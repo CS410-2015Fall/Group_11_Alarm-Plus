@@ -1,10 +1,8 @@
-Clock = function(id) {
-    this.id = id;
-    this.isTick = false;
+Clock = function() {
+    this.isTick;
 };
 
-
-Clock.prototype.getCurrTime = function() {
+Clock.prototype.dispCurrTime = function() {
     var today = new Date();
     var currentHours = today.getHours();
     var currentMinutes = today.getMinutes();
@@ -24,17 +22,10 @@ Clock.prototype.getCurrTime = function() {
 };
 
 Clock.prototype.stopTick = function() {
-  this.active = false;
+  clearInterval(this.isTick);
 };
 
 Clock.prototype.startTick = function() {
-  this.active = true;
+  this.isTick = setInterval(this.dispCurrTime,1000);
 };
 
-Clock.prototype.Tick = function() {
-  setInterval(this.getCurrTime,1000);
-};
-
-
-
-//var alarmHour = angular.element(document.querySelector('#alarm-hour')).val();

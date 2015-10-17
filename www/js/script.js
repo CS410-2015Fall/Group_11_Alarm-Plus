@@ -1,6 +1,4 @@
-var jq = $.noConflict();
-
-
+var jq = $.noConflict(); // allow us to use JQuery
 var module = angular.module('Alarm-Plus', []);
 
 
@@ -9,9 +7,20 @@ var checkInput = function checkNumberInput(object) {
     if (object.value.length > object.maxLength) {
         object.value = object.value.slice(0, object.maxLength);
     }
-    //if (object.value > object.max) { object.value = object.max};
 };
 
 
-var clock = new Clock(1);
-clock.Tick();
+// Singleton Clock
+var clock = new Clock();
+
+// Start the clock
+function startClock() {
+  clock.startTick();
+}
+
+// Stop the clock
+function stopClock() {
+  clock.stopTick();
+}
+
+
