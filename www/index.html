@@ -10,24 +10,41 @@
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
+
+</head>
+<body>
+    <!-- setUp Alarm page -->
+    <div class="setAlarm">
+        <h2> Set Alarm </h2>
+        <label class="item item-input hours">
+            <span class="input-label"> Hours </span>
+            <input type="number" id="alarm-hour" oninput="checkInput(this)" min="0" max="11" maxlength="2" />
+        </label>
+        <label class="item item-input minutes">
+            <span class="input-label"> Minutes </span>
+            <input type="number" id="alarm-minute" oninput="checkInput(this)" min="0" max="59" maxlength="2" />
+        </label>
+
+        <label class="item item-input AM/PM ">
+            <span class="input-label"> AM/PM </span>
+            <input type="text" maxlength="2" />
+        </label>
+        <div class="clickArea">
+            <button> Create </button>
+            <button> Cancel </button>
+        </div>
+    </div>
+
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
     <!-- your app's js -->
     <script src="js/app.js"></script>
-</head>
+    <script type="text/javascript" src="js/alarmRunner.js"></script>
+    <script type="text/javascript" src="js/alarm.js"></script>
+    <script type="text/javascript" src="js/clock.js"></script>
 
-<body ng-app="starter">
-    <ion-pane>
-        <ion-header-bar class="bar-stable">
-            <h1 class="title">Ionic Blank Starter</h1>
-        </ion-header-bar>
-        <ion-content>
-        </ion-content>
-    </ion-pane>
-    <!-- JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </body>
 
 </html>
