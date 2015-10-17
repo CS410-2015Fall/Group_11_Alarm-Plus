@@ -1,3 +1,6 @@
+var module = angular.module('Alarm-Plus', []);
+
+
 // Check the input of alarmHour and alarmMinutes
 var checkInput = function checkNumberInput(object) {
     if (object.value.length > object.maxLength) {
@@ -6,3 +9,7 @@ var checkInput = function checkNumberInput(object) {
 
     //if (object.value > object.max) { object.value = object.max};
 };
+
+
+var clock = new Clock(1);
+clock.getCurrTime();
