@@ -1,5 +1,6 @@
 Clock = function(id) {
     this.id = id;
+    this.isTick = false;
 };
 
 
@@ -16,20 +17,24 @@ Clock.prototype.getCurrTime = function() {
     // set the format of the time
     var timeOfDay = (currentHours < 12) ? "AM" : "PM";
     currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
-    currentHours = (currentHours == 0) ? 12 : currentHours;
+    currentHours = (currentHours === 0) ? 12 : currentHours;
 
     var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
-    console.log("the current time is: " + currentTimeString);
+    jq("#clock").text(currentTimeString);
 };
 
-
 Clock.prototype.stopTick = function() {
-    // body...
+  this.active = false;
 };
 
 Clock.prototype.startTick = function() {
-  // body...
+  this.active = true;
 };
+
+Clock.prototype.Tick = function() {
+  setInterval(this.getCurrTime,1000);
+};
+
 
 
 //var alarmHour = angular.element(document.querySelector('#alarm-hour')).val();
