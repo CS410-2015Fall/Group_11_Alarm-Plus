@@ -1,8 +1,8 @@
 Clock = function() {
-    this.isTick;
+    this.isTick = {};
 };
 
-Clock.prototype.dispCurrTime = function() {
+Clock.prototype.dispTime = function() {
     var today = new Date();
     var currentHours = today.getHours();
     var currentMinutes = today.getMinutes();
@@ -26,6 +26,6 @@ Clock.prototype.stopTick = function() {
 };
 
 Clock.prototype.startTick = function() {
-  this.isTick = setInterval(this.dispCurrTime,1000);
+  this.isTick = setInterval(this.dispTime,1000);
 };
 

@@ -1,28 +1,29 @@
-Alarm = function(id, name, hour, minute, active, task) {
-  this.id = id;
-  this.name = name;
-  this.hour = hour;
-  this.minute = minute;
-  this.active = active;
-  this.task = task;
+Alarm = function(name, hour, minute, timeofday, task) {
+    this.name = name;
+    this.hour = hour;
+    this.minute = minute;
+    this.tod = timeofday;
+    this.task = task;
+    this.active = true;
 };
 
 // Alarm inherits from Clock
-Alarm.prototype = new Clock(this.id);
+Alarm.prototype = new Clock();
 
-// Initialize the alarm
-Alarm.prototype.create = function() {
+Alarm.prototype.disableAlarm = function() {
+  this.active = false;
+};
+
+Alarm.prototype.enableAlarm = function() {
+  this.active = true;
+};
+
+Alarm.prototype.isEnable = function() {
+  return this.active;
+};
+
+Alarm.prototype.snooze = function() {
 
 };
 
-Alarm.prototype.create = function(){
 
-};
-
-Alarm.prototype.remove = function(alarmID) {
-  // body...
-};
-
-Alarm.prototype.set = function(alarmID, name, hour, minute) {
-  // body...
-};

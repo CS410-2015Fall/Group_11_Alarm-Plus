@@ -18,29 +18,33 @@
     </ion-header-bar>
     <ion-content class="has-header">
         <!-- setUp Alarm page -->
-        <div style="padding-top:2cm;" class="setAlarm">
+        <div style="padding-top:2cm;" class="list list-inset">
             <h2> Set Alarm </h2>
+            <label class="item item-input alarm-name">
+                <span class="input-label"> Name </span>
+                <input type="text" id="alarm-name" maxlength="30" />
+            </label>
             <label class="item item-input hours">
                 <span class="input-label"> Hours </span>
-                <input type="number" id="alarm-hour" oninput="checkInput(this)" min="0" max="11" maxlength="2" />
+                <input type="number" id="alarm-hour" oninput="checkInput(this)" min="0" max="12" maxlength="2" />
             </label>
             <label class="item item-input minutes">
                 <span class="input-label"> Minutes </span>
                 <input type="number" id="alarm-minute" oninput="checkInput(this)" min="0" max="59" maxlength="2" />
             </label>
-            <label class="item item-input AM/PM ">
-                <span class="input-label"> AM/PM </span>
-                <input type="text" maxlength="2" />
-            </label>
+            <select class="item item-input" id="time-of-day">
+                <option class="input-label"> AM </option>
+                <option class="input-label"> PM </option>
+            </select>
             <div class="clickArea">
-                <button class="button button-positive"> Create </button>
-                <button class="button button-assertive"> Cancel </button>
+                <button class="button button-positive" id="create-alarm"> Create </button>
+                <button class="button button-assertive" id="remove-alarm"> Cancel </button>
             </div>
         </div>
         <!-- a regular clock -->
-        <div id="clock"> here </div>
-        <button style="margin-top:2cm;" onclick="startClock()"> Run Clock </button>
-        <button style="margin-top:2cm;" onclick="stopClock()"> Stop Clock</button>
+        <div id="clock"> Clock running Area </div>
+        <button style="margin-top:2cm;" id="tempt-clock-run"> Run Clock </button>
+        <button style="margin-top:2cm;" id="tempt-clock-stop"> Stop Clock</button>
     </ion-content>
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
