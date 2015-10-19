@@ -19,7 +19,9 @@ Clock.prototype.dispTime = function() {
 
     var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
     jq("#clock").text(currentTimeString);
-    if (currentMinutes == 15) { alert('here');}
+    if (currentMinutes == 15) {
+        alert('here');
+    }
 };
 
 Clock.prototype.stopTick = function() {

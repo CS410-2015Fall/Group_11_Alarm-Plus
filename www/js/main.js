@@ -10,15 +10,12 @@ var checkInput = function checkNumberInput(object) {
     }
 };
 
-// check time-of-day input
-function checkTimeOfDay(object) {
-
-}
 
 
+// singleton object to be used:
 var clock = new Clock();
-// alarms = set of alarms
-var alarms = [];
+var alarms = []; // hashtable
+// var alarms = new Hashtable();
 var startAlarm;
 
 
@@ -26,7 +23,9 @@ var startAlarm;
 // Start the clock
 jq("#tempt-clock-run").click(function() {
     //clock.startTick();
-    startAlarm = setInterval(function(){isAlarmTime(alarms);}, 5000);
+    startAlarm = setInterval(function() {
+        isAlarmTime(alarms);
+    }, 35000); // check every 30 seconds: it is supposed to run just once
 });
 
 // Stop the clock
@@ -35,18 +34,24 @@ jq("#tempt-clock-stop").click(function() {
     clearInterval(startAlarm);
 });
 
-// Create an alarm based on user's input
+
 jq("#create-alarm").click(function() {
+    // Check if the inputs are valid:
+
+    // Create an alarm based on user's input
     var id = Math.floor((Math.random() * 15) + 1);
     var alarm = new Alarm(jq("#alarm-name").val(), jq("#alarm-hour").val(),
         jq("#alarm-minute").val(), jq("#time-of-day").val());
     alarms[id] = alarm;
     console.log(alarms);
+
+
     ClearInputBox();
 });
 
+// Constantly check if an alarm should go off.
+// Alarms = the list of alarms
 function isAlarmTime(Alarms) {
-  alert('repeat me');
     for (var id in alarms) {
         var aName = Alarms[id].name;
         var aHour = Alarms[id].hour;
@@ -54,8 +59,8 @@ function isAlarmTime(Alarms) {
         var aTod = Alarms[id].tod;
         var aActive = Alarms[id].active;
         console.log("alarm name is " + aName + " and my alarm hour is " + aHour + " and alarm minute is " + aMinute + " " + aTod + " " + aActive);
-        if (aHour == clock.getHour() && aMinute == clock.getMinute()) {
-          alert("time is up");
+        if (aHour == clock.getHour() && aMinute == clock.getMinute() && aTod === clock.getTimeOfDay()) {
+            alert("time is up");
         }
     }
 }
@@ -70,3 +75,14 @@ function ClearInputBox() {
 jq("#tempt-check-time").click(function() {
     isAlarmTime(alarms);
 });
+
+
+//adwqdkoqwkdoqwkd
+
+
+/*
+Todo:
+- the logic that we should run the setInterval.
+
+
+*/
