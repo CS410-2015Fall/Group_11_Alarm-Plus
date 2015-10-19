@@ -19,13 +19,36 @@ Clock.prototype.dispTime = function() {
 
     var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
     jq("#clock").text(currentTimeString);
+    if (currentMinutes == 15) { alert('here');}
 };
 
 Clock.prototype.stopTick = function() {
-  clearInterval(this.isTick);
+    clearInterval(this.isTick);
 };
 
 Clock.prototype.startTick = function() {
-  this.isTick = setInterval(this.dispTime,1000);
+    this.isTick = setInterval(this.dispTime, 1000);
 };
 
+// Check the current Hour
+Clock.prototype.getHour = function() {
+    var today = new Date();
+    var currentHours = today.getHours();
+    currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
+    currentHours = (currentHours === 0) ? 12 : currentHours;
+    return currentHours;
+};
+
+// Check the current Minute
+Clock.prototype.getMinute = function() {
+    var today = new Date();
+    var currentMinutes = today.getMinutes();
+    currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+    return currentMinutes;
+};
+
+// Check the current TimeOfDay
+Clock.prototype.getTimeOfDay = function() {
+    var today = new Date();
+    return (today.getHours() < 12) ? "AM" : "PM";
+};
