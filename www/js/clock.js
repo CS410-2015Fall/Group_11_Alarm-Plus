@@ -16,12 +16,7 @@ Clock.prototype.dispTime = function() {
     var timeOfDay = (currentHours < 12) ? "AM" : "PM";
     currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
     currentHours = (currentHours === 0) ? 12 : currentHours;
-
-    var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
-    jq("#clock").text(currentTimeString);
-    if (currentMinutes == 15) {
-        alert('here');
-    }
+    return currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
 };
 
 Clock.prototype.stopTick = function() {
@@ -32,7 +27,7 @@ Clock.prototype.startTick = function() {
     this.isTick = setInterval(this.dispTime, 1000);
 };
 
-// Check the current Hour
+// Get the current Hour
 Clock.prototype.getHour = function() {
     var today = new Date();
     var currentHours = today.getHours();
@@ -41,7 +36,7 @@ Clock.prototype.getHour = function() {
     return currentHours;
 };
 
-// Check the current Minute
+// Get the current Minute
 Clock.prototype.getMinute = function() {
     var today = new Date();
     var currentMinutes = today.getMinutes();
@@ -49,8 +44,17 @@ Clock.prototype.getMinute = function() {
     return currentMinutes;
 };
 
-// Check the current TimeOfDay
+// Get the current TimeOfDay
 Clock.prototype.getTimeOfDay = function() {
     var today = new Date();
     return (today.getHours() < 12) ? "AM" : "PM";
 };
+
+// Get the current Second
+Clock.prototype.getSecond = function() {
+  var today = new Date();
+  var currentSeconds = today.getSeconds();
+  return (currentSeconds < 10 ? "0" : "") + currentSeconds;
+};
+
+

@@ -4,6 +4,7 @@ Alarm = function(name, hour, minute, timeofday, task) {
     this.minute = minute;
     this.tod = timeofday;
     this.task = task;
+    this.snoozeCredit = 3;
     this.active = true;
 };
 

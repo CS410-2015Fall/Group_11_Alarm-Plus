@@ -17,20 +17,24 @@ var clock = new Clock();
 var alarms = []; // hashtable
 // var alarms = new Hashtable();
 var startAlarm;
+var startTask;
+var snooze = 3;
 
 
 
 // Start the clock
 jq("#tempt-clock-run").click(function() {
-    //clock.startTick();
-    startAlarm = setInterval(function() {
-        isAlarmTime(alarms);
-    }, 35000); // check every 30 seconds: it is supposed to run just once
+    // we will wait for the second to hit 0 before we start running the clock.
+    setTimeout(function() {
+        startAlarm = setInterval(function() {
+          console.log(clock.dispTime());
+            isAlarmTime(alarms);
+        }, 60000);
+    }, (60 - clock.getSecond()) * 1000);
 });
 
 // Stop the clock
 jq("#tempt-clock-stop").click(function() {
-    //clock.stopTick();
     clearInterval(startAlarm);
 });
 
@@ -53,17 +57,30 @@ jq("#create-alarm").click(function() {
 // Alarms = the list of alarms
 function isAlarmTime(Alarms) {
     for (var id in alarms) {
+        if (!Alarms[id].active) {
+            continue;
+        }
+        snooze = 3; // snooze should be set to 3 at the start
         var aName = Alarms[id].name;
         var aHour = Alarms[id].hour;
         var aMinute = Alarms[id].minute;
         var aTod = Alarms[id].tod;
         var aActive = Alarms[id].active;
-        console.log("alarm name is " + aName + " and my alarm hour is " + aHour + " and alarm minute is " + aMinute + " " + aTod + " " + aActive);
+        var aSnooze = Alarms[id].snoozeCredit;
+        //console.log("alarm name is " + aName + " and my alarm hour is " + aHour + " and alarm minute is " + aMinute + " " + aTod + " " + aActive);
         if (aHour == clock.getHour() && aMinute == clock.getMinute() && aTod === clock.getTimeOfDay()) {
-            alert("time is up");
+            // keep rining:
+            alert('wake up already');
         }
     }
 }
+
+jq("#tempt-snooze").click(function() {
+    snooze--;
+    console.log(snooze);
+});
+
+
 
 function ClearInputBox() {
     jq("#alarm-name").val(''),
