@@ -18,7 +18,7 @@
     </ion-header-bar>
     <ion-content class="has-header">
         <!-- setUp Alarm page -->
-        <div style="padding-top:2cm;" class="list list-inset" >
+        <div style="padding-top:2cm;" class="list list-inset">
             <h2> Set Alarm </h2>
             <label class="item item-input alarm-name">
                 <span class="input-label"> Name </span>
@@ -34,6 +34,13 @@
             </label>
             <label class="item item-input weekdays">
                 <span class="input-label"> Select days: </span>
+                <ion-checkbox ng-model="MON">MON</ion-checkbox>
+                <ion-checkbox ng-model="TUE">TUE</ion-checkbox>
+                <ion-checkbox ng-model="WED">WED</ion-checkbox>
+                <ion-checkbox ng-model="THUR">THUR</ion-checkbox>
+                <ion-checkbox ng-model="FRI">FRI</ion-checkbox>
+                <ion-checkbox ng-model="SAT">SAT</ion-checkbox>
+                <ion-checkbox ng-model="SUN">SUN</ion-checkbox>
             </label>
             <select class="item item-input" id="time-of-day">
                 <option class="input-label">AM</option>

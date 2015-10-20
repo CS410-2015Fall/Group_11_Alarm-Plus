@@ -52,9 +52,13 @@ Clock.prototype.getTimeOfDay = function() {
 
 // Get the current Second
 Clock.prototype.getSecond = function() {
-  var today = new Date();
-  var currentSeconds = today.getSeconds();
-  return (currentSeconds < 10 ? "0" : "") + currentSeconds;
+    var today = new Date();
+    var currentSeconds = today.getSeconds();
+    return (currentSeconds < 10 ? "0" : "") + currentSeconds;
 };
 
-
+// Get dat of the week Sunday = 0 -> 6 (Sat)
+Clock.prototype.getDay = function() {
+    var day = new Date();
+    return day.getDay();
+};

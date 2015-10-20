@@ -10,8 +10,6 @@ var checkInput = function checkNumberInput(object) {
     }
 };
 
-
-
 // singleton object to be used:
 var clock = new Clock();
 var alarms = []; // hashtable
@@ -20,14 +18,12 @@ var startAlarm;
 var startTask;
 var snooze = 3;
 
-
-
 // Start the clock
 jq("#tempt-clock-run").click(function() {
     // we will wait for the second to hit 0 before we start running the clock.
     setTimeout(function() {
         startAlarm = setInterval(function() {
-          console.log(clock.dispTime());
+            console.log(clock.dispTime());
             isAlarmTime(alarms);
         }, 60000);
     }, (60 - clock.getSecond()) * 1000);
@@ -48,8 +44,6 @@ jq("#create-alarm").click(function() {
         jq("#alarm-minute").val(), jq("#time-of-day").val());
     alarms[id] = alarm;
     console.log(alarms);
-
-
     ClearInputBox();
 });
 
@@ -93,13 +87,3 @@ jq("#tempt-check-time").click(function() {
     isAlarmTime(alarms);
 });
 
-
-//adwqdkoqwkdoqwkd
-
-
-/*
-Todo:
-- the logic that we should run the setInterval.
-
-
-*/
