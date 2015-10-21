@@ -1,4 +1,4 @@
-Alarm = function(name, hour, minute, timeofday, task) {
+Alarm = function(name, hour, minute, timeofday, task, weekDays) {
     this.name = name;
     this.hour = hour;
     this.minute = minute;
@@ -6,6 +6,7 @@ Alarm = function(name, hour, minute, timeofday, task) {
     this.task = task;
     this.snoozeCredit = 3;
     this.active;
+    this.weekDays = weekDays;
 };
 
 Alarm.prototype.start = function() {
@@ -22,9 +23,14 @@ Alarm.prototype.start = function() {
     var timeOfDay = (currentHours < 12) ? "AM" : "PM";
     currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
     currentHours = (currentHours === 0) ? 12 : currentHours;
-    var curTime =  currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+    var curTime = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
     if (this.hour == currentHours && this.minute == currentMinutes && this.tod === timeOfDay) {
         console.log("TIME IS UP");
+        // TODO: task should be started
+
+
+        // TODO: the music should keep on ringing until user get the 3 answer OR close the app
+
     }
 
     this.active = setTimeout((function() {

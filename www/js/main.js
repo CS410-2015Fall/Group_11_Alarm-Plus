@@ -20,6 +20,8 @@ var checkTime;
 
 jq("#create-alarm").click(function() {
     // Check if the inputs are valid:
+    var weekDays = [];
+
 
     // Create an alarm based on user's input
     var id = Math.floor((Math.random() * 15) + 1);
@@ -35,6 +37,8 @@ jq("#create-alarm").click(function() {
     console.log(alarms);
     ClearInputBox();
 });
+
+
 
 function getCurrSecond() {
     var today = new Date();

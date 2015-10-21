@@ -18,19 +18,18 @@
     </ion-header-bar>
     <ion-content class="has-header">
         <!-- setUp Alarm page -->
-        <div style="padding-top:2cm;" class="list list-inset">
+        <div style="padding-top:2cm;" class="list list-inset" ng-controller="setupController as setup">
             <h2> Set Alarm </h2>
             <label class="item item-input alarm-name">
                 <span class="input-label"> Name </span>
-                <input type="text" id="alarm-name" maxlength="30" />
+                <input type="text" id="alarm-name" maxlength="30" ng-model="defaultName"/>
             </label>
             <label class="item item-input hours">
                 <span class="input-label"> Hours </span>
-                <input type="number" id="alarm-hour" oninput="checkInput(this)" min="0" max="12" maxlength="2" />
+                <input type="number" id="alarm-hour" oninput="checkInput(this)" min="0" max="12" maxlength="2" ng-model="defaultHour" />
                 <span class="input-label"> Minutes </span>
-                <input type="number" id="alarm-minute" oninput="checkInput(this)" min="0" max="59" maxlength="2" />
+                <input type="number" id="alarm-minute" min="0" max="59" maxlength="2" oninput="checkInput(this)" ng-model="defaultMinute" />
             </label>
-
             <label class="item item-input weekdays">
                 <span class="input-label"> Select days: </span>
                 <ion-checkbox ng-model="MON">MON</ion-checkbox>
@@ -41,11 +40,10 @@
                 <ion-checkbox ng-model="SAT">SAT</ion-checkbox>
                 <ion-checkbox ng-model="SUN">SUN</ion-checkbox>
             </label>
-            
-            <select class="item item-input" id="time-of-day">
-                <option class="input-label">AM</option>
-                <option class="input-label">PM</option>
+            <select class="item item-input" ng-model="setup.tod" id="time-of-day">
+                <option class="input-label" ng-repeat="c in tod">{{c}}</option>
             </select>
+
             <div class="clickArea">
                 <button class="button button-positive" id="create-alarm"> Create </button>
                 <button class="button button-assertive" id="remove-alarm"> Cancel </button>
