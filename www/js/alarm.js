@@ -28,7 +28,7 @@ Alarm.prototype.start = function() {
         console.log("TIME IS UP");
         return;
     }
-    active = setTimeout(this.start(), 60000);
+    active = setTimeout(this.start(), 1000);
 };
 
 Alarm.prototype.stop = function() {

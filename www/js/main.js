@@ -10,12 +10,6 @@ var checkInput = function checkNumberInput(object) {
     }
 };
 
-// Start the clock
-jq("#tempt-clock-run").click(function() {
-    // we will wait for the second to hit 0 before we start running the clock.
-
-});
-
 // alarms will contain all the created alarms.
 var alarms = [];
 
@@ -30,11 +24,17 @@ jq("#create-alarm").click(function() {
     // start an alarm at second = 0
     setTimeout(function() {
       alarms[id].start();
-    }, (60 - clock.getSecond()) * 1000);
+    }, (60 - getCurrSecond) * 1000);
 
     console.log(alarms);
     ClearInputBox();
 });
+
+function getCurrSecond () {
+  var today = new Date();
+  currSecond = today.getSeconds();
+  return (currentSeconds < 10 ? "0" : "") + currentSeconds;
+}
 
 
 jq("#tempt-snooze").click(function() {
