@@ -24,6 +24,7 @@ function listAlarms($scope) {
   $scope.defaultMinute = 0,
   $scope.defaultHour = 0,
   $scope.defaultName ="CoolAlarm",
+  $scope.defaultTod = "PM";
   $scope.tod = ["AM", "PM"];
 }
 

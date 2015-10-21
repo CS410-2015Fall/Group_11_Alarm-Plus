@@ -18,7 +18,7 @@
     </ion-header-bar>
     <ion-content class="has-header">
         <!-- setUp Alarm page -->
-        <div style="padding-top:2cm;" class="list list-inset" ng-controller="setupController as setup">
+        <div style="padding-top:2cm;" class="list list-inset" ng-controller="setupController">
             <h2> Set Alarm </h2>
             <label class="item item-input alarm-name">
                 <span class="input-label"> Name </span>
@@ -40,7 +40,7 @@
                 <ion-checkbox ng-model="SAT">SAT</ion-checkbox>
                 <ion-checkbox ng-model="SUN">SUN</ion-checkbox>
             </label>
-            <select class="item item-input" ng-model="setup.tod" id="time-of-day">
+            <select class="item item-input" ng-model="defaultTod" id="time-of-day">
                 <option class="input-label" ng-repeat="c in tod">{{c}}</option>
             </select>
 
