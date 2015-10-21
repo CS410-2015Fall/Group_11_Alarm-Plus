@@ -5,7 +5,7 @@ var checkInput = function checkNumberInput(object) {
     if (object.value.length > object.maxLength) {
         object.value = object.value.slice(0, object.maxLength);
     }
-    if (object.value > object.max) {
+    if (object.value     > object.max) {
         object.value = object.max;
     }
 };
@@ -22,18 +22,38 @@ jq("#create-alarm").click(function() {
         jq("#alarm-minute").val(), jq("#time-of-day").val());
 
     // start an alarm at second = 0
+    console.log(getCurrSecond());
     setTimeout(function() {
-      alarms[id].start();
+        alarms[id].start();
     }, (60 - getCurrSecond) * 1000);
 
     console.log(alarms);
     ClearInputBox();
 });
 
-function getCurrSecond () {
-  var today = new Date();
-  currSecond = today.getSeconds();
-  return (currentSeconds < 10 ? "0" : "") + currentSeconds;
+function getCurrSecond() {
+    var today = new Date();
+    currSeconds = today.getSeconds();
+    return (currSeconds < 10 ? "0" : "") + currSeconds;
+}
+
+// Used for debug purpose
+function currTime() {
+    var today = new Date();
+    var currentHours = today.getHours();
+    var currentMinutes = today.getMinutes();
+    var currentSeconds = today.getSeconds();
+
+    // Pad the minutes and seconds with leading zeros, if required
+    currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+    currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+
+    // set the format of the time
+    var timeOfDay = (currentHours < 12) ? "AM" : "PM";
+    currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
+    currentHours = (currentHours === 0) ? 12 : currentHours;
+    var curTime =  currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+    console.log(curTime);
 }
 
 

@@ -22,17 +22,21 @@ Alarm.prototype.start = function() {
     var timeOfDay = (currentHours < 12) ? "AM" : "PM";
     currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
     currentHours = (currentHours === 0) ? 12 : currentHours;
+    var curTime =  currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
 
+    jq("#clock").text(curTime);
     if (this.hour == currentHours && this.minute == currentMinutes && this.tod === timeOfDay) {
         // if Time is up do something here:
         console.log("TIME IS UP");
-        return;
     }
-    active = setTimeout(this.start(), 1000);
+
+    this.active = setTimeout((function() {
+        this.start();
+    }).bind(this), 1000);
 };
 
 Alarm.prototype.stop = function() {
-    clearTimeout(this.active);
+    clearInterval(active);
 };
 
 Alarm.prototype.setHour = function(hour) {
