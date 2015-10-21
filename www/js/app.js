@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var AlarmPlus = angular.module('Alarm-Plus', ['ionic'])
+var AlarmPlus = angular.module('Alarm-Plus', ['ionic']);
 
 AlarmPlus.run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -21,9 +21,9 @@ AlarmPlus.run(function($ionicPlatform) {
 AlarmPlus.controller('setupController', ['$scope', listAlarms]);
 
 function listAlarms($scope) {
-  $scope.defaultMinute = 0;
-  $scope.defaultHour = 0;
-  $scope.defaultName ="CoolAlarm"
+  $scope.defaultMinute = 0,
+  $scope.defaultHour = 0,
+  $scope.defaultName ="CoolAlarm",
   $scope.tod = ["AM", "PM"];
 }
 

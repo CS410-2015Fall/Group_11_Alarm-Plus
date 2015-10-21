@@ -5,7 +5,7 @@ Alarm = function(name, hour, minute, timeofday, task, weekDays) {
     this.tod = timeofday;
     this.task = task;
     this.snoozeCredit = 3;
-    this.active;
+    this.active = {};
     this.weekDays = weekDays;
 };
 
