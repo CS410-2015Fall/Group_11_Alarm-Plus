@@ -5,13 +5,18 @@ var checkInput = function checkNumberInput(object) {
     if (object.value.length > object.maxLength) {
         object.value = object.value.slice(0, object.maxLength);
     }
-    if (object.value     > object.max) {
+    if (object.value > object.max) {
         object.value = object.max;
     }
 };
 
 // alarms will contain all the created alarms.
 var alarms = [];
+var checkTime;
+
+
+
+
 
 jq("#create-alarm").click(function() {
     // Check if the inputs are valid:
@@ -25,7 +30,7 @@ jq("#create-alarm").click(function() {
     console.log(getCurrSecond());
     setTimeout(function() {
         alarms[id].start();
-    }, (60 - getCurrSecond) * 1000);
+    }, (60 - getCurrSecond()) * 1000);
 
     console.log(alarms);
     ClearInputBox();
@@ -52,21 +57,27 @@ function currTime() {
     var timeOfDay = (currentHours < 12) ? "AM" : "PM";
     currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
     currentHours = (currentHours === 0) ? 12 : currentHours;
-    var curTime =  currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
-    console.log(curTime);
+    var curTime = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+
+    jq("#clock").text(curTime);
+
+    checkTime = setTimeout(function() {
+        currTime();
+    }, 1000);
 }
 
+currTime();
 
 jq("#tempt-snooze").click(function() {
-    snooze--;
-    console.log(snooze);
+    // snooze--;
+    // console.log(snooze);
+    clearTimeout(checkTime);
 });
 
 
 
 function ClearInputBox() {
-    jq("#alarm-name").val(''),
-        jq("#alarm-minute").val(''),
+    jq("#alarm-minute").val(''),
         jq("#time-of-day").val(''),
         jq("#alarm-hour").val('');
 }

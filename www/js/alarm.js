@@ -23,16 +23,13 @@ Alarm.prototype.start = function() {
     currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
     currentHours = (currentHours === 0) ? 12 : currentHours;
     var curTime =  currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
-
-    jq("#clock").text(curTime);
     if (this.hour == currentHours && this.minute == currentMinutes && this.tod === timeOfDay) {
-        // if Time is up do something here:
         console.log("TIME IS UP");
     }
 
     this.active = setTimeout((function() {
         this.start();
-    }).bind(this), 1000);
+    }).bind(this), 60000);
 };
 
 Alarm.prototype.stop = function() {
