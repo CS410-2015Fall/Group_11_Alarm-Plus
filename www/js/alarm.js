@@ -27,6 +27,7 @@ Alarm.prototype.start = function() {
     if (this.hour == currentHours && this.minute == currentMinutes && this.tod === timeOfDay) {
         console.log("TIME IS UP");
         // TODO: task should be started
+        alert('TIME IS UP');
 
 
         // TODO: the music should keep on ringing until user get the 3 answer OR close the app

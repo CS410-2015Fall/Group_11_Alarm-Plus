@@ -27,9 +27,11 @@
             <label class="item item-input hours">
                 <span class="input-label"> Hours </span>
                 <input type="number" id="alarm-hour" oninput="checkInput(this)" min="0" max="12" maxlength="2" ng-model="defaultHour" />
-                <span class="input-label"> Minutes </span>
-                <input type="number" id="alarm-minute" min="0" max="59" maxlength="2" oninput="checkInput(this)" ng-model="defaultMinute" />
             </label>
+            <label class="item item-input hours">
+            <span class="input-label"> Minutes </span>
+                <input type="number" id="alarm-minute" min="0" max="59" maxlength="2" oninput="checkInput(this)" ng-model="defaultMinute" />
+                </label>
             <label class="item item-input weekdays">
                 <span class="input-label"> Select days: </span>
                 <ion-checkbox ng-model="MON">MON</ion-checkbox>
