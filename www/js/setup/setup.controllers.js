@@ -16,8 +16,8 @@ angular.module('Alarm-Plus.controllers')
 
             // Create an alarm based on user's input
             var id = Math.floor((Math.random() * 15) + 1);
-            $scope.alarms[id] = new Alarm($scope.alarmName, $scope.alarmHour,
-                $scope.alarmMinute, $scope.alarmTod);
+            $scope.alarms[id] = new Alarm(this.alarmName, this.alarmHour,
+                this.alarmMinute, this.alarmTod);
 
             // start an alarm at second = 0
             console.log($scope.getCurSecond());
