@@ -14,14 +14,9 @@ var checkInput = function checkNumberInput(object) {
 var alarms = [];
 var checkTime;
 
-
-
-
-
 jq("#create-alarm").click(function() {
     // Check if the inputs are valid:
     var weekDays = [];
-
 
     // Create an alarm based on user's input
     var id = Math.floor((Math.random() * 15) + 1);

@@ -17,3 +17,41 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'ngCordova'])
         }
     });
 })
+
+.config(function($stateProvider, $urlRouterProvider) {
+    $stateProvider
+        .state('app', {
+            url: '/app',
+            abstract: true,
+            templateUrl: 'templates/menu.html',
+            controller: 'AppCtrl'
+        })
+
+    .state('app.home', {
+            url: '/home',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/home.html',
+                }
+            }
+        })
+     .state('app.task', {
+            url: '/task',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/task.html',
+                }
+            }
+        })
+        .state('app.setup', {
+            url: '/setup',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/setup.html',
+                    controller: 'setupController'
+                }
+            }
+        });
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/app/home');
+});

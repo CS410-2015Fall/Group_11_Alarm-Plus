@@ -13,50 +13,7 @@
 </head>
 
 <body ng-app="Alarm-Plus">
-    <ion-header-bar class="bar bar-header">
-        <h1 class="title">Alarm-Plus</h1>
-    </ion-header-bar>
-    <ion-content class="has-header">
-        <!-- setUp Alarm page -->
-        <div style="padding-top:2cm;" class="list list-inset" ng-controller="setupController">
-            <h2> Set Alarm </h2>
-            <label class="item item-input alarm-name">
-                <span class="input-label"> Name </span>
-                <input type="text" id="alarm-name" maxlength="30" ng-model="defaultName" />
-            </label>
-            <label class="item item-input hours">
-                <span class="input-label"> Hours </span>
-                <input type="number" id="alarm-hour" oninput="checkInput(this)" min="0" max="12" maxlength="2" ng-model="defaultHour" />
-            </label>
-            <label class="item item-input hours">
-                <span class="input-label"> Minutes </span>
-                <input type="number" id="alarm-minute" min="0" max="59" maxlength="2" oninput="checkInput(this)" ng-model="defaultMinute" />
-            </label>
-            <label class="item item-input weekdays">
-                <span class="input-label"> Select days: </span>
-                <ion-checkbox ng-model="MON">MON</ion-checkbox>
-                <ion-checkbox ng-model="TUE">TUE</ion-checkbox>
-                <ion-checkbox ng-model="WED">WED</ion-checkbox>
-                <ion-checkbox ng-model="THUR">THUR</ion-checkbox>
-                <ion-checkbox ng-model="FRI">FRI</ion-checkbox>
-                <ion-checkbox ng-model="SAT">SAT</ion-checkbox>
-                <ion-checkbox ng-model="SUN">SUN</ion-checkbox>
-            </label>
-            <select class="item item-input" ng-model="defaultTod" id="time-of-day">
-                <option class="input-label" ng-repeat="c in tod">{{c}}</option>
-            </select>
-            <div class="clickArea">
-                <button class="button button-positive" id="create-alarm"> Create </button>
-                <button class="button button-assertive" id="remove-alarm"> Cancel </button>
-            </div>
-        </div>
-        <!-- a regular clock -->
-        <div id="clock"> Clock running Area </div>
-        <button style="margin-top:2cm;" id="tempt-clock-run"> Run Clock </button>
-        <button style="margin-top:2cm;" id="tempt-clock-stop"> Stop Clock</button>
-        <button style="margin-top:2cm;" id="tempt-check-time"> check alarm</button>
-        <button style="margin-top:2cm;" id="tempt-snooze"> Snooze </button>
-    </ion-content>
+    <ion-nav-view></ion-nav-view>
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
