@@ -6,7 +6,7 @@ Alarm = function(name, hour, minute, timeofday, task, weekDays) {
     this.task = task;
     this.snoozeCredit = 3;
     this.active = {};
-    this.weekDays = weekDays;
+    this.weekDays = weekDays; // TODO: weekdays should be an array of number
 };
 
 Alarm.prototype.start = function() {
@@ -24,12 +24,12 @@ Alarm.prototype.start = function() {
     currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
     currentHours = (currentHours === 0) ? 12 : currentHours;
     var curTime = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+    // TODO: condition to add need ot check if our weekdays array contain the current day
     if (this.hour == currentHours && this.minute == currentMinutes && this.tod === timeOfDay) {
         console.log("TIME IS UP");
-        // TODO: task should be started
         alert('TIME IS UP');
-
         // TODO: the music should keep on ringing until user get the 3 answer OR close the app
+        // the user should be redirect to another page
 
     }
 
@@ -38,6 +38,7 @@ Alarm.prototype.start = function() {
     }).bind(this), 60000);
 };
 
+// Stop the Alarm from running
 Alarm.prototype.stop = function() {
     clearInterval(active);
 };
@@ -53,3 +54,10 @@ Alarm.prototype.setMinute = function(minute) {
 Alarm.prototype.setTimeOfDay = function(tod) {
     this.tod = tod;
 };
+
+// When the user press snooze button, lower the snooze credit
+Alarm.prototype.useSnooze = function() {
+  this.snoozeCredit--;
+  console.log(this.snoozeCredit);
+};
+

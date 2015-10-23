@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'ngCordova'])
+angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.services', 'ngCordova'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -35,7 +35,7 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'ngCordova'])
                 }
             }
         })
-     .state('app.task', {
+        .state('app.task', {
             url: '/task',
             views: {
                 'menuContent': {

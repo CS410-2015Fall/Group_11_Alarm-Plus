@@ -8,12 +8,25 @@ angular.module('Alarm-Plus.controllers')
             $scope.alarmHour = 0,
             $scope.alarmMinute = 0,
             $scope.alarmTod = "PM",
+            $scope.alarmDays = {
+              SUN: 0,
+              MON: 1,
+              TUE: 2,
+              WED: 3,
+              THUR: 4,
+              FRI: 5,
+              SAT: 6
+            },
             $scope.alarms = [];
 
-        $scope.createAlarm = function() {
-            // Check if the inputs are valid:
-            var weekDays = [];
 
+        $scope.clearInputBox = function() {
+            this.alarmMinute = '',
+                this.alarmHour = '',
+                this.alarmTod = 'PM';
+        }
+
+        $scope.createAlarm = function() {
             // Create an alarm based on user's input
             var id = Math.floor((Math.random() * 15) + 1);
             $scope.alarms[id] = new Alarm(this.alarmName, this.alarmHour,
@@ -26,18 +39,14 @@ angular.module('Alarm-Plus.controllers')
             }, (60 - $scope.getCurSecond()) * 1000);
 
             console.log($scope.alarms);
-            $scope.clearInputBox();
+            // cleart Box input
+            $scope.clearInputBox()
         }
+
         $scope.getCurSecond = function() {
             var today = new Date();
             currSeconds = today.getSeconds();
             return (currSeconds < 10 ? "0" : "") + currSeconds;
-        }
-
-        $scope.clearInputBox = function() {
-            $scope.alarmMinute = '',
-                $scope.alarmHour = '',
-                $scope.alarmTod = 'PM';
         }
 
         $scope.findAlarm = function(alarm) {

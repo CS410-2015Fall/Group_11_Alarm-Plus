@@ -39,5 +39,5 @@ angular.module('Alarm-Plus.controllers', ['ionic', 'ngCordova'])
             $scope.closeLogin();
         }, 1000);
     };
-})
+});
 
