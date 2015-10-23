@@ -1,0 +1,35 @@
+<ion-view view-title="setup">
+    <ion-content>
+        <!-- setUp Alarm page -->
+        <div style="padding-top:2cm;" class="list list-inset">
+            <h2> Set Alarm </h2>
+            <label class="item item-input">
+                <span class="input-label"> Name </span>
+                <input type="text" maxlength="30" ng-value="string" ng-model="alarmName" />
+            </label>
+            <label class="item item-input">
+                <span class="input-label"> Hours </span>
+                <input type="number" min="0" max="12" ng-required="true" ng-maxlength="2" ng-model="alarmHour" />
+            </label>
+            <label class="item item-input">
+                <span class="input-label"> Minutes </span>
+                <input type="number" min="0" max="59" ng-maxlength="2" ng-required="true" ng-model="alarmMinute" /> {{curTime}}
+            </label>
+            <label class="item item-input">
+                <span class="input-label"> Select days: </span>
+                <ion-checkbox ng-repeat="day in alarmDays"> {{day}}</ion-checkbox>
+            </label>
+            {{alarmDays}}
+            {{alarmDays.SUN}}
+            <select class="item item-input" ng-model="alarmTod">
+                <option class="input-label" ng-repeat="c in tod">{{c}}</option>
+            </select>
+            <div class="clickArea">
+                <button class="button button-positive" ng-click="createAlarm()"> Create </button>
+                <button class="button button-assertive"> Cancel </button>
+            </div>
+            <div></div>
+            <button class="button button-positive" ng-click="dispCurTime()"> Show Time </button>
+        </div>
+    </ion-content>
+</ion-view>
