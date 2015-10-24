@@ -7,15 +7,29 @@ angular.module('Alarm-Plus.controllers')
             $scope.alarmName = "guest",
             $scope.alarmHour = 0,
             $scope.alarmMinute = 0,
-            $scope.alarmTod = "PM",
-            $scope.alarmDays = [
-            { text: "SUN", checked: false},
-            { text: "MON", checked: false},
-            { text: "TUE", checked: false},
-            { text: "WED", checked: false},
-            { text: "THUR", checked: false},
-            { text: "FRI", checked: false},
-            { text: "SAT", checked: false},],
+            $scope.alarmTod = { time: "PM"},
+            $scope.alarmDays = [{
+                text: "SUN",
+                checked: false
+            }, {
+                text: "MON",
+                checked: false
+            }, {
+                text: "TUE",
+                checked: false
+            }, {
+                text: "WED",
+                checked: false
+            }, {
+                text: "THUR",
+                checked: false
+            }, {
+                text: "FRI",
+                checked: false
+            }, {
+                text: "SAT",
+                checked: false
+            }, ],
             $scope.alarms = [];
 
 
@@ -23,13 +37,17 @@ angular.module('Alarm-Plus.controllers')
             this.alarmMinute = 0,
                 this.alarmHour = 0,
                 this.alarmTod = 'PM';
+            for (var day in this.alarmDays) {
+                this.alarmDays[day].checked = false;
+
+            };
         }
 
         $scope.createAlarm = function() {
             // Create an alarm based on user's input
             var id = Math.floor((Math.random() * 15) + 1);
             $scope.alarms[id] = new Alarm(this.alarmName, this.alarmHour,
-                this.alarmMinute, this.alarmTod);
+                this.alarmMinute, this.alarmTod.time, this.alarmDays);
 
             // start an alarm at second = 0
             console.log($scope.getCurSecond());
@@ -37,9 +55,10 @@ angular.module('Alarm-Plus.controllers')
                 $scope.alarms[id].start();
             }, (60 - $scope.getCurSecond()) * 1000);
 
+            console.log($scope.alarmDays);
             console.log($scope.alarms);
             // cleart Box input
-            $scope.clearInputBox()
+            this.clearInputBox()
         }
 
         $scope.getCurSecond = function() {
@@ -75,6 +94,3 @@ angular.module('Alarm-Plus.controllers')
         }
     });
 }]);
-
-
-

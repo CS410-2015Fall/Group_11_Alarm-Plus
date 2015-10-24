@@ -13,12 +13,8 @@
             <span class="input-label"> Minutes </span>
             <input type="number" min="0" max="59" ng-maxlength="2" ng-required="true" ng-model="alarmMinute" />
         </label>
-        <!-- {{alarmDays[0].checked}} {{ alarmDays[1].checked}} -->
-        <ion-list>
-            <ion-item>
-                <ion-option-button ng-model="alarmTod" ng-repeat="c in tod" class="button-assertive">{{c}}</ion-option-button>
-            </ion-item>
-        </ion-list>
+        <ion-radio ng-model="alarmTod.time" ng-value="time" ng-repeat="time in tod">{{time}}</ion-radio>
+
         <!-- Right Side -->
         <ion-checkbox ng-repeat="day in alarmDays" ng-model="day.checked" checked="day.checked">{{day.text}}</ion-checkbox>
         <div class="clickArea">
@@ -26,6 +22,6 @@
             <button class="button button-assertive"> Cancel </button>
             <button class="button button-positive" ng-click="dispCurTime()"> Show Time </button>
         </div>
-        {{curTime}}
+        {{curTime}} {{ alarmTod.time }}
     </ion-content>
 </ion-view>

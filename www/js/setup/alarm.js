@@ -1,7 +1,7 @@
 angular.module('Alarm-Plus.controllers')
 
 .factory('Alarm', ['$ionicPopup', '$timeout', function($ionicPopup, $timeout) {
-    function Alarm(name, hour, minute, timeofday, task, weekDays) {
+    function Alarm(name, hour, minute, timeofday, weekDays, task) {
         this.name = name;
         this.hour = hour;
         this.minute = minute;
@@ -46,7 +46,9 @@ angular.module('Alarm-Plus.controllers')
         currentHours = (currentHours === 0) ? 12 : currentHours;
         var curTime = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
         // TODO: condition to add need ot check if our weekdays array contain the current day
-        if (this.hour == currentHours && this.minute == currentMinutes && this.tod === timeOfDay) {
+        if (this.hour == currentHours && this.minute == currentMinutes && this.tod === timeOfDay &&
+          this.weekDays[today.getDay()].checked) {
+
             console.log("TIME IS UP");
             showPopup();
 
