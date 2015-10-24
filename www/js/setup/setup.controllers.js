@@ -1,6 +1,6 @@
 angular.module('Alarm-Plus.controllers')
 
-.controller('setupController', function($scope, $ionicPlatform, $timeout) {
+.controller('setupController', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', function($scope, $ionicPlatform, $timeout, Alarm) {
     $ionicPlatform.ready(function() {
         $scope.curTime = "oh";
         $scope.tod = ["AM", "PM"],
@@ -21,9 +21,9 @@ angular.module('Alarm-Plus.controllers')
 
 
         $scope.clearInputBox = function() {
-            this.alarmMinute = '',
-                this.alarmHour = '',
-                this.alarmTod = 'PM';
+            $scope.alarmMinute = 2,
+                $scope.alarmHour = 2,
+                $scope.alarmTod = 'PM';
         }
 
         $scope.createAlarm = function() {
@@ -75,4 +75,7 @@ angular.module('Alarm-Plus.controllers')
             }, 1000);
         }
     });
-});
+}]);
+
+
+
