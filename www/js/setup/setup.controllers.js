@@ -8,22 +8,21 @@ angular.module('Alarm-Plus.controllers')
             $scope.alarmHour = 0,
             $scope.alarmMinute = 0,
             $scope.alarmTod = "PM",
-            $scope.alarmDays = {
-              SUN: 0,
-              MON: 1,
-              TUE: 2,
-              WED: 3,
-              THUR: 4,
-              FRI: 5,
-              SAT: 6
-            },
+            $scope.alarmDays = [
+            { text: "SUN", checked: false},
+            { text: "MON", checked: false},
+            { text: "TUE", checked: false},
+            { text: "WED", checked: false},
+            { text: "THUR", checked: false},
+            { text: "FRI", checked: false},
+            { text: "SAT", checked: false},],
             $scope.alarms = [];
 
 
         $scope.clearInputBox = function() {
-            $scope.alarmMinute = 2,
-                $scope.alarmHour = 2,
-                $scope.alarmTod = 'PM';
+            this.alarmMinute = 0,
+                this.alarmHour = 0,
+                this.alarmTod = 'PM';
         }
 
         $scope.createAlarm = function() {
