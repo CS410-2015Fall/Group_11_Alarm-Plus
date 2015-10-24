@@ -1,13 +1,15 @@
 angular.module('Alarm-Plus.controllers')
 
-.controller('setupController', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', function($scope, $ionicPlatform, $timeout, Alarm) {
+.controller('setupController', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', function($scope, $ionicPlatform, $timeout, Alarm, $q) {
     $ionicPlatform.ready(function() {
         $scope.curTime = "oh";
         $scope.tod = ["AM", "PM"],
             $scope.alarmName = "guest",
             $scope.alarmHour = 0,
             $scope.alarmMinute = 0,
-            $scope.alarmTod = { time: "PM"},
+            $scope.alarmTod = {
+                time: "PM"
+            },
             $scope.alarmDays = [{
                 text: "SUN",
                 checked: false
@@ -33,13 +35,13 @@ angular.module('Alarm-Plus.controllers')
             $scope.alarms = [];
 
 
+
         $scope.clearInputBox = function() {
             this.alarmMinute = 0,
                 this.alarmHour = 0,
                 this.alarmTod = 'PM';
             for (var day in this.alarmDays) {
                 this.alarmDays[day].checked = false;
-
             };
         }
 
@@ -58,7 +60,7 @@ angular.module('Alarm-Plus.controllers')
             console.log($scope.alarmDays);
             console.log($scope.alarms);
             // cleart Box input
-            this.clearInputBox()
+            //this.clearInputBox();
         }
 
         $scope.getCurSecond = function() {
