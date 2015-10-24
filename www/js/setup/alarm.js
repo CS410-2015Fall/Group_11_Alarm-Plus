@@ -1,6 +1,6 @@
 angular.module('Alarm-Plus.controllers')
 
-.factory('Alarm', function() {
+.factory('Alarm', ['$ionicPopup', '$timeout', function($ionicPopup, $timeout) {
     function Alarm(name, hour, minute, timeofday, task, weekDays) {
         this.name = name;
         this.hour = hour;
@@ -11,6 +11,24 @@ angular.module('Alarm-Plus.controllers')
         this.active = {};
         this.weekDays = weekDays; // TODO: weekdays should be an array of number
     };
+
+    function showPopup($scope) {
+        var myPopup = $ionicPopup.show({
+            template: '<input type="password">',
+            title: 'Enter Wi-Fi Password',
+            subTitle: 'Please use normal things',
+            buttons: [{
+                text: 'Cancel'
+            }, {
+                text: '<b>Save</b>',
+                type: 'button-positive'
+            }]
+        });
+
+        $timeout(function() {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 10000);
+    }
 
     Alarm.prototype.start = function() {
         var today = new Date();
@@ -30,7 +48,8 @@ angular.module('Alarm-Plus.controllers')
         // TODO: condition to add need ot check if our weekdays array contain the current day
         if (this.hour == currentHours && this.minute == currentMinutes && this.tod === timeOfDay) {
             console.log("TIME IS UP");
-            alert('TIME IS UP');
+            showPopup();
+
             // TODO: the music should keep on ringing until user get the 3 answer OR close the app
             // the user should be redirect to another page
         }
@@ -62,4 +81,4 @@ angular.module('Alarm-Plus.controllers')
         console.log(this.snoozeCredit);
     };
     return Alarm;
-})
+}])
