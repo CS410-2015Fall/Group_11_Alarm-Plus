@@ -62,15 +62,6 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
                 }
             }
         })
-        .state('app.setup', {
-            url: '/setup',
-            views: {
-                'menuContent': {
-                    templateUrl: 'templates/setup.html',
-                    controller: 'setupController'
-                }
-            }
-        });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/home');
 });
