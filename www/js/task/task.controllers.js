@@ -20,19 +20,19 @@ angular.module('Alarm-Plus.controllers')
 .controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate) {
   var cardTypes = [{
     title: 'Swipe down to clear the card',
-    image: 'img/pic.png'
+    equation: '5 + x = 15'
   }, {
-    title: 'Where is this?',
-    image: 'img/pic.png'
+    title: 'Swipe down to clear the card',
+    equation: '5x + 2 = 12'
   }, {
-    title: 'What kind of grass is this?',
-    image: 'img/pic2.png'
+    title: 'Swipe down to clear the card',
+    equation: 'x + 6 = 13'
   }, {
-    title: 'What beach is this?',
-    image: 'img/pic3.png'
+    title: 'Swipe down to clear the card',
+    equation: '8 - x = 2'
   }, {
-    title: 'What kind of clouds are these?',
-    image: 'img/pic4.png'
+    title: 'Swipe down to clear the card',
+    equation: '9/x = 3'
   }];
 
   $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
