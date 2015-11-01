@@ -34,6 +34,15 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
             }, 5000);
         };
     });
+
+    var permanentStorage = window.localStorage;
+    window.localStorage.setItem("key", "can i put array here?");
+    var coolalarm = ["babe", "love"];
+    window.localStorage.setItem("key2", coolalarm);
+    var value = window.localStorage.getItem("key");
+    var value2 = window.localStorage.getItem("key2");
+    alert(value);
+    alert(value2);
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -44,7 +53,7 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
             templateUrl: 'templates/menu.html',
             controller: 'AppCtrl'
         })
-    .state('app.home', {
+        .state('app.home', {
             url: '/home',
             views: {
                 'menuContent': {
@@ -62,6 +71,6 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
                 }
             }
         })
-    // if none of the above states are matched, use this as the fallback
+        // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/home');
 });
