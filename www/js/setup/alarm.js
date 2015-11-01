@@ -47,12 +47,10 @@ angular.module('Alarm-Plus.controllers')
         // TODO: condition to add need ot check if our weekdays array contain the current day
         if (this.hour == currentHours && this.minute == currentMinutes && this.tod === timeOfDay &&
             this.weekDays[today.getDay()].checked) {
-            var src = "/src/audio.mp3";
-            var media = $cordovaMedia.newMedia(src);
-            media.play();
+
 
             console.log("TIME IS UP");
-            //showPopup();
+            showPopup();
 
 
             // TODO: the music should keep on ringing until user get the 3 answer OR close the app
