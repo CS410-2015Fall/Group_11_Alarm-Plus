@@ -108,8 +108,8 @@ angular.module('Alarm-Plus.controllers', [])
                     this.alarmTod = 'PM';
                 for (var day in this.alarmDays) {
                     this.alarmDays[day].checked = false;
-                };
-            }
+                }
+            };
 
             $scope.createAlarm = function() {
                 // Create an alarm based on user's input
@@ -127,18 +127,19 @@ angular.module('Alarm-Plus.controllers', [])
                 console.log($scope.alarms);
                 // cleart Box input
                 //this.clearInputBox();
-            }
+                $scope.closeModal(2);
+            };
 
             $scope.getCurSecond = function() {
                 var today = new Date();
                 currSeconds = today.getSeconds();
                 return (currSeconds < 10 ? "0" : "") + currSeconds;
-            }
+            };
 
             $scope.findAlarm = function(alarm) {
                 var index = $scope.alarms.indexOf(alarm);
                 console.log(index);
-            }
+            };
 
             $scope.dispCurTime = function() {
                 var today = new Date();
@@ -159,7 +160,7 @@ angular.module('Alarm-Plus.controllers', [])
                 $timeout(function() {
                     $scope.dispCurTime();
                 }, 1000);
-            }
+            };
         });
     }
 ]);
