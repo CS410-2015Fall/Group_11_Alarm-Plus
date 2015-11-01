@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.services', 'ngCordova'])
+angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.services', 'ngCordova', 'ionic.contrib.ui.cards'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -17,6 +17,20 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
         }
     });
 })
+
+// .directive('noScroll', function($document) {
+
+//   return {
+//     restrict: 'A',
+//     link: function($scope, $element, $attr) {
+
+//       $document.on('touchmove', function(e) {
+//         e.preventDefault();
+//       });
+//     }
+//   }
+// })
+
 
 .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -42,7 +56,7 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
             views: {
                 'menuContent': {
                     templateUrl: 'templates/task.html',
-                    controller:'taskController'
+                    controller:'CardsCtrl'
                 }
             }
         })
@@ -58,3 +72,5 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/home');
 });
+
+
