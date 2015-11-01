@@ -1,28 +1,5 @@
 angular.module('Alarm-Plus.controllers')
 
-.factory('Task', ['$scope', 'ionicSwipeCardDelegate', function($scope, $ionicSwipeCardDelegate) {
-    function Task(equation, taskTitle, point) {
-        this.equation = equation;
-        this.taskTitle = title;
-        this.point = point;
-    };
-
-    // start the pop-up and don't close
-    Task.prototype.start = function() {
-
-    };
-
-    // If the user answer correctly
-    Task.prototype.end = function() {
-
-    };
-
-    Task.prototype.getPoint = function() {
-        return this.point;
-    };
-    return Task;
-}])
-
 .controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate) {
   var cardTypes = [{
     title: 'Swipe down to clear the card',

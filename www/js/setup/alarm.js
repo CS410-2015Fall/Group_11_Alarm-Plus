@@ -1,7 +1,9 @@
 angular.module('Alarm-Plus.controllers')
 
-.factory('Alarm', ['$ionicPopup', '$timeout', '$state',function($ionicPopup, $timeout, $state) {
-    function Alarm(name, hour, minute, timeofday, task, weekDays) {
+
+.factory('Alarm', ['$ionicPopup', '$timeout', '$cordovaMedia', '$state', function($ionicPopup, $timeout, $cordovaMedia, $state) {
+    function Alarm(name, hour, minute, timeofday, weekDays, task) {
+
         this.name = name;
         this.hour = hour;
         this.minute = minute;
@@ -24,7 +26,6 @@ angular.module('Alarm-Plus.controllers')
                 type: 'button-positive'
             }]
         });
-
         $timeout(function() {
             myPopup.close(); //close the popup after 3 seconds for some reason
         }, 10000);
@@ -46,7 +47,8 @@ angular.module('Alarm-Plus.controllers')
         currentHours = (currentHours === 0) ? 12 : currentHours;
         var curTime = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
         // TODO: condition to add need ot check if our weekdays array contain the current day
-        if (this.hour == currentHours && this.minute == currentMinutes && this.tod === timeOfDay) {
+        if (this.hour == currentHours && this.minute == currentMinutes && this.tod === timeOfDay &&
+            this.weekDays[today.getDay()].checked) {
             console.log("TIME IS UP");
             //showPopup();
             $state.go('app.task');
@@ -55,6 +57,7 @@ angular.module('Alarm-Plus.controllers')
 
             // the user should be redirect to another page
         }
+
         this.active = setTimeout((function() {
             this.start();
         }).bind(this), 60000);

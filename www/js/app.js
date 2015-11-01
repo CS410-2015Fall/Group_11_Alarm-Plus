@@ -15,6 +15,24 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
         if (window.StatusBar) {
             StatusBar.styleDefault();
         }
+
+        // Android customization
+        cordova.plugins.backgroundMode.setDefaults({
+            title: "Alarm-Plus",
+            text: "Let's go"
+        });
+        // Enable background mode
+        cordova.plugins.backgroundMode.enable();
+
+        // Called when background mode has been activated
+        cordova.plugins.backgroundMode.onactivate = function() {
+            setTimeout(function() {
+                // Modify the currently displayed notification
+                cordova.plugins.backgroundMode.configure({
+                    text: 'Running in background for more than 5s now.'
+                });
+            }, 5000);
+        };
     });
 })
 
@@ -40,14 +58,12 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
             templateUrl: 'templates/menu.html',
             controller: 'AppCtrl'
         })
-
-    .state('app.home', {
+        .state('app.home', {
             url: '/home',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/home.html',
-                    controller:'homeController'
-
+                    controller: 'homeController'
                 }
             }
         })
@@ -57,19 +73,11 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
                 'menuContent': {
                     templateUrl: 'templates/task.html',
                     controller:'CardsCtrl'
+
                 }
             }
         })
-        .state('app.setup', {
-            url: '/setup',
-            views: {
-                'menuContent': {
-                    templateUrl: 'templates/setup.html',
-                    controller: 'setupController'
-                }
-            }
-        });
-    // if none of the above states are matched, use this as the fallback
+        // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/home');
 });
 
