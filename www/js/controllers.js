@@ -1,4 +1,4 @@
-angular.module('Alarm-Plus.controllers', ['ionic', 'ngCordova'])
+angular.module('Alarm-Plus.controllers',[])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
@@ -14,19 +14,31 @@ angular.module('Alarm-Plus.controllers', ['ionic', 'ngCordova'])
 
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('templates/login.html', {
-        scope: $scope
+        id: '1',
+        scope: $scope,
+        animation: 'slide-in-up'
     }).then(function(modal) {
-        $scope.modal = modal;
+        $scope.modal1 = modal;
+    });
+
+    $ionicModal.fromTemplateUrl('templates/setup.html', {
+        id: '2',
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal) {
+        $scope.modal2 = modal;
     });
 
     // Triggered in the login modal to close it
-    $scope.closeLogin = function() {
-        $scope.modal.hide();
+    $scope.closeModal = function(index) {
+        if (index == 1) $scope.modal1.hide();
+      else $scope.modal2.hide();
     };
 
     // Open the login modal
-    $scope.login = function() {
-        $scope.modal.show();
+    $scope.openModal = function(index) {
+        if (index == 1) $scope.modal1.show();
+      else $scope.modal2.show();
     };
 
     // Perform the login action when the user submits the login form
@@ -40,4 +52,3 @@ angular.module('Alarm-Plus.controllers', ['ionic', 'ngCordova'])
         }, 1000);
     };
 });
-

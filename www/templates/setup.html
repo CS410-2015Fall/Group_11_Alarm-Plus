@@ -1,8 +1,14 @@
-<ion-view view-title="setup">
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">Setup</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeModal(2)">Close</button>
+        </div>
+    </ion-header-bar>
     <ion-content>
         <!-- Left Side -->
         <label class="item item-input">
-            <span class="input-label"> Name </span>
+            <span class="input-label"> Nam2e </span>
             <input type="text" maxlength="30" ng-value="string" ng-model="alarmName" />
         </label>
         <label class="item item-input">
@@ -14,7 +20,6 @@
             <input type="number" min="0" max="59" ng-maxlength="2" ng-required="true" ng-model="alarmMinute" />
         </label>
         <ion-radio ng-model="alarmTod.time" ng-value="time" ng-repeat="time in tod">{{time}}</ion-radio>
-
         <!-- Right Side -->
         <ion-checkbox ng-repeat="day in alarmDays" ng-model="day.checked" checked="day.checked">{{day.text}}</ion-checkbox>
         <div class="clickArea">
@@ -24,4 +29,4 @@
         </div>
         {{curTime}} {{ alarmTod.time }}
     </ion-content>
-</ion-view>
+</ion-modal-view>

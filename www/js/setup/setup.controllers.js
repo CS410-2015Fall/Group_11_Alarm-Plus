@@ -1,7 +1,7 @@
 angular.module('Alarm-Plus.controllers')
 
-.controller('setupController', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', function($scope, $ionicPlatform, $timeout, Alarm, $q) {
-    $ionicPlatform.ready(function() {
+.controller('setupController', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', '$ionicModal',
+    function($scope, $ionicPlatform, $timeout, Alarm, $q, $ionicModal) {
         $scope.curTime = "oh";
         $scope.tod = ["AM", "PM"],
             $scope.alarmName = "guest",
@@ -33,8 +33,6 @@ angular.module('Alarm-Plus.controllers')
                 checked: false
             }, ],
             $scope.alarms = [];
-
-
 
         $scope.clearInputBox = function() {
             this.alarmMinute = 0,
@@ -94,5 +92,6 @@ angular.module('Alarm-Plus.controllers')
                 $scope.dispCurTime();
             }, 1000);
         }
-    });
-}]);
+
+    }
+]);

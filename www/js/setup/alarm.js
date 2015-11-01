@@ -1,6 +1,6 @@
 angular.module('Alarm-Plus.controllers')
 
-.factory('Alarm', ['$ionicPopup', '$timeout', function($ionicPopup, $timeout) {
+.factory('Alarm', ['$ionicPopup', '$timeout', '$cordovaMedia', function($ionicPopup, $timeout, $cordovaMedia) {
     function Alarm(name, hour, minute, timeofday, weekDays, task) {
         this.name = name;
         this.hour = hour;
@@ -24,7 +24,6 @@ angular.module('Alarm-Plus.controllers')
                 type: 'button-positive'
             }]
         });
-
         $timeout(function() {
             myPopup.close(); //close the popup after 3 seconds for some reason
         }, 10000);
@@ -47,14 +46,19 @@ angular.module('Alarm-Plus.controllers')
         var curTime = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
         // TODO: condition to add need ot check if our weekdays array contain the current day
         if (this.hour == currentHours && this.minute == currentMinutes && this.tod === timeOfDay &&
-          this.weekDays[today.getDay()].checked) {
+            this.weekDays[today.getDay()].checked) {
+            var src = "/src/audio.mp3";
+            var media = $cordovaMedia.newMedia(src);
+            media.play();
 
             console.log("TIME IS UP");
-            showPopup();
+            //showPopup();
+
 
             // TODO: the music should keep on ringing until user get the 3 answer OR close the app
             // the user should be redirect to another page
         }
+
         this.active = setTimeout((function() {
             this.start();
         }).bind(this), 60000);
