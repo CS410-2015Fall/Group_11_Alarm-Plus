@@ -34,15 +34,6 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
             }, 5000);
         };
     });
-
-    var permanentStorage = window.localStorage;
-    window.localStorage.setItem("key", "can i put array here?");
-    var coolalarm = ["babe", "love"];
-    window.localStorage.setItem("key2", coolalarm);
-    var value = window.localStorage.getItem("key");
-    var value2 = window.localStorage.getItem("key2");
-    alert(value);
-    alert(value2);
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
