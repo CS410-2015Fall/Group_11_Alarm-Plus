@@ -1,5 +1,5 @@
 <ion-view view-title="task">
-   <ion-pane ng-controller="CardsCtrl">
+   <ion-pane>
     <ion-header-bar class="bar-transparent">
         <h1 class="title">WAKE UP!</h1>
       </ion-header-bar>
@@ -9,7 +9,7 @@
         COMPLETE THE TASK TO TURN OFF THE ALARM
       </swipe-card>
       <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
-        <div ng-controller="CardCtrl">
+        <div>
           <div class="title">
             Swipe down to skip the question.
           </div>

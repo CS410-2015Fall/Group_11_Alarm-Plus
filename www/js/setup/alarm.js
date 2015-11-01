@@ -1,6 +1,6 @@
 angular.module('Alarm-Plus.controllers')
 
-.factory('Alarm', ['$ionicPopup', '$timeout', function($ionicPopup, $timeout) {
+.factory('Alarm', ['$ionicPopup', '$timeout', '$state',function($ionicPopup, $timeout, $state) {
     function Alarm(name, hour, minute, timeofday, task, weekDays) {
         this.name = name;
         this.hour = hour;
@@ -48,9 +48,11 @@ angular.module('Alarm-Plus.controllers')
         // TODO: condition to add need ot check if our weekdays array contain the current day
         if (this.hour == currentHours && this.minute == currentMinutes && this.tod === timeOfDay) {
             console.log("TIME IS UP");
-            showPopup();
-
+            //showPopup();
+            $state.go('app.task');
             // TODO: the music should keep on ringing until user get the 3 answer OR close the app
+
+
             // the user should be redirect to another page
         }
         this.active = setTimeout((function() {

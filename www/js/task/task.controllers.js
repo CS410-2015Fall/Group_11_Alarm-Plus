@@ -1,21 +1,27 @@
 angular.module('Alarm-Plus.controllers')
 
-// .controller('taskController', function($scope, $ionicPlatform) {
-//     $ionicPlatform.ready(function() {
-//       $scope.taskName = "hi there";
-//       $scope.fixedText = "im fixed";
+.factory('Task', ['$scope', 'ionicSwipeCardDelegate', function($scope, $ionicSwipeCardDelegate) {
+    function Task(equation, taskTitle, point) {
+        this.equation = equation;
+        this.taskTitle = title;
+        this.point = point;
+    };
 
-//       $scope.curPoint = 0;
+    // start the pop-up and don't close
+    Task.prototype.start = function() {
 
-//       $scope.success = function () {
-//         $scope.curPoint++;
-//       }
+    };
 
-//     });
+    // If the user answer correctly
+    Task.prototype.end = function() {
 
+    };
 
-
-// });
+    Task.prototype.getPoint = function() {
+        return this.point;
+    };
+    return Task;
+}])
 
 .controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate) {
   var cardTypes = [{
@@ -50,11 +56,12 @@ angular.module('Alarm-Plus.controllers')
     newCard.id = Math.random();
     $scope.cards.push(angular.extend({}, newCard));
   }
-})
 
-.controller('CardCtrl', function($scope, $ionicSwipeCardDelegate) {
   $scope.goAway = function() {
     var card = $ionicSwipeCardDelegate.getSwipeableCard($scope);
     card.swipe();
   };
-});
+})
+
+
+
