@@ -1,6 +1,6 @@
 angular.module('Alarm-Plus.controllers', [])
 
-.controller('AppCtrl', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', '$ionicModal',
+.controller('setupController', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', '$ionicModal',
     function($scope, $ionicPlatform, $timeout, Alarm, $q, $ionicModal) {
         $ionicPlatform.ready(function() {
             // Login Area
