@@ -86,12 +86,6 @@ angular.module('Alarm-Plus.controllers', [])
                 }, ],
                 $scope.alarms = [];
 
-            $ionicModal.fromTemplateUrl('templates/setup.html', {
-                scope: $scope
-            }).then(function(modal) {
-                $scope.modal = modal;
-            });
-
             // Triggered in the setup modal to close it
             $scope.closeSetup = function() {
                 $scope.modal.hide();
@@ -106,9 +100,6 @@ angular.module('Alarm-Plus.controllers', [])
                 this.alarmMinute = 0,
                     this.alarmHour = 0,
                     this.alarmTod = 'PM';
-                for (var day in this.alarmDays) {
-                    this.alarmDays[day].checked = false;
-                }
             };
 
             $scope.createAlarm = function() {
@@ -126,7 +117,7 @@ angular.module('Alarm-Plus.controllers', [])
                 console.log($scope.alarmDays);
                 console.log($scope.alarms);
                 // cleart Box input
-                //this.clearInputBox();
+
                 $scope.closeModal(2);
             };
 

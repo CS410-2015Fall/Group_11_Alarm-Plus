@@ -49,7 +49,6 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
 //   }
 // })
 
-
 .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('app', {

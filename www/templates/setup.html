@@ -6,27 +6,31 @@
         </div>
     </ion-header-bar>
     <ion-content>
-        <!-- Left Side -->
-        <label class="item item-input">
-            <span class="input-label"> Nam2e </span>
-            <input type="text" maxlength="30" ng-value="string" ng-model="alarmName" />
-        </label>
-        <label class="item item-input">
-            <span class="input-label"> Hours </span>
-            <input type="number" min="0" max="12" ng-required="true" ng-maxlength="2" ng-model="alarmHour" />
-        </label>
-        <label class="item item-input">
-            <span class="input-label"> Minutes </span>
-            <input type="number" min="0" max="59" ng-maxlength="2" ng-required="true" ng-model="alarmMinute" />
-        </label>
-        <ion-radio ng-model="alarmTod.time" ng-value="time" ng-repeat="time in tod">{{time}}</ion-radio>
-        <!-- Right Side -->
-        <ion-checkbox ng-repeat="day in alarmDays" ng-model="day.checked" checked="day.checked">{{day.text}}</ion-checkbox>
-        <div class="clickArea">
-            <button class="button button-positive" ng-click="createAlarm()"> Create </button>
-            <button class="button button-assertive"> Cancel </button>
-            <button class="button button-positive" ng-click="dispCurTime()"> Show Time </button>
-        </div>
+        <form name="form" novalidate>
+            <label class="item item-input">
+                <span class="input-label"> Name </span>
+                <div ng-show="form.$submitted || form.uName.$touched">
+                    <div ng-show="form.uName.$error.required">Tell us your name.</div>
+                </div>
+                <input type="text" maxlength="30" ng-value="string" ng-model="alarmName" />
+            </label>
+            <label class="item item-input">
+                <span class="input-label"> Hours </span>
+                <input type="number" min="0" max="12" ng-required="true" ng-maxlength="2" ng-model="alarmHour" />
+            </label>
+            <label class="item item-input">
+                <span class="input-label"> Minutes </span>
+                <input type="number" min="0" max="59" ng-maxlength="2" ng-required="true" ng-model="alarmMinute" />
+            </label>
+            <ion-radio ng-model="alarmTod.time" ng-value="time" ng-repeat="time in tod">{{time}}</ion-radio>
+            <!-- Right Side -->
+            <ion-checkbox ng-repeat="day in alarmDays" ng-model="day.checked" checked="day.checked">{{day.text}}</ion-checkbox>
+            <div class="clickArea">
+                <button class="button button-positive" ng-click="createAlarm()"> Create </button>
+                <button class="button button-assertive"> Cancel </button>
+                <button class="button button-positive" ng-click="dispCurTime()"> Show Time </button>
+            </div>
+        </form>
         {{curTime}} {{ alarmTod.time }}
     </ion-content>
 </ion-modal-view>
