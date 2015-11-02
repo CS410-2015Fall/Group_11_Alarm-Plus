@@ -9,7 +9,7 @@
         COMPLETE THE TASK TO TURN OFF THE ALARM
       </swipe-card>
       <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
-        <div>
+        <div ng-controller="CardsCtrl">
           <div class="title">
             Swipe down to skip the question.
           </div>
