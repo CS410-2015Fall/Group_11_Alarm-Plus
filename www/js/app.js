@@ -72,9 +72,13 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
                 'menuContent': {
                     templateUrl: 'templates/task.html',
                     controller: 'CardsCtrl'
+<<<<<<< HEAD
+=======
+
+>>>>>>> tasks
                 }
             }
-        })
-        // if none of the above states are matched, use this as the fallback
+        });
+    // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/home');
 });
