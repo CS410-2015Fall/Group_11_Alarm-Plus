@@ -45,6 +45,12 @@ angular.module('Alarm-Plus.controllers')
             };
         }
 
+        //somenewstuff
+        $scope.visible = false;
+
+        $scope.newalarms = [];
+
+
         $scope.createAlarm = function() {
             // Create an alarm based on user's input
             var id = Math.floor((Math.random() * 15) + 1);
@@ -61,6 +67,25 @@ angular.module('Alarm-Plus.controllers')
             console.log($scope.alarms);
             // cleart Box input
             //this.clearInputBox();
+        }
+
+        $scope.addAlarm = function() {
+            $scope.newalarms.push(name:$scope.aName, $scope.alarmHour, $scope.alarmMinute, tod:$scope.aTod, date:$scope.aDate);
+
+            $scope.aName = this.alarmName;
+            $scope.alarmHour = this.alarmHour;
+            $scope.alarmMinute = this.alarmMinute;
+            // idk if this works so commented it out but i just wanted to put the hour and minute together
+            // var h = this.alarmHour;
+            // var m = this.alarmMinute;
+            // $scope.aTime = h + m; 
+            $scope.aTod = this.alarmTod.time;
+            $scope.aDate = this.alarmDays;
+        }
+
+        $scope.removeAlarm = function(item) {
+            var index=$scope.newalarms.indexOf(item)
+            $scope.newalarms.splice(index,1);
         }
 
         $scope.getCurSecond = function() {
