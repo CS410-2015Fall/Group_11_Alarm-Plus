@@ -71,7 +71,7 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
             views: {
                 'menuContent': {
                     templateUrl: 'templates/task.html',
-                    controller:'CardsCtrl'
+                    controller: 'CardsCtrl'
 
                 }
             }
@@ -79,5 +79,3 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
         // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/home');
 });
-
-
