@@ -1,12 +1,14 @@
 <ion-view view-title="home">
     <ion-content>
+    <button class="button button-assertive" ng-click="clearAll()"> CLEAR ALL </button>
+    <button class="button button-balanced" ng-click="currArray()"> SEE ALL </button>
         <ion-list>
             <ion-item class="item-thumbnail-left" ng-repeat="alarm in alarms">
                 <p> {{alarm.name}} </p>
                     <p> {{alarm.hour}} : {{alarm.minute}} {{alarm.tod}} </p>
                     <button class="ion-minus-circled" ng-click="removeAlarm($index)">
                     </button>
-                    <button class="button button-assertive" ng-click="editAlarm()">
+                    <button class="button button-assertive" ng-click="editAlarm($index)">
                     </button>
             </ion-item>
         </ion-list>

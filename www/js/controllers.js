@@ -83,8 +83,21 @@ angular.module('Alarm-Plus.controllers', [])
                 }, {
                     text: "SAT",
                     checked: false
-                }, ],
-                $scope.alarms = [];
+                }, ];
+
+            $scope.initAlarms = function() {
+                // Check if key alrms is already exist
+                if (window.localStorage.getItem("alarms") === null) {
+                    var tempt = [];
+                    window.localStorage.setItem("alarms", JSON.stringify(tempt));
+                    $scope.alarms = JSON.parse(window.localStorage.getItem("alarms"));
+                } else {
+                    $scope.alarms = JSON.parse(window.localStorage.getItem("alarms"));
+                }
+            };
+
+            $scope.initAlarms();
+
 
             // Triggered in the setup modal to close it
             $scope.closeSetup = function() {
@@ -96,20 +109,13 @@ angular.module('Alarm-Plus.controllers', [])
                 $scope.modal.show();
             };
 
-            $scope.clearInputBox = function() {
-                this.alarmMinute = 0,
-                    this.alarmHour = 0,
-                    this.alarmTod = 'PM';
-            };
-
             $scope.createAlarm = function() {
+
                 // Create an alarm based on user's input
                 // var id = Math.floor((Math.random() * 15) + 1);
                 var nalarm = new Alarm(this.alarmName, this.alarmHour,
                     this.alarmMinute, this.alarmTod.time, this.alarmDays);
 
-                salarm = JSON.stringify(nalarm);
-                window.localStorage.setItem(this.alarmName, salarm);
                 $scope.alarms.push(nalarm);
 
                 // start an alarm at second = 0
@@ -119,6 +125,7 @@ angular.module('Alarm-Plus.controllers', [])
 
                 }, (60 - $scope.getCurSecond()) * 1000);
 
+                window.localStorage.setItem("alarms", JSON.stringify($scope.alarms));
                 console.log($scope.alarmDays);
                 console.log($scope.alarms);
                 // cleart Box input
