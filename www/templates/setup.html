@@ -9,30 +9,26 @@
         <form name="form" novalidate>
             <label class="item item-input">
                 <span class="input-label"> Name </span>
-                <div ng-show="form.$submitted || form.uName.$touched">
-                    <div ng-show="form.uName.$error.required">Tell us your name.</div>
-                </div>
                 <input type="text" maxlength="30" ng-value="string" ng-model="alarmName" />
             </label>
-            <label class="item item-input">
+<!--             <label class="item item-input">
                 <span class="input-label"> Hours </span>
                 <input type="number" min="0" max="12" ng-required="true" ng-maxlength="2" ng-model="alarmHour" />
             </label>
             <label class="item item-input">
                 <span class="input-label"> Minutes </span>
                 <input type="number" min="0" max="59" ng-maxlength="2" ng-required="true" ng-model="alarmMinute" />
-            </label>
+            </label> -->
             <ionic-timepicker input-obj="timePickerObject">
-                <button class="button button-block button-positive overflowShow">
+                <button class="button button-block button-balanced overflowShow"> 11:59 PM
                     <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
                 </button>
             </ionic-timepicker>
-            <ion-radio ng-model="alarmTod.time" ng-value="time" ng-repeat="time in tod">{{time}}</ion-radio>
+       <!--      <ion-radio ng-model="alarmTod.time" ng-value="time" ng-repeat="time in tod">{{time}}</ion-radio> -->
             <!-- Right Side -->
             <ion-checkbox ng-repeat="day in alarmDays" ng-model="day.checked" checked="day.checked">{{day.text}}</ion-checkbox>
             <div class="clickArea">
                 <button class="button button-positive" ng-click="createAlarm()"> Create </button>
-                <button class="button button-assertive"> Cancel </button>
                 <button class="button button-positive" ng-click="dispCurTime()"> Show Time </button>
             </div>
         </form>

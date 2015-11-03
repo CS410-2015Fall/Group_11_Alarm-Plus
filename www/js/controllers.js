@@ -136,9 +136,9 @@ angular.module('Alarm-Plus.controllers', [])
                 inputEpochTime: ((new Date()).getHours() * 60 * 60), //Optional
                 step: 15, //Optional
                 format: 12, //Optional
-                titleLabel: '12-hour Format', //Optional
-                setLabel: 'Set', //Optional
-                closeLabel: 'Close', //Optional
+                titleLabel: 'SETUP', //Optional
+                setLabel: 'Create', //Optional
+                closeLabel: 'Cancel', //Optional
                 setButtonType: 'button-positive', //Optional
                 closeButtonType: 'button-stable', //Optional
                 callback: function(val) { //Mandatory
