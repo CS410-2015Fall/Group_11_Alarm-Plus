@@ -20,7 +20,7 @@
                 <input type="number" min="0" max="59" ng-maxlength="2" ng-required="true" ng-model="alarmMinute" />
             </label> -->
             <ionic-timepicker input-obj="timePickerObject">
-                <button class="button button-block button-balanced overflowShow"> 11:59 PM
+                <button class="button button-block button-balanced overflowShow"> {{alarmHour}} : {{alarmMinute}} {{alarmTod.time}}
                     <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
                 </button>
             </ionic-timepicker>

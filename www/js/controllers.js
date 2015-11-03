@@ -134,7 +134,7 @@ angular.module('Alarm-Plus.controllers', [])
 
             $scope.timePickerObject = {
                 inputEpochTime: ((new Date()).getHours() * 60 * 60), //Optional
-                step: 15, //Optional
+                step: 1, //Optional
                 format: 12, //Optional
                 titleLabel: 'SETUP', //Optional
                 setLabel: 'Create', //Optional
@@ -152,6 +152,13 @@ angular.module('Alarm-Plus.controllers', [])
                 } else {
                     var selectedTime = new Date(val * 1000);
                     console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), ':', selectedTime.getUTCMinutes(), 'in UTC');
+                    $scope.alarmMinute = selectedTime.getMinutes();
+                    var currentHours = selectedTime.getUTCHours();
+                    $scope.alarmTod.time = (currentHours < 12) ? "AM" : "PM";
+                    currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
+                    currentHours = (currentHours === 0) ? 12 : currentHours;
+                    $scope.alarmHour = currentHours
+                    console.log($scope.alarmHour + " " + $scope.alarmMinute + " " + $scope.alarmTod.time);
                 }
             }
 
