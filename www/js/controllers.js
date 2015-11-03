@@ -1,6 +1,6 @@
 angular.module('Alarm-Plus.controllers', [])
 
-.controller('setupController', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', '$ionicModal',
+.controller('AppCtrl', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', '$ionicModal',
     function($scope, $ionicPlatform, $timeout, Alarm, $q, $ionicModal) {
         $ionicPlatform.ready(function() {
             // Login Area
@@ -131,6 +131,29 @@ angular.module('Alarm-Plus.controllers', [])
                 var index = $scope.alarms.indexOf(alarm);
                 console.log(index);
             };
+
+            $scope.timePickerObject = {
+                inputEpochTime: ((new Date()).getHours() * 60 * 60), //Optional
+                step: 15, //Optional
+                format: 12, //Optional
+                titleLabel: '12-hour Format', //Optional
+                setLabel: 'Set', //Optional
+                closeLabel: 'Close', //Optional
+                setButtonType: 'button-positive', //Optional
+                closeButtonType: 'button-stable', //Optional
+                callback: function(val) { //Mandatory
+                    timePickerCallback(val);
+                }
+            };
+
+            function timePickerCallback(val) {
+                if (typeof(val) === 'undefined') {
+                    console.log('Time not selected');
+                } else {
+                    var selectedTime = new Date(val * 1000);
+                    console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), ':', selectedTime.getUTCMinutes(), 'in UTC');
+                }
+            }
 
             $scope.dispCurTime = function() {
                 var today = new Date();

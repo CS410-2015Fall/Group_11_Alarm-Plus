@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.services', 'ngCordova', 'ionic.contrib.ui.cards', 'ui.router'])
+angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.services', 'ngCordova', 'ionic.contrib.ui.cards', 'ui.router', 'ionic-timepicker'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -55,7 +55,7 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
             url: '/app',
             abstract: true,
             templateUrl: 'templates/menu.html',
-            controller: 'setupController'
+            controller: 'AppCtrl'
         })
         .state('app.home', {
             url: '/home',
@@ -63,6 +63,15 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
                 'menuContent': {
                     templateUrl: 'templates/home.html',
                     controller: 'homeController'
+                }
+            }
+        })
+        .state('app.setup', {
+            url: '/setup',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/setup.html',
+                    controller: 'setupController'
                 }
             }
         })
