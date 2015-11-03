@@ -1,8 +1,9 @@
 angular.module('Alarm-Plus.controllers')
 
-.controller('homeController', function($scope, $ionicPlatform) {
-    $ionicPlatform.ready(function() {
+.controller('homeController', 'ionicPlatform', 'Alarm' function($scope, $ionicPlatform, Alarm) {
+   
+
+    	
 
 
     });
-});
