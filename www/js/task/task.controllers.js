@@ -1,19 +1,19 @@
 angular.module('Alarm-Plus.controllers')
 
-.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate) {
+.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, $cordovaVibration) {
   var cardTypes = [{
     title: 'Swipe down to clear the card',
     equation: '5 + x = 15',
-    answera: '10', //answer
+    answera: '1',
     answerb: '11',
-    answerc: '1',
+    answerc: '10', //answer
     answerd: '5'
   }, {
     title: 'Swipe down to clear the card',
     equation: '5x + 2 = 12',
     answera: '1',
-    answerb: '2', //answer
-    answerc: '4',
+    answerb: '4',
+    answerc: '2', //answer
     answerd: '5'
   }, {
     title: 'Swipe down to clear the card',
@@ -27,14 +27,14 @@ angular.module('Alarm-Plus.controllers')
     equation: '8 - x = 2',
     answera: '4',
     answerb: '3',
-    answerc: '5',
-    answerd: '6' //answer
+    answerc: '6', //answer
+    answerd: '5'
   }, {
     title: 'Swipe down to clear the card',
     equation: '9/x = 3',
-    answera: '3', //answer
+    answera: '10',
     answerb: '55',
-    answerc: '10',
+    answerc: '3', //answer
     answerd: '12'
   }];
 
@@ -57,8 +57,15 @@ angular.module('Alarm-Plus.controllers')
   $scope.goAway = function() {
     var card = $ionicSwipeCardDelegate.getSwipeableCard($scope);
     card.swipe();
+    // Vibrate 100ms
+  	$cordovaVibration.vibrate(100);
 
+    //add the cordova vibrate stuff here... and use this fn as the response to an incorrect answer
 
+    
+
+  	// vibrate 200 ms, wait 200 ms, vibrate again 200 ms.
+    //navigator.vibrate([200, 200, 200]);
 
   };
 
