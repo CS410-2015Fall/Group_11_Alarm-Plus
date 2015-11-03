@@ -62,7 +62,7 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
             views: {
                 'menuContent': {
                     templateUrl: 'templates/home.html',
-                    controller: 'homeController'
+                    controller: 'AppCtrl'
                 }
             }
         })
