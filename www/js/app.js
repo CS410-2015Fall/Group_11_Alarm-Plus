@@ -12,9 +12,16 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
+
         if (window.StatusBar) {
             StatusBar.styleDefault();
         }
+
+
+
+        console.log("hi");
+
+        console.log();
 
         // Android customization
         cordova.plugins.backgroundMode.setDefaults({

@@ -108,12 +108,14 @@ angular.module('Alarm-Plus.controllers', [])
                 var nalarm = new Alarm(this.alarmName, this.alarmHour,
                     this.alarmMinute, this.alarmTod.time, this.alarmDays);
 
+                salarm = JSON.stringify(nalarm);
+                window.localStorage.setItem(this.alarmName, salarm);
                 $scope.alarms.push(nalarm);
 
                 // start an alarm at second = 0
                 console.log($scope.getCurSecond());
                 $timeout(function() {
-                    $scope.alarms[$scope.alarms.length-1].start();
+                    $scope.alarms[$scope.alarms.length - 1].start();
 
                 }, (60 - $scope.getCurSecond()) * 1000);
 
@@ -148,6 +150,16 @@ angular.module('Alarm-Plus.controllers', [])
                     timePickerCallback(val);
                 }
             };
+
+            // Remove an alarm on Home Page
+            $scope.removeAlarm = function(index) {
+                $scope.alarms.splice(index, 1);
+            }
+
+            // Modify the alarm on Home page
+            $scope.editAlarm = function() {
+
+            }
 
             function timePickerCallback(val) {
                 if (typeof(val) === 'undefined') {
