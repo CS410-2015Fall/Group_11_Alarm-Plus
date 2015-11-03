@@ -66,15 +66,6 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
                 }
             }
         })
-        // .state('app.setup', {
-        //     url: '/setup',
-        //     views: {
-        //         'menuContent': {
-        //             templateUrl: 'templates/setup.html',
-        //             controller: 'setupController'
-        //         }
-        //     }
-        // })
         .state('app.task', {
             url: '/task',
             views: {

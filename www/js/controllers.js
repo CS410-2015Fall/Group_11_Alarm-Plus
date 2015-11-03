@@ -137,7 +137,7 @@ angular.module('Alarm-Plus.controllers', [])
                 step: 1, //Optional
                 format: 12, //Optional
                 titleLabel: 'SETUP', //Optional
-                setLabel: 'Create', //Optional
+                setLabel: 'Set', //Optional
                 closeLabel: 'Cancel', //Optional
                 setButtonType: 'button-positive', //Optional
                 closeButtonType: 'button-stable', //Optional

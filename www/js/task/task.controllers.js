@@ -54,8 +54,9 @@ angular.module('Alarm-Plus.controllers')
     $scope.cards.push(angular.extend({}, newCard));
   }
 
-  $scope.goAway = function() {
+  $scope.goAway = function(input) {
     var card = $ionicSwipeCardDelegate.getSwipeableCard($scope);
+
     card.swipe();
 
 
