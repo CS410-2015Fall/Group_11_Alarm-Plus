@@ -4,38 +4,38 @@ angular.module('Alarm-Plus.controllers')
   var cardTypes = [{
     title: 'Swipe down to clear the card',
     equation: '5 + x = 15',
-    answera: '6',
-    answerb: '6',
-    answerc: '6',
-    answerd: '6'
+    answera: '10', //answer
+    answerb: '11',
+    answerc: '1',
+    answerd: '5'
   }, {
     title: 'Swipe down to clear the card',
     equation: '5x + 2 = 12',
-    answera: '6',
-    answerb: '6',
-    answerc: '6',
-    answerd: '6'
+    answera: '1',
+    answerb: '2', //answer
+    answerc: '4',
+    answerd: '5'
   }, {
     title: 'Swipe down to clear the card',
     equation: 'x + 6 = 13',
-    answera: '6',
-    answerb: '6',
-    answerc: '6',
-    answerd: '6'
+    answera: '0',
+    answerb: '10',
+    answerc: '7', //answer
+    answerd: '13'
   }, {
     title: 'Swipe down to clear the card',
     equation: '8 - x = 2',
-    answera: '6',
-    answerb: '6',
-    answerc: '6',
-    answerd: '6'
+    answera: '4',
+    answerb: '3',
+    answerc: '5',
+    answerd: '6' //answer
   }, {
     title: 'Swipe down to clear the card',
     equation: '9/x = 3',
-    answera: '6',
-    answerb: '6',
-    answerc: '6',
-    answerd: '6'
+    answera: '3', //answer
+    answerb: '55',
+    answerc: '10',
+    answerd: '12'
   }];
 
   $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
