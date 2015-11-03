@@ -113,7 +113,9 @@ angular.module('Alarm-Plus.controllers', [])
                 // start an alarm at second = 0
                 console.log($scope.getCurSecond());
                 $timeout(function() {
-                    $scope.alarms[alarms.length].start();
+                  debugger;
+                    $scope.alarms[$scope.alarms.length-1].start();
+
                 }, (60 - $scope.getCurSecond()) * 1000);
 
                 console.log($scope.alarmDays);
