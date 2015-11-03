@@ -1,7 +1,7 @@
 angular.module('Alarm-Plus.controllers', [])
 
-.controller('setupController', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', '$ionicModal',
-    function($scope, $ionicPlatform, $timeout, Alarm, $q, $ionicModal) {
+.controller('setupController', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', '$ionicModal','$log',
+    function($scope, $ionicPlatform, $timeout, Alarm, $q, $ionicModal, $log) {
         $ionicPlatform.ready(function() {
             // Login Area
             $scope.loginData = {};
@@ -132,6 +132,27 @@ angular.module('Alarm-Plus.controllers', [])
                 console.log(index);
             };
 
+            $scope.timePickerObject = {
+                inputEpochTime: ((new Date()).getHours() * 60 * 60), //Optional
+                step: 15, //Optional
+                format: 12, //Optional
+                titleLabel: 'SetUp', //Optional
+                // setLabel: 'Set', //Optional
+                // closeLabel: 'Close', //Optional
+                callback: function(val) { //Mandatory
+                    timePickerCallback(val);
+                }
+            };
+
+            function timePickerCallback(val) {
+                if (typeof(val) === 'undefined') {
+                    console.log('Time not selected');
+                } else {
+                    var selectedTime = new Date(val * 1000);
+                    console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), ':', selectedTime.getUTCMinutes(), 'in UTC');
+                }
+            }
+
             $scope.dispCurTime = function() {
                 var today = new Date();
                 var currentHours = today.getHours();
@@ -152,6 +173,39 @@ angular.module('Alarm-Plus.controllers', [])
                     $scope.dispCurTime();
                 }, 1000);
             };
+
+
+            // TimePicker
+            $scope.mytime = new Date();
+
+            $scope.hstep = 1;
+            $scope.mstep = 15;
+
+            $scope.options = {
+                hstep: [1, 2, 3],
+                mstep: [1, 5, 10, 15, 25, 30]
+            };
+
+            $scope.ismeridian = true;
+            $scope.toggleMode = function() {
+                $scope.ismeridian = !$scope.ismeridian;
+            };
+
+            $scope.update = function() {
+                var d = new Date();
+                d.setHours(14);
+                d.setMinutes(0);
+                $scope.mytime = d;
+            };
+
+            $scope.changed = function() {
+                $log.log('Time changed to: ' + $scope.mytime);
+            };
+
+            $scope.clear = function() {
+                $scope.mytime = null;
+            };
+
         });
     }
 ]);

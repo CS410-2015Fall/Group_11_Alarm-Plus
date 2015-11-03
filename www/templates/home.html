@@ -1,6 +1,11 @@
 <ion-view view-title="home">
     <ion-content>
         <h1>HOME</h1>
-        {{myAlarm}}
+        <ionic-timepicker input-obj="timePickerObject">
+            <button class="button button-block button-positive overflowShow">
+                <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
+            </button>
+        </ionic-timepicker>
+        <uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
     </ion-content>
 </ion-view>
