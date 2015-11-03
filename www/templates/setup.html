@@ -22,6 +22,17 @@
             <button class="button button-assertive"> Cancel </button>
             <button class="button button-positive" ng-click="dispCurTime()"> Show Time </button>
         </div>
+        <div id="AlarmArray">
+        <h1>Alarms:</h1>
+        <table>
+            <tr ng-repeat="alarm in newalarms track by $index" class="alarms">
+                <td>{{alarm.name}} {{alarm.time}} {{alarm.tod}} {{alarm.date}}-</td>
+                <td>
+                    <button ng-click="removeAlarm(item)">Remove</button>
+                </td>
+            </tr>
+        </table>
+    </div>
         {{curTime}} {{ alarmTod.time }}
     </ion-content>
 </ion-view>
