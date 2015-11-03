@@ -72,6 +72,10 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
                 'menuContent': {
                     templateUrl: 'templates/task.html',
                     controller: 'CardsCtrl'
+<<<<<<< HEAD
+=======
+
+>>>>>>> tasks
                 }
             }
         });
