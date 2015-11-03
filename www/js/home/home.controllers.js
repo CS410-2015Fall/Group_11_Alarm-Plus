@@ -16,8 +16,10 @@ angular.module('Alarm-Plus.controllers')
         });
 
         $ionicPlatform.on('resume', function() {
-          // This should be a greate place to refresh the array
+            // This should be a greate place to refresh the array
             alert("hi me");
         });
+
+        $scope.test1 = "do do do do";
     }
 ]);

@@ -1,5 +1,15 @@
 <ion-view view-title="home">
     <ion-content>
-        <h1>HOME</h1>
+        <ion-list>
+            <ion-item class="item-thumbnail-left" ng-repeat="alarm in alarms">
+                <sp> {{alarm.name}} </p>
+                    <p> {{alarm.hour}} : {{alarm.minute}} {{alarm.tod}} </p>
+                    <button class="ion-minus-circled" ng-click="alarms.splice($index, 1)">
+                    </button>
+                    <button class="button button-assertive" ng-click="editAlarm()">
+                    </button>
+            </ion-item>
+        </ion-list>
+        <!-- {{ alarms }} -->
     </ion-content>
 </ion-view>
