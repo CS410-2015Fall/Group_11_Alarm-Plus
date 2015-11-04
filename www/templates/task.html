@@ -1,28 +1,29 @@
 <ion-view view-title="task">
-    <ion-pane>
-        <ion-header-bar class="bar-transparent">
-            <h1 class="title">WAKE UP!</h1>
-        </ion-header-bar>
-        <swipe-cards>
-            <swipe-card on-card-swipe="cardSwiped()" id="start-card">
-                COMPLETE THE TASK TO TURN OFF THE ALARM
-            </swipe-card>
-            <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
-                <div ng-controller="CardsCtrl">
-                    <div class="title">
-                        Swipe down to skip the question.
-                    </div>
-                    <div class="equation">
-                        {{card.equation}}
-                    </div>
-                    <!-- <div class="button-bar"> -->
-                    <button class="button button-full button-positive" ng-click="goAway()">{{card.answera}}</button>
-                    <button class="button button-full button-energized" ng-click="goAway()">{{card.answerb}}</button>
-                    <button class="button button-full button-royal" ng-click="goAway()">{{card.answerc}}</button>
-                    <button class="button button-full button-balanced" ng-click="goAway()">{{card.answerd}}</button>
-                    <!-- </div> -->
-                </div>
-            </swipe-card>
-        </swipe-cards>
-    </ion-pane>
+   <ion-pane>
+    <ion-header-bar class="bar-transparent">
+        <h1 class="title">WAKE UP!</h1>
+      </ion-header-bar>
+
+    <swipe-cards>
+      <swipe-card on-card-swipe="cardSwiped()" id="start-card">
+        COMPLETE THE TASK TO TURN OFF THE ALARM
+      </swipe-card>
+      <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
+        <div ng-controller="CardsCtrl">
+          <div class="title">
+            Swipe down to skip the question.
+          </div>
+          <div class="equation">
+            {{card.equation}}
+          </div>
+          <!-- <div class="button-bar"> -->
+            <button class="button button-full button-positive" ng-click="stay()">{{card.answera}}</button>
+            <button class="button button-full button-energized" ng-click="stay()">{{card.answerb}}</button>
+            <button class="button button-full button-royal" ng-click="goAway()">{{card.answerc}}</button>
+            <button class="button button-full button-balanced" ng-click="stay()">{{card.answerd}}</button>
+          <!-- </div> -->
+        </div>
+      </swipe-card>
+    </swipe-cards>
+  </ion-pane>
 </ion-view>

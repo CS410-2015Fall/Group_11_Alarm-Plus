@@ -1,41 +1,41 @@
 angular.module('Alarm-Plus.controllers')
 
-.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate) {
+.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, $cordovaVibration, $state) {
     var cardTypes = [{
         title: 'Swipe down to clear the card',
         equation: '5 + x = 15',
-        answera: '6',
-        answerb: '6',
-        answerc: '6',
-        answerd: '6'
+        answera: '1',
+        answerb: '11',
+        answerc: '10', //answer
+        answerd: '5'
     }, {
         title: 'Swipe down to clear the card',
         equation: '5x + 2 = 12',
-        answera: '6',
-        answerb: '6',
-        answerc: '6',
-        answerd: '6'
+        answera: '1',
+        answerb: '4',
+        answerc: '2', //answer
+        answerd: '5'
     }, {
         title: 'Swipe down to clear the card',
         equation: 'x + 6 = 13',
-        answera: '6',
-        answerb: '6',
-        answerc: '6',
-        answerd: '6'
+        answera: '0',
+        answerb: '10',
+        answerc: '7', //answer
+        answerd: '13'
     }, {
         title: 'Swipe down to clear the card',
         equation: '8 - x = 2',
-        answera: '6',
-        answerb: '6',
-        answerc: '6',
-        answerd: '6'
+        answera: '4',
+        answerb: '3',
+        answerc: '6', //answer
+        answerd: '5'
     }, {
         title: 'Swipe down to clear the card',
         equation: '9/x = 3',
-        answera: '6',
-        answerb: '6',
-        answerc: '6',
-        answerd: '6'
+        answera: '10',
+        answerb: '55',
+        answerc: '3', //answer
+        answerd: '12'
     }];
 
     $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
@@ -54,14 +54,20 @@ angular.module('Alarm-Plus.controllers')
         $scope.cards.push(angular.extend({}, newCard));
     }
 
-    $scope.goAway = function(input) {
-        var card = $ionicSwipeCardDelegate.getSwipeableCard($scope);
-
-        card.swipe();
-
-
+    $scope.goAway = function() {
+        //var card = $ionicSwipeCardDelegate.getSwipeableCard($scope);
+        //card.swipe();
+        $state.go('app.home');
 
     };
+
+    $scope.stay = function() {
+
+        // Vibrate 100ms
+        $cordovaVibration.vibrate(100);
+
+    };
+
 
 })
 

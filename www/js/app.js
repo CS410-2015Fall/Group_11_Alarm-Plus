@@ -17,12 +17,6 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
             StatusBar.styleDefault();
         }
 
-
-
-        console.log("hi");
-
-        console.log();
-
         // Android customization
         cordova.plugins.backgroundMode.setDefaults({
             title: "Alarm-Plus",
