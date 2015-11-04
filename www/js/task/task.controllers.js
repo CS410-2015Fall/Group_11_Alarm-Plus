@@ -51,12 +51,12 @@ angular.module('Alarm-Plus.controllers')
     // };
 
     $scope.cardDestroyed = function(index) {
-      console.log("swipe " + index);
+      console.log("destroy " + index);
   $scope.cards.splice(index, 1);
 };
 
 $scope.cardSwiped = function(index) {
-  console.log("destroy " + index);
+  console.log("swipe " + index);
   var newCard = // new card data
   $scope.cards.push(newCard);
 };

@@ -1,9 +1,7 @@
 <ion-view view-title="task">
     <ion-pane>
         <!--  <swipe-cards> -->
-        <!-- <swipe-card on-card-swipe="cardSwiped()" id="start-card"> -->
-        COMPLETE THE TASK TO TURN OFF THE ALARM
-        <!-- </swipe-card> -->
+
         <!--  <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
       {{card.equation}} -->
         <!-- <div ng-controller="CardsCtrl">
@@ -22,7 +20,11 @@
         <!--  </swipe-card>
     </swipe-cards> -->
         <swipe-cards>
+       <!--  <swipe-card id="start-card">
+        COMPLETE THE TASK TO TURN OFF THE ALARM
+        </swipe-card> -->
             <swipe-card ng-repeat="card in cards track by $index" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
+            <!-- <swipe-card ng-repeat="card in cards track by $index" on-destroy="cardDestroyed($index)" > -->
                 {{card.equation}}
                 <button class="button button-full button-positive">{{card.answera}}</button>
                 <button class="button button-full button-energized">{{card.answerb}}</button>
