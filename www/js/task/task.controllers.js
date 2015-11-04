@@ -1,7 +1,7 @@
 angular.module('Alarm-Plus.controllers')
 
 .controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, $cordovaVibration, $state) {
-    var cardTypes = [{
+    $scope.cards = [{
         title: 'Swipe down to clear the card',
         equation: '5 + x = 15',
         answera: '1',
@@ -38,35 +38,48 @@ angular.module('Alarm-Plus.controllers')
         answerd: '12'
     }];
 
-    $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
+    //$scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
 
-    $scope.cardSwiped = function(index) {
-        $scope.addCard();
-    };
+    // $scope.cardSwiped = function(index) {
+    //   console.log("swipe " + index);
+    //     $scope.addCard();
+    // };
+
+    // $scope.cardDestroyed = function(index) {
+    //   console.log("destroy " + index);
+    //     $scope.cards.splice(index, 1);
+    // };
 
     $scope.cardDestroyed = function(index) {
-        $scope.cards.splice(index, 1);
-    };
+      console.log("swipe " + index);
+  $scope.cards.splice(index, 1);
+};
 
-    $scope.addCard = function() {
-        var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
-        newCard.id = Math.random();
-        $scope.cards.push(angular.extend({}, newCard));
-    }
+$scope.cardSwiped = function(index) {
+  console.log("destroy " + index);
+  var newCard = // new card data
+  $scope.cards.push(newCard);
+};
 
-    $scope.goAway = function() {
-        //var card = $ionicSwipeCardDelegate.getSwipeableCard($scope);
-        //card.swipe();
-        $state.go('app.home');
+    // $scope.addCard = function() {
+    //     var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
+    //     newCard.id = Math.random();
+    //     $scope.cards.push(angular.extend({}, newCard));
+    // }
 
-    };
+    // $scope.goAway = function() {
+    //     //var card = $ionicSwipeCardDelegate.getSwipeableCard($scope);
+    //     //card.swipe();
+    //     $state.go('app.home');
 
-    $scope.stay = function() {
+    // };
 
-        // Vibrate 100ms
-        $cordovaVibration.vibrate(100);
+    // $scope.stay = function() {
 
-    };
+    //     // Vibrate 100ms
+    //     $cordovaVibration.vibrate(100);
+
+    // };
 
 
 })
