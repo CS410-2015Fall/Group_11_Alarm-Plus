@@ -31,7 +31,6 @@ angular.module('Alarm-Plus.controllers')
             $scope.clearAll = function() {
                 window.localStorage.clear();
                 $scope.alarms = [];
-                debugger;
             };
         });
     }
