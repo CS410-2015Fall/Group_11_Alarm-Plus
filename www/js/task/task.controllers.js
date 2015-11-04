@@ -67,7 +67,22 @@ angular.module('Alarm-Plus.controllers')
   	// vibrate 200 ms, wait 200 ms, vibrate again 200 ms.
     //navigator.vibrate([200, 200, 200]);
 
-  };
+            };
+            
+            $scope.stay = function() {
+                       
+            // Vibrate 100ms
+            $cordovaVibration.vibrate(100);
+            
+            //add the cordova vibrate stuff here... and use this fn as the response to an incorrect answer
+            
+            
+            
+            // vibrate 200 ms, wait 200 ms, vibrate again 200 ms.
+            //navigator.vibrate([200, 200, 200]);
+            
+            };
+
 
 })
 
