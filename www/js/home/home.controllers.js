@@ -30,7 +30,8 @@ angular.module('Alarm-Plus.controllers')
             // Remove all item in the localStorage
             $scope.clearAll = function() {
                 window.localStorage.clear();
-                $scope.alarm = [];
+                $scope.alarms = [];
+                debugger;
             };
         });
     }
