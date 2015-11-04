@@ -158,16 +158,6 @@ angular.module('Alarm-Plus.controllers', [])
                 }
             };
 
-            // Remove an alarm on Home Page
-            $scope.removeAlarm = function(index) {
-                $scope.alarms.splice(index, 1);
-            }
-
-            // Modify the alarm on Home page
-            $scope.editAlarm = function() {
-
-            }
-
             function timePickerCallback(val) {
                 if (typeof(val) === 'undefined') {
                     console.log('Time not selected');
