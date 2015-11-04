@@ -19,6 +19,7 @@ angular.module('Alarm-Plus.controllers')
             // Remove an alarm on Home Page
             $scope.removeAlarm = function(index) {
                 $scope.alarms.splice(index, 1);
+                window.localStorage.setItem("alarms", JSON.stringify($scope.alarms));
             };
 
             // Modify the alarm on Home page
@@ -29,6 +30,7 @@ angular.module('Alarm-Plus.controllers')
             // Remove all item in the localStorage
             $scope.clearAll = function() {
                 window.localStorage.clear();
+                $scope.alarm = [];
             };
         });
     }
