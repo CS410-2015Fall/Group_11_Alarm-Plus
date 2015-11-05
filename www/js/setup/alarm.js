@@ -32,6 +32,7 @@ angular.module('Alarm-Plus.controllers')
 
     Alarm.prototype.start = function() {
         var today = new Date();
+        var day = today.getDay();
         var currentHours = today.getHours();
         var currentMinutes = today.getMinutes();
         var currentSeconds = today.getSeconds();
@@ -46,7 +47,7 @@ angular.module('Alarm-Plus.controllers')
         currentHours = (currentHours === 0) ? 12 : currentHours;
         var curTime = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
         if (this.hour == currentHours && this.minute == currentMinutes && this.tod === timeOfDay &&
-            this.weekDays[today.getDay()].checked) {
+            this.weekDays[day].checked) {
             console.log("TIME IS UP");
             $state.go('app.task');
             // With this setup: music and everything should be done in Task page.

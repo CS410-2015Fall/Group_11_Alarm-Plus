@@ -104,6 +104,7 @@ angular.module('Alarm-Plus.controllers', [])
                       alarm.hour = alarms[a].hour;
                       alarm.minute = alarms[a].minute;
                       alarm.tod = alarms[a].tod;
+                      alarm.weekDays = alarms[a].weekDays;
                       $scope.alarms.push(alarm);
                       alarm.start();
                        //debugger;
