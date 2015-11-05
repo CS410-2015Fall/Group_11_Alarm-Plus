@@ -102,10 +102,14 @@ angular.module('Alarm-Plus.controllers')
             $scope.count = $scope.count - 1;
             var card = $ionicSwipeCardDelegate.getSwipeableCard(this);
             card.swipe();
+        } else {
+          $cordovaVibration.vibrate(100);
         }
+
         if ($scope.count == 0) {
             $state.go('app.home');
         }
+
     };
 })
 
