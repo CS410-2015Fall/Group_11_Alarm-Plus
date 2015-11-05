@@ -1,6 +1,6 @@
 angular.module('Alarm-Plus.controllers')
 
-.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, $cordovaVibration, $state) {
+.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, $cordovaVibration, $state, $rootScope) {
     $scope.cards = [{
         title: 'Swipe down to clear the card',
         equation: '5 + x = 15',
@@ -72,6 +72,7 @@ angular.module('Alarm-Plus.controllers')
         $scope.cards.push(newCard);
     };
 
+    $scope.self = $scope;
     $scope.addCard = function() {
         var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
         // newCard.id = Math.random();
@@ -79,10 +80,8 @@ angular.module('Alarm-Plus.controllers')
     }
 
     // $scope.goAway = function() {
-    //     //var card = $ionicSwipeCardDelegate.getSwipeableCard($scope);
-    //     //card.swipe();
-    //     $state.go('app.home');
-
+    //     var card = $ionicSwipeCardDelegate.getSwipeableCard($scope);
+    //     card.swipe();
     // };
 
     // $scope.stay = function() {
@@ -101,7 +100,8 @@ angular.module('Alarm-Plus.controllers')
         if (answer == $scope.cards[index].answer) {
             console.log("count is " + $scope.count);
             $scope.count = $scope.count - 1;
-            $scope.cardDestroyed(index);
+            var card = $ionicSwipeCardDelegate.getSwipeableCard(this);
+            card.swipe();
         }
         if ($scope.count == 0) {
             $state.go('app.home');
