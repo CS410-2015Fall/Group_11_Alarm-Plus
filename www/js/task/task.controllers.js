@@ -102,6 +102,7 @@ angular.module('Alarm-Plus.controllers')
         console.log("count is " + $scope.count);
         $scope.cardDestroyed(index);
         $scope.cardSwiped();
+        console.log("length is " + $scope.cards.length);
     };
 
 
