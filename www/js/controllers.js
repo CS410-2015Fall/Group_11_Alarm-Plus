@@ -102,11 +102,11 @@ angular.module('Alarm-Plus.controllers', [])
                       var alarm = new Alarm();
                       alarm.name = alarms[a].name;
                       alarm.hour = alarms[a].hour;
-                      alarm.minutes = alarms[a].minute;
+                      alarm.minute = alarms[a].minute;
                       alarm.tod = alarms[a].tod;
                       $scope.alarms.push(alarm);
                       alarm.start();
-                      // debugger;
+                       //debugger;
                         // $timeout(function() {
                         //     a.start();
                         // }, (60 - $scope.getCurSecond()) * 1000);
