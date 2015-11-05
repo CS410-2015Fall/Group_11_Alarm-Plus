@@ -102,7 +102,8 @@ angular.module('Alarm-Plus.controllers')
           console.log("count is " + $scope.count);
             $scope.count = $scope.count - 1;
             $scope.cardDestroyed(index);
-        }
+        } else {
+        	$cordovaVibration.vibrate(100);}
         if ($scope.count == 0) {
             $state.go('app.home');
         }
