@@ -99,18 +99,14 @@ angular.module('Alarm-Plus.controllers')
     $scope.isCorrect = function(answer, index) {
         console.log(answer);
         if (answer == $scope.cards[index].answer) {
-          console.log("count is " + $scope.count);
+            console.log("count is " + $scope.count);
             $scope.count = $scope.count - 1;
             $scope.cardDestroyed(index);
         }
         if ($scope.count == 0) {
             $state.go('app.home');
         }
-        // console.log("count is " + $scope.count);
-        // console.log("length is " + $scope.cards.length);
     };
-
-
 })
 
 //$state.go('app.home');
