@@ -18,22 +18,19 @@
         <!-- </div> -->
         <!--  </swipe-card>
     </swipe-cards> -->
+
         <swipe-cards>
-            <swipe-card id="start-card">
+            <swipe-card on-card-swipe="cardSwiped()" id="start-card">
                 COMPLETE THE TASK TO TURN OFF THE ALARM
             </swipe-card>
-            <swipe-card ng-repeat="card in cards track by $index" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
-                <!-- <swipe-card ng-repeat="card in cards track by $index" on-destroy="cardDestroyed($index)" > -->
+            <swipe-card ng-repeat="card in cards track by $index" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)" ng-init="currIndex = $index">
                 <div class="title">
-                    Swipe down to skip the question.
+                    Swipe down to skip the question. {{ currIndex }}
                 </div>
                 <div class="equation">
                     {{card.equation}}
                 </div>
-                <button class="button button-full button-positive">{{card.answera}}</button>
-                <button class="button button-full button-energized">{{card.answerb}}</button>
-                <button class="button button-full button-royal">{{card.answerc}}</button>
-                <button class="button button-full button-balanced">{{card.answerd}}</button>
+                <button class="button button-full button-positive" ng-repeat="choice in card.choices" ng-click="isCorrect(choice, currIndex)"> {{choice}}</button>
             </swipe-card>
         </swipe-cards>
     </ion-pane>

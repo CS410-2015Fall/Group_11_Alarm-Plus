@@ -2,7 +2,7 @@
     <ion-content>
         <button class="button button-assertive" ng-click="clearAll()"> CLEAR ALL </button>
         <ion-list>
-            <ion-item class="item-thumbnail-left" ng-repeat="alarm in alarms">
+            <ion-item class="item-thumbnail-left" ng-repeat="alarm in alarms track by $index">
                 <p> {{alarm.name}} </p>
                 <p> {{alarm.hour}} : {{alarm.minute}} {{alarm.tod}} </p>
                 <button class="ion-minus-circled" ng-click="removeAlarm($index)">

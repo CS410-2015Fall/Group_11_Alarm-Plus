@@ -122,7 +122,6 @@ angular.module('Alarm-Plus.controllers', [])
                 console.log($scope.getCurSecond());
                 $timeout(function() {
                     $scope.alarms[$scope.alarms.length - 1].start();
-
                 }, (60 - $scope.getCurSecond()) * 1000);
 
                 window.localStorage.setItem("alarms", JSON.stringify($scope.alarms));
