@@ -5,27 +5,32 @@ angular.module('Alarm-Plus.controllers')
         title: 'Swipe down to clear the card',
         equation: '5 + x = 15',
         answer: 10, //answer
-        choices: [2, 7, 9, 10]
+        choices: [2, 7, 9, 10],
+        rank: 0.5 - Math.random()
     }, {
         title: 'Swipe down to clear the card',
         equation: '5x + 2 = 12',
         answer: 2, //answer
-        choices: [2, 7, 9, 10]
+        choices: [2, 7, 9, 10],
+        rank: 0.5 - Math.random()
     }, {
         title: 'Swipe down to clear the card',
         equation: 'x + 6 = 13',
         answer: 7, //answer
-        choices: [2, 7, 9, 10]
+        choices: [2, 7, 9, 10],
+        rank: 0.5 - Math.random()
     }, {
         title: 'Swipe down to clear the card',
         equation: '8 - x = 2',
         answer: 6, //answer
-        choices: [6, 7, 9, 10]
+        choices: [6, 7, 9, 10],
+        rank: 0.5 - Math.random()
     }, {
         title: 'Swipe down to clear the card',
         equation: '9/x = 3',
         answer: 3, //answer
-        choices: [2, 7, 3, 10]
+        choices: [2, 7, 3, 10],
+        rank: 0.5 - Math.random()
     }];
 
     $scope.count = 3;
@@ -87,9 +92,9 @@ angular.module('Alarm-Plus.controllers')
 
     // };
 
-    // $scope.random = function() {
-    //     return 0.5 - Math.random();
-    // };
+    $scope.random = function() {
+        return 0.5 - Math.random();
+    };
 
     $scope.isCorrect = function(answer, index) {
         console.log(answer);
