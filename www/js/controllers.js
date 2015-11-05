@@ -92,14 +92,25 @@ angular.module('Alarm-Plus.controllers', [])
                     window.localStorage.setItem("alarms", JSON.stringify(tempt));
                     $scope.alarms = JSON.parse(window.localStorage.getItem("alarms"));
                 } else {
-                    $scope.alarms = JSON.parse(window.localStorage.getItem("alarms"));
-                    // for (var a in $scope.alarms) {
-                    //   debugger;
-                    //   $scope.alarms[a].start();
-                    //     // $timeout(function() {
-                    //     //     a.start();
-                    //     // }, (60 - $scope.getCurSecond()) * 1000);
-                    // }
+                    var alarms = JSON.parse(window.localStorage.getItem("alarms"));
+                    $scope.alarms = [];
+                    for (var a in alarms) {
+
+                      //var hi = $.extend(new Alarm(), $scope.alarms[a]);
+                      debugger;
+                      //$scope.alarms[a].start();
+                      var alarm = new Alarm();
+                      alarm.name = alarms[a].name;
+                      alarm.hour = alarms[a].hour;
+                      alarm.minutes = alarms[a].minute;
+                      alarm.tod = alarms[a].tod;
+                      $scope.alarms.push(alarm);
+                      alarm.start();
+                      debugger;
+                        // $timeout(function() {
+                        //     a.start();
+                        // }, (60 - $scope.getCurSecond()) * 1000);
+                    }
                 }
             };
 
