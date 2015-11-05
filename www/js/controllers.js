@@ -118,8 +118,9 @@ angular.module('Alarm-Plus.controllers', [])
                     }
 
                     $timeout(function() {
+                      debugger;
                         for (var b in $scope.alarms) {
-                            b.start();
+                            $scope.alarms[b].start();
                         }
                     }, (60 - $scope.getCurSecond()) * 1000);
                 }
