@@ -64,11 +64,11 @@ angular.module('Alarm-Plus.controllers')
     $scope.cardSwiped = function(index) {
         console.log("swipe " + index);
         var newCard = {
-        title: 'Swipe down to clear the card',
-        equation: '8 - x = 2',
-        answer: 6, //answer
-        choices: [6, 7, 9, 10]
-    };
+            title: 'Swipe down to clear the card',
+            equation: '8 - x = 2',
+            answer: 6, //answer
+            choices: [6, 7, 9, 10]
+        };
         $scope.cards.push(newCard);
     };
 
@@ -99,15 +99,15 @@ angular.module('Alarm-Plus.controllers')
     $scope.isCorrect = function(answer, index) {
         console.log(answer);
         if (answer == $scope.cards[index].answer) {
+          console.log("count is " + $scope.count);
             $scope.count = $scope.count - 1;
+            $scope.cardDestroyed(index);
         }
         if ($scope.count == 0) {
             $state.go('app.home');
         }
-        console.log("count is " + $scope.count);
-        $scope.cardDestroyed(index);
-        $scope.cardSwiped();
-        console.log("length is " + $scope.cards.length);
+        // console.log("count is " + $scope.count);
+        // console.log("length is " + $scope.cards.length);
     };
 
 

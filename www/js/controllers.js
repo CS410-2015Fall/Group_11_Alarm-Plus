@@ -97,7 +97,7 @@ angular.module('Alarm-Plus.controllers', [])
                     for (var a in alarms) {
 
                       //var hi = $.extend(new Alarm(), $scope.alarms[a]);
-                      debugger;
+                      // debugger;
                       //$scope.alarms[a].start();
                       var alarm = new Alarm();
                       alarm.name = alarms[a].name;
@@ -106,7 +106,7 @@ angular.module('Alarm-Plus.controllers', [])
                       alarm.tod = alarms[a].tod;
                       $scope.alarms.push(alarm);
                       alarm.start();
-                      debugger;
+                      // debugger;
                         // $timeout(function() {
                         //     a.start();
                         // }, (60 - $scope.getCurSecond()) * 1000);
