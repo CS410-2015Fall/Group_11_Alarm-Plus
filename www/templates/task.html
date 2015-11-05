@@ -24,6 +24,9 @@
             </swipe-card>
             <swipe-card ng-repeat="card in cards track by $index" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
                 <!-- <swipe-card ng-repeat="card in cards track by $index" on-destroy="cardDestroyed($index)" > -->
+                <div class="title">
+                    Swipe down to skip the question.
+                </div>
                 <div class="equation">
                     {{card.equation}}
                 </div>
