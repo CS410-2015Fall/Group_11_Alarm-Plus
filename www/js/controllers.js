@@ -85,6 +85,13 @@ angular.module('Alarm-Plus.controllers', [])
                     checked: false
                 }, ];
 
+            $scope.getCurSecond = function() {
+                var today = new Date();
+                currSeconds = today.getSeconds();
+                return (currSeconds < 10 ? "0" : "") + currSeconds;
+            };
+
+
             $scope.initAlarms = function() {
                 // Check if key alrms is already exist
                 if (window.localStorage.getItem("alarms") === null) {
@@ -96,22 +103,25 @@ angular.module('Alarm-Plus.controllers', [])
                     $scope.alarms = [];
                     for (var a in alarms) {
 
-                      //var hi = $.extend(new Alarm(), $scope.alarms[a]);
-                      // debugger;
-                      //$scope.alarms[a].start();
-                      var alarm = new Alarm();
-                      alarm.name = alarms[a].name;
-                      alarm.hour = alarms[a].hour;
-                      alarm.minute = alarms[a].minute;
-                      alarm.tod = alarms[a].tod;
-                      alarm.weekDays = alarms[a].weekDays;
-                      $scope.alarms.push(alarm);
-                      alarm.start();
-                       //debugger;
-                        // $timeout(function() {
-                        //     a.start();
-                        // }, (60 - $scope.getCurSecond()) * 1000);
+                        //var hi = $.extend(new Alarm(), $scope.alarms[a]);
+                        // debugger;
+                        //$scope.alarms[a].start();
+                        var alarm = new Alarm();
+                        alarm.name = alarms[a].name;
+                        alarm.hour = alarms[a].hour;
+                        alarm.minute = alarms[a].minute;
+                        alarm.tod = alarms[a].tod;
+                        alarm.weekDays = alarms[a].weekDays;
+                        $scope.alarms.push(alarm);
+                        //alarm.start();
+                        //debugger;
                     }
+
+                    $timeout(function() {
+                        for (var b in $scope.alarms) {
+                            b.start();
+                        }
+                    }, (60 - $scope.getCurSecond()) * 1000);
                 }
             };
 
@@ -149,12 +159,6 @@ angular.module('Alarm-Plus.controllers', [])
                 // cleart Box input
 
                 $scope.closeModal(2);
-            };
-
-            $scope.getCurSecond = function() {
-                var today = new Date();
-                currSeconds = today.getSeconds();
-                return (currSeconds < 10 ? "0" : "") + currSeconds;
             };
 
             $scope.findAlarm = function(alarm) {
