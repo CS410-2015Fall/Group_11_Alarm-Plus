@@ -114,11 +114,10 @@ angular.module('Alarm-Plus.controllers', [])
                         alarm.weekDays = alarms[a].weekDays;
                         $scope.alarms.push(alarm);
                         //alarm.start();
-                        //debugger;
+                         //debugger;
                     }
 
                     $timeout(function() {
-                      debugger;
                         for (var b in $scope.alarms) {
                             $scope.alarms[b].start();
                         }
