@@ -15,6 +15,10 @@ angular.module('Alarm-Plus.controllers')
             // var value2 = window.localStorage.getItem("key2");
             // console.log(value);
 
+            $scope.shouldShowDelete = false;
+            $scope.shouldShowReorder = false;
+            $scope.listCanSwipe = true
+
 
             // Remove an alarm on Home Page
             $scope.removeAlarm = function(index) {

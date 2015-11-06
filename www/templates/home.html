@@ -1,13 +1,19 @@
 <ion-view view-title="home">
     <ion-content>
         <!-- x -->
-        <ion-list>
+        <ion-list can-swipe="listCanSwipe">
             <ion-item class="item-thumbnail-left" ng-repeat="alarm in alarms">
                 <h1> {{alarm.name}} </h2>
                 <h2> {{alarm.hour}} : {{alarm.minute}} {{alarm.tod}} </h2>
                 <h3> <span ng-repeat="day in alarm.weekDays" ng-if="day.checked"> {{day.text}} </span></h3>
-                <button class="ion-minus-circled" ng-click="removeAlarm($index)">
-                </button>
+                <ion-option-button class="button-assertive"
+                       ng-click="removeAlarm($index)">
+      Delete
+    </ion-option-button>
+    <ion-option-button class="button-info"
+                       ng-click="edit(item)">
+      Edit
+    </ion-option-button>
             </ion-item>
         </ion-list>
     </ion-content>

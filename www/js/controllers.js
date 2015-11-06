@@ -85,6 +85,8 @@ angular.module('Alarm-Plus.controllers', [])
                     checked: false
                 }, ];
 
+
+
             $scope.getCurSecond = function() {
                 var today = new Date();
                 currSeconds = today.getSeconds();
