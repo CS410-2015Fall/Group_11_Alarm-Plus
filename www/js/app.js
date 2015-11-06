@@ -67,6 +67,16 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
                 }
             }
         })
+         .state('app.task2', {
+            url: '/task2',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/task2.html',
+                    controller: 'task2Controller'
+                    // TODO : CHanged controller to ur controller newTAsk
+                }
+            }
+        })
         .state('app.task', {
             url: '/task',
             views: {
@@ -76,6 +86,7 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
                 }
             }
         });
+
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/home');
 });
