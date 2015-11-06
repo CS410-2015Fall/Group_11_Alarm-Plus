@@ -19,9 +19,9 @@
             <ion-checkbox ng-repeat="day in alarmDays" ng-model="day.checked" checked="day.checked">{{day.text}}</ion-checkbox>
             <div class="clickArea">
                 <button class="button button-block button-positive" ng-click="createAlarm()"> Create </button>
-                <button class="button button-positive" ng-click="dispCurTime()"> Show Time </button>
+                <!-- <button class="button button-positive" ng-click="dispCurTime()"> Show Time </button> -->
             </div>
         </form>
-        {{curTime}} {{ alarmTod.time }}
+       <!--  {{curTime}} {{ alarmTod.time }} -->
     </ion-content>
 </ion-modal-view>

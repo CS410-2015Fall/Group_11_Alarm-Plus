@@ -56,7 +56,7 @@ angular.module('Alarm-Plus.controllers', [])
             // Setup page:
             $scope.curTime = "oh";
             $scope.tod = ["AM", "PM"],
-                $scope.alarmName = "guest",
+                $scope.alarmName = "410 due today",
                 $scope.alarmHour = 0,
                 $scope.alarmMinute = 0,
                 $scope.alarmTod = {
