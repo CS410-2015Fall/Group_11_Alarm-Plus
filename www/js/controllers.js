@@ -94,6 +94,9 @@ angular.module('Alarm-Plus.controllers', [])
             };
 
 
+            /*
+            Synchronize the array of alarms with localStorage
+            */
             $scope.initAlarms = function() {
                 // Check if key alrms is already exist
                 if (window.localStorage.getItem("alarms") === null) {
@@ -168,9 +171,6 @@ angular.module('Alarm-Plus.controllers', [])
                 console.log(index);
             };
 
-
-
-
             /*
             Return the closest date:
             day = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
@@ -211,7 +211,7 @@ angular.module('Alarm-Plus.controllers', [])
                 var year = today.getYear() + 1900;
                 var month = today.getMonth();
                 //var day = $scope.closestDate(wday);
-                var day = today.getDate();
+                //var day = today.getDate();
                 var now = today.getTime();
 
                 var alarms = [];
@@ -219,20 +219,24 @@ angular.module('Alarm-Plus.controllers', [])
                 // at: new Date(year, month, day, hour, min)
 
                 for (var i in wday) {
-                    console.log("hi " + i);
                     if (wday[i].checked) {
                         var tempt = wday[i].text;
                         alarms.push(tempt);
-                        console.log(alarms);
                     }
                 }
-
-                cordova.plugins.notification.local.schedule([{
-                    id: 0,
-                    title: title,
-                    at: new Date(year, month, day, hour, min)
-                }]);
-
+                // TODO: decide on what the ID should be:
+                // Current problem: we can only make one alarm for each day of the week.
+                console.log(alarms);
+                for (var j in alarms) {
+                    var day = $scope.closestDate(alarms[j]);
+                    day = new Date(day).getDate();
+                    console.log("my js is " + j + " so day is " + day);
+                    cordova.plugins.notification.local.schedule({
+                        id: j,
+                        title: title,
+                        at: new Date(year, month, day, hour, min)
+                    });
+                }
                 // TODO: update localStorage here:
                 navigator.notification.alert("Reminder added successfully" + new Date(year, month, day, hour, min));
             };
@@ -251,7 +255,7 @@ angular.module('Alarm-Plus.controllers', [])
             $scope.timePickerObject = {
                 inputEpochTime: ((new Date()).getHours() * 60 * 60), //Optional
                 step: 1, //Optional
-                format: 12, //Optional
+                format: 24, //Optional
                 titleLabel: 'SETUP', //Optional
                 setLabel: 'Set', //Optional
                 closeLabel: 'Cancel', //Optional
