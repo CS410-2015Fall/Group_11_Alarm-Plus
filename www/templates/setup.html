@@ -16,7 +16,7 @@
                     <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
                 </button>
             </ionic-timepicker>
-            <ion-checkbox ng-repeat="day in alarmDays" ng-model="day.checked" checked="day.checked">{{day.text}}</ion-checkbox>
+            <ion-checkbox ng-repeat="day in alarmDays" ng-model="day.checked" checked="day.checked">{{day.text}} {{day.checked}}</ion-checkbox>
             <div class="clickArea">
                 <button class="button button-block button-positive" ng-click="createAlarm()"> Create </button>
                 <button class="button button-block button-balanced" ng-click="testAlarm()"> Test </button>

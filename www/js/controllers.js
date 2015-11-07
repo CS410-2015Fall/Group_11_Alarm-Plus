@@ -179,46 +179,59 @@ angular.module('Alarm-Plus.controllers', [])
                 var today = new Date();
                 //console.log(today);
                 var today_day = today.getDay();
-
                 for (var i = 7; i--;) {
-                  // console.log($scope.alarmDays[i].text);
+                    // console.log($scope.alarmDays[i].text);
                     if (day === $scope.alarmDays[i].text) {
                         day = (i < today_day) ? (i + 7) : i;
                         break;
                     }
                 }
-
                 var daysUntilNext = day - today_day;
                 // console.log(daysUntilNext);
                 var wanted = new Date().setDate(today.getDate() + daysUntilNext);
                 navigator.notification.alert(day + new Date(wanted));
-                //return new Date().setDate(today.getDate() + daysUntilNext);
+                return new Date().setDate(today.getDate() + daysUntilNext);
             };
 
             $scope.test = function() {
-              $scope.closestDate('SUN');
-              $scope.closestDate('MON');
-              $scope.closestDate('TUE');
-              $scope.closestDate('WED');
-              $scope.closestDate('THUR');
-              $scope.closestDate('FRI');
-              $scope.closestDate('SAT');
+                $scope.closestDate('SUN');
+                $scope.closestDate('MON');
+                $scope.closestDate('TUE');
+                $scope.closestDate('WED');
+                $scope.closestDate('THUR');
+                $scope.closestDate('FRI');
+                $scope.closestDate('SAT');
             };
 
-            $scope.schedule = function(id, title, msg, hour, min) {
+            /*
+            Alarms with the same id will result in using only the latest one.
+            */
+            $scope.schedule = function(id, title, msg, hour, min, wday) {
                 var today = new Date();
                 var year = today.getYear() + 1900;
                 var month = today.getMonth();
+                //var day = $scope.closestDate(wday);
                 var day = today.getDate();
                 var now = today.getTime();
 
+                var alarms = [];
+
                 // at: new Date(year, month, day, hour, min)
 
-                cordova.plugins.notification.local.schedule({
-                    id: 2,
+                for (var i in wday) {
+                    console.log("hi " + i);
+                    if (wday[i].checked) {
+                        var tempt = wday[i].text;
+                        alarms.push(tempt);
+                        console.log(alarms);
+                    }
+                }
+
+                cordova.plugins.notification.local.schedule([{
+                    id: 0,
                     title: title,
                     at: new Date(year, month, day, hour, min)
-                });
+                }]);
 
                 // TODO: update localStorage here:
                 navigator.notification.alert("Reminder added successfully" + new Date(year, month, day, hour, min));
@@ -232,7 +245,7 @@ angular.module('Alarm-Plus.controllers', [])
                 //     title: "confused really",
                 //     at: new Date(now + 60 * 1000)
                 // });
-                $scope.schedule($scope.alarmName, "Alarm-Plus", "Productive TIME", $scope.alarmHour, $scope.alarmMinute);
+                $scope.schedule($scope.alarmName, "Alarm-Plus", "Productive TIME", $scope.alarmHour, $scope.alarmMinute, $scope.alarmDays);
             };
 
             $scope.timePickerObject = {
@@ -259,7 +272,6 @@ angular.module('Alarm-Plus.controllers', [])
                     var currentHours = selectedTime.getUTCHours();
                     $scope.alarmHour = currentHours;
                     $scope.alarmTod.time = (currentHours < 12) ? "AM" : "PM";
-                    debugger;
                     // currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
                     // currentHours = (currentHours === 0) ? 12 : currentHours;
                     // $scope.alarmHour = currentHours
