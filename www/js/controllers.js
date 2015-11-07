@@ -116,7 +116,7 @@ angular.module('Alarm-Plus.controllers', [])
                         alarm.weekDays = alarms[a].weekDays;
                         $scope.alarms.push(alarm);
                         //alarm.start();
-                         //debugger;
+                        //debugger;
                     }
 
                     $timeout(function() {
@@ -168,6 +168,37 @@ angular.module('Alarm-Plus.controllers', [])
                 console.log(index);
             };
 
+
+            $scope.schedule = function(name, title, msg, hour, min) {
+                var today = new Date();
+                var year = today.getYear();
+                var month = today.getMonth();
+                var day = today.getDay();
+                var now = today.getTime();
+
+                // at: new Date(year, month, day, hour, min)
+
+                cordova.plugins.notification.local.schedule({
+                    id: name,
+                    title: title,
+                    at: new Date(now + 60 * 1000)
+                });
+
+                // TODO: update localStorage here:
+                navigator.notification.alert("Reminder added successfully" + new Date(year, month, day, hour, min));
+            };
+
+            $scope.testAlarm = function() {
+
+                // var now = today.getTime();
+                // cordova.plugins.notification.local.schedule({
+                //     id: 1,
+                //     title: "confused really",
+                //     at: new Date(now + 60 * 1000)
+                // });
+                $scope.schedule($scope.alarmName, "Alarm-Plus", "Productive TIME", $scope.alarmHour, $scope.alarmMinute);
+            };
+
             $scope.timePickerObject = {
                 inputEpochTime: ((new Date()).getHours() * 60 * 60), //Optional
                 step: 1, //Optional
@@ -188,13 +219,14 @@ angular.module('Alarm-Plus.controllers', [])
                 } else {
                     var selectedTime = new Date(val * 1000);
                     console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), ':', selectedTime.getUTCMinutes(), 'in UTC');
-                    $scope.alarmMinute = selectedTime.getMinutes();
+                    $scope.alarmMinute = selectedTime.getUTCMinutes();
                     var currentHours = selectedTime.getUTCHours();
+                    $scope.alarmHour = currentHours;
                     $scope.alarmTod.time = (currentHours < 12) ? "AM" : "PM";
-                    currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
-                    currentHours = (currentHours === 0) ? 12 : currentHours;
-                    $scope.alarmHour = currentHours
-                    console.log($scope.alarmHour + " " + $scope.alarmMinute + " " + $scope.alarmTod.time);
+                    // currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
+                    // currentHours = (currentHours === 0) ? 12 : currentHours;
+                    // $scope.alarmHour = currentHours
+                    // console.log($scope.alarmHour + " " + $scope.alarmMinute + " " + $scope.alarmTod.time);
                 }
             }
 
