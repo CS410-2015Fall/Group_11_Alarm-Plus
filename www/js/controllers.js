@@ -177,17 +177,19 @@ angular.module('Alarm-Plus.controllers', [])
             */
             $scope.closestDate = function(day) {
                 var today = new Date();
+                //console.log(today);
                 var today_day = today.getDay();
 
                 for (var i = 7; i--;) {
                   // console.log($scope.alarmDays[i].text);
                     if (day === $scope.alarmDays[i].text) {
-                        day = (i <= today_day) ? (i + 7) : i;
+                        day = (i < today_day) ? (i + 7) : i;
                         break;
                     }
                 }
+
                 var daysUntilNext = day - today_day;
-                console.log(daysUntilNext);
+                // console.log(daysUntilNext);
                 var wanted = new Date().setDate(today.getDate() + daysUntilNext);
                 navigator.notification.alert(day + new Date(wanted));
                 //return new Date().setDate(today.getDate() + daysUntilNext);
