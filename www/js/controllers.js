@@ -1,7 +1,7 @@
 angular.module('Alarm-Plus.controllers', [])
 
 .controller('AppCtrl', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', '$ionicModal', '$state',
-    function($scope, $ionicPlatform, $timeout, Alarm, $q, $ionicModal,$state) {
+    function($scope, $ionicPlatform, $timeout, Alarm, $q, $ionicModal, $state) {
         $ionicPlatform.ready(function() {
             // Login Area
             $scope.loginData = {};
@@ -235,9 +235,10 @@ angular.module('Alarm-Plus.controllers', [])
                         title: title,
                         at: new Date(year, month, day, hour, min)
                     });
-                    var alarm = new Alarm(j,name,hour,min,tod,wday);
-                    $scope.alarms.push(alarm);
                 }
+
+                var alarm = new Alarm(name, hour, min, tod, wday);
+                $scope.alarms.push(alarm);
 
                 window.localStorage.setItem("alarms", JSON.stringify($scope.alarms));
                 // TODO: update localStorage here:
