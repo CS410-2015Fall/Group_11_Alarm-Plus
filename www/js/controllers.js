@@ -1,7 +1,7 @@
 angular.module('Alarm-Plus.controllers', [])
 
-.controller('AppCtrl', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', '$ionicModal',
-    function($scope, $ionicPlatform, $timeout, Alarm, $q, $ionicModal) {
+.controller('AppCtrl', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', '$ionicModal', '$state',
+    function($scope, $ionicPlatform, $timeout, Alarm, $q, $ionicModal,$state) {
         $ionicPlatform.ready(function() {
             // Login Area
             $scope.loginData = {};
@@ -84,6 +84,9 @@ angular.module('Alarm-Plus.controllers', [])
                     text: "SAT",
                     checked: false
                 }, ];
+
+            $scope.dispHour = 00;
+
 
 
 
@@ -241,6 +244,11 @@ angular.module('Alarm-Plus.controllers', [])
                 navigator.notification.alert("Reminder added successfully" + new Date(year, month, day, hour, min));
             };
 
+            cordova.plugins.notification.local.on("trigger", function(notification) {
+                alert("triggered: " + notification.id);
+                $state.go('app.task');
+            });
+
             $scope.testAlarm = function() {
 
                 // var now = today.getTime();
@@ -255,7 +263,7 @@ angular.module('Alarm-Plus.controllers', [])
             $scope.timePickerObject = {
                 inputEpochTime: ((new Date()).getHours() * 60 * 60), //Optional
                 step: 1, //Optional
-                format: 24, //Optional
+                format: 12, //Optional
                 titleLabel: 'SETUP', //Optional
                 setLabel: 'Set', //Optional
                 closeLabel: 'Cancel', //Optional
@@ -276,10 +284,10 @@ angular.module('Alarm-Plus.controllers', [])
                     var currentHours = selectedTime.getUTCHours();
                     $scope.alarmHour = currentHours;
                     $scope.alarmTod.time = (currentHours < 12) ? "AM" : "PM";
-                    // currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
-                    // currentHours = (currentHours === 0) ? 12 : currentHours;
-                    // $scope.alarmHour = currentHours
-                    // console.log($scope.alarmHour + " " + $scope.alarmMinute + " " + $scope.alarmTod.time);
+                    currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
+                    currentHours = (currentHours === 0) ? 12 : currentHours;
+                    $scope.dispHour = currentHours
+                        // console.log($scope.alarmHour + " " + $scope.alarmMinute + " " + $scope.alarmTod.time);
                 }
             }
 
