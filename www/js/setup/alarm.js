@@ -2,7 +2,8 @@ angular.module('Alarm-Plus.controllers')
 
 
 .factory('Alarm', ['$ionicPopup', '$timeout', '$state', function($ionicPopup, $timeout, $state) {
-    function Alarm(name, hour, minute, timeofday, weekDays, task) {
+    function Alarm(id, name, hour, minute, timeofday, weekDays, task) {
+        this.id = id;
         this.name = name;
         this.hour = hour;
         this.minute = minute;

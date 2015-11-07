@@ -105,31 +105,31 @@ angular.module('Alarm-Plus.controllers', [])
                 if (window.localStorage.getItem("alarms") === null) {
                     var tempt = [];
                     window.localStorage.setItem("alarms", JSON.stringify(tempt));
-                    $scope.alarms = JSON.parse(window.localStorage.getItem("alarms"));
+                    $scope.alarms = tempt;
                 } else {
-                    var alarms = JSON.parse(window.localStorage.getItem("alarms"));
-                    $scope.alarms = [];
-                    for (var a in alarms) {
+                    $scope.alarms = JSON.parse(window.localStorage.getItem("alarms"));
+                    //$scope.alarms = [];
+                    // for (var a in alarms) {
 
-                        //var hi = $.extend(new Alarm(), $scope.alarms[a]);
-                        // debugger;
-                        //$scope.alarms[a].start();
-                        var alarm = new Alarm();
-                        alarm.name = alarms[a].name;
-                        alarm.hour = alarms[a].hour;
-                        alarm.minute = alarms[a].minute;
-                        alarm.tod = alarms[a].tod;
-                        alarm.weekDays = alarms[a].weekDays;
-                        $scope.alarms.push(alarm);
-                        //alarm.start();
-                        //debugger;
-                    }
+                    //     //var hi = $.extend(new Alarm(), $scope.alarms[a]);
+                    //     // debugger;
+                    //     //$scope.alarms[a].start();
+                    //     var alarm = new Alarm();
+                    //     alarm.name = alarms[a].name;
+                    //     alarm.hour = alarms[a].hour;
+                    //     alarm.minute = alarms[a].minute;
+                    //     alarm.tod = alarms[a].tod;
+                    //     alarm.weekDays = alarms[a].weekDays;
+                    //     $scope.alarms.push(alarm);
+                    //     //alarm.start();
+                    //     //debugger;
+                    // }
 
-                    $timeout(function() {
-                        for (var b in $scope.alarms) {
-                            $scope.alarms[b].start();
-                        }
-                    }, (60 - $scope.getCurSecond()) * 1000);
+                    // $timeout(function() {
+                    //     for (var b in $scope.alarms) {
+                    //         $scope.alarms[b].start();
+                    //     }
+                    // }, (60 - $scope.getCurSecond()) * 1000);
                 }
             };
 
@@ -209,17 +209,13 @@ angular.module('Alarm-Plus.controllers', [])
             /*
             Alarms with the same id will result in using only the latest one.
             */
-            $scope.schedule = function(id, title, msg, hour, min, wday) {
+            $scope.schedule = function(name, title, msg, hour, min, wday) {
                 var today = new Date();
                 var year = today.getYear() + 1900;
                 var month = today.getMonth();
-                //var day = $scope.closestDate(wday);
-                //var day = today.getDate();
                 var now = today.getTime();
-
+                var tod = (hour < 12) ? "AM" : "PM";
                 var alarms = [];
-
-                // at: new Date(year, month, day, hour, min)
 
                 for (var i in wday) {
                     if (wday[i].checked) {
@@ -239,9 +235,14 @@ angular.module('Alarm-Plus.controllers', [])
                         title: title,
                         at: new Date(year, month, day, hour, min)
                     });
+                    var alarm = new Alarm(j,name,hour,min,tod,wday);
+                    $scope.alarms.push(alarm);
                 }
+
+                window.localStorage.setItem("alarms", JSON.stringify($scope.alarms));
                 // TODO: update localStorage here:
                 navigator.notification.alert("Reminder added successfully" + new Date(year, month, day, hour, min));
+                $scope.closeModal(2);
             };
 
             cordova.plugins.notification.local.on("trigger", function(notification) {
