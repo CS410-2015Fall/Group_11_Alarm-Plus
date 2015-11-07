@@ -168,20 +168,41 @@ angular.module('Alarm-Plus.controllers', [])
                 console.log(index);
             };
 
-
-            $scope.schedule = function(name, title, msg, hour, min) {
+            /*
+            Return the closest date:
+            day = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
+            */
+            $scope.closestDate = function(day) {
                 var today = new Date();
-                var year = today.getYear();
+                var today_day = today.getDay();
+
+                day = day.toLowerCase();
+
+                for (var i = 7; i--;) {
+                    if (day === days[i]) {
+                        day = (i <= today_day) ? (i + 7) : i;
+                        break;
+                    }
+                }
+                var daysUntilNext = day - today_day;
+                console.log(new Date().setDate(today.getDate() + daysUntilNext));
+                return new Date().setDate(today.getDate() + daysUntilNext);
+            };
+
+
+            $scope.schedule = function(id, title, msg, hour, min) {
+                var today = new Date();
+                var year = today.getYear() + 1900;
                 var month = today.getMonth();
-                var day = today.getDay();
+                var day = today.getDate();
                 var now = today.getTime();
 
                 // at: new Date(year, month, day, hour, min)
 
                 cordova.plugins.notification.local.schedule({
-                    id: name,
+                    id: 2,
                     title: title,
-                    at: new Date(now + 60 * 1000)
+                    at: new Date(year, month, day, hour, min)
                 });
 
                 // TODO: update localStorage here:
