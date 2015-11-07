@@ -168,6 +168,9 @@ angular.module('Alarm-Plus.controllers', [])
                 console.log(index);
             };
 
+
+
+
             /*
             Return the closest date:
             day = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
@@ -176,19 +179,29 @@ angular.module('Alarm-Plus.controllers', [])
                 var today = new Date();
                 var today_day = today.getDay();
 
-                day = day.toLowerCase();
-
                 for (var i = 7; i--;) {
-                    if (day === days[i]) {
+                  // console.log($scope.alarmDays[i].text);
+                    if (day === $scope.alarmDays[i].text) {
                         day = (i <= today_day) ? (i + 7) : i;
                         break;
                     }
                 }
                 var daysUntilNext = day - today_day;
-                console.log(new Date().setDate(today.getDate() + daysUntilNext));
-                return new Date().setDate(today.getDate() + daysUntilNext);
+                console.log(daysUntilNext);
+                var wanted = new Date().setDate(today.getDate() + daysUntilNext);
+                navigator.notification.alert(day + new Date(wanted));
+                //return new Date().setDate(today.getDate() + daysUntilNext);
             };
 
+            $scope.test = function() {
+              $scope.closestDate('SUN');
+              $scope.closestDate('MON');
+              $scope.closestDate('TUE');
+              $scope.closestDate('WED');
+              $scope.closestDate('THUR');
+              $scope.closestDate('FRI');
+              $scope.closestDate('SAT');
+            };
 
             $scope.schedule = function(id, title, msg, hour, min) {
                 var today = new Date();
@@ -244,6 +257,7 @@ angular.module('Alarm-Plus.controllers', [])
                     var currentHours = selectedTime.getUTCHours();
                     $scope.alarmHour = currentHours;
                     $scope.alarmTod.time = (currentHours < 12) ? "AM" : "PM";
+                    debugger;
                     // currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
                     // currentHours = (currentHours === 0) ? 12 : currentHours;
                     // $scope.alarmHour = currentHours
@@ -271,6 +285,8 @@ angular.module('Alarm-Plus.controllers', [])
                     $scope.dispCurTime();
                 }, 1000);
             };
+
+
         });
     }
 ]);
