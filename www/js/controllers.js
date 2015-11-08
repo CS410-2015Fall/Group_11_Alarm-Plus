@@ -6,40 +6,61 @@ angular.module('Alarm-Plus.controllers', [])
             // Login Area
             $scope.loginData = {};
 
-            // Create the login modal that we will use later
-            $ionicModal.fromTemplateUrl('templates/login.html', {
-                id: '1',
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function(modal) {
-                $scope.modal1 = modal;
-            });
+            // // Create the login modal that we will use later
+            // $ionicModal.fromTemplateUrl('templates/login.html', {
+            //     id: '1',
+            //     scope: $scope,
+            //     animation: 'slide-in-up'
+            // }).then(function(modal) {
+            //     $scope.modal1 = modal;
+            // });
 
-            $ionicModal.fromTemplateUrl('templates/setup.html', {
-                id: '2',
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function(modal) {
-                $scope.modal2 = modal;
-            });
+            // $ionicModal.fromTemplateUrl('templates/setup.html', {
+            //     id: '2',
+            //     scope: $scope,
+            //     animation: 'slide-in-up'
+            // }).then(function(modal) {
+            //     $scope.modal2 = modal;
+            // });
 
             // Triggered in the login modal to close it
             $scope.closeModal = function(index) {
                 if (index == 1) {
-                    $scope.modal1.hide();
+                    $scope.modal1.remove();
                 } else if (index == 2) {
-                    $scope.modal2.hide();
+                    $scope.modal2.remove();
                 }
             };
 
             // Open the login modal
             $scope.openModal = function(index) {
+                var modalOptions = {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                };
                 if (index == 1) {
-                    $scope.modal1.show();
+                    $ionicModal.fromTemplateUrl('templates/login.html', modalOptions).then(function(dialog) {
+                        $scope.modal1 = dialog;
+                        $scope.modal1.show();
+                    });
                 } else if (index == 2) {
-                    $scope.modal2.show();
+                    $ionicModal.fromTemplateUrl('templates/setup.html', modalOptions).then(function(dialog) {
+                        $scope.modal2 = dialog;
+                        $scope.modal2.show();
+                    });
                 }
             };
+
+            // $scope.openModal = function(item) {
+            //     var modalOptions = {
+            //         scope: $scope,
+            //         animation: 'slide-in-up'
+            //     };
+            //     $ionicModal.fromTemplateUrl('templates/availability.html', modalOptions).then(function(dialog) {
+            //         $scope.testModal = dialog;
+            //         $scope.testModal.show();
+            //     });
+            // }
 
             // Perform the login action when the user submits the login form
             $scope.doLogin = function() {
@@ -180,17 +201,14 @@ angular.module('Alarm-Plus.controllers', [])
             */
             $scope.closestDate = function(day) {
                 var today = new Date();
-                //console.log(today);
                 var today_day = today.getDay();
                 for (var i = 7; i--;) {
-                    // console.log($scope.alarmDays[i].text);
                     if (day === $scope.alarmDays[i].text) {
                         day = (i < today_day) ? (i + 7) : i;
                         break;
                     }
                 }
                 var daysUntilNext = day - today_day;
-                // console.log(daysUntilNext);
                 var wanted = new Date().setDate(today.getDate() + daysUntilNext);
                 navigator.notification.alert(day + new Date(wanted));
                 return new Date().setDate(today.getDate() + daysUntilNext);
@@ -241,25 +259,25 @@ angular.module('Alarm-Plus.controllers', [])
                 $scope.alarms.push(alarm);
 
                 window.localStorage.setItem("alarms", JSON.stringify($scope.alarms));
-                // TODO: update localStorage here:
                 navigator.notification.alert("Reminder added successfully" + new Date(year, month, day, hour, min));
                 $scope.closeModal(2);
             };
 
+
+            /*
+            Things need to be done when the alarm fires:
+            */
             cordova.plugins.notification.local.on("trigger", function(notification) {
-                alert("triggered: " + notification.id);
+                //alert("triggered: " + notification.id);
                 $state.go('app.task');
             });
 
             $scope.testAlarm = function() {
-
-                // var now = today.getTime();
-                // cordova.plugins.notification.local.schedule({
-                //     id: 1,
-                //     title: "confused really",
-                //     at: new Date(now + 60 * 1000)
-                // });
                 $scope.schedule($scope.alarmName, "Alarm-Plus", "Productive TIME", $scope.alarmHour, $scope.alarmMinute, $scope.alarmDays);
+            };
+
+            $scope.reset = function() {
+                $scope.myForm.$setPristine();
             };
 
             $scope.timePickerObject = {

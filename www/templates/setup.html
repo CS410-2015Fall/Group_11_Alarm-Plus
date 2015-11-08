@@ -6,7 +6,7 @@
         </div>
     </ion-header-bar>
     <ion-content>
-        <form name="form" novalidate>
+        <form name="myForm" novalidate>
             <label class="item item-input">
                 <span class="input-label"> Name </span>
                 <input type="text" maxlength="30" ng-value="string" ng-model="alarmName" />
@@ -16,13 +16,15 @@
                     <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
                 </button>
             </ionic-timepicker>
-            <ion-checkbox ng-repeat="day in alarmDays" ng-model="day.checked" checked="day.checked">{{day.text}} {{day.checked}}</ion-checkbox>
+            <ion-checkbox ng-repeat="day in alarmDays track by $index" ng-model="day.checked" checked="day.checked">{{day.text}} {{day.checked}}</ion-checkbox>
             <div class="clickArea">
                 <button class="button button-block button-positive" ng-click="createAlarm()"> Create </button>
-                <button class="button button-block button-balanced" ng-click="testAlarm()"> Test </button>
+                <button class="button button-block button-balanced" ng-click="testAlarm()"> C2 </button>
                 <button class="button button-block button-positive" ng-click="test()"> Test </button>
+                <button class="button button-block button-balanced" ng-click="reset()"> reset </button>
                 <!-- <button class="button button-positive" ng-click="dispCurTime()"> Show Time </button> -->
             </div>
+            <!-- {{my_form.$pristine}} -->
         </form>
        <!--  {{curTime}} {{ alarmTod.time }} -->
     </ion-content>
