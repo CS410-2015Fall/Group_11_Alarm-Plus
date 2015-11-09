@@ -280,7 +280,7 @@ angular.module('Alarm-Plus.controllers', [])
             });
 
             $scope.testAlarm = function() {
-                $scope.schedule($scope.alarmName, "Alarm-Plus", "Productive TIME", $scope.alarmHour, $scope.alarmMinute, $scope.alarmDays);
+                $scope.schedule(this.alarmName, "Alarm-Plus", "Productive TIME", this.alarmHour, this.alarmMinute, this.alarmDays);
             };
 
             $scope.reset = function() {
