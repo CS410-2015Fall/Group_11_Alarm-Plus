@@ -85,28 +85,35 @@ angular.module('Alarm-Plus.controllers', [])
                 },
                 $scope.alarmDays = [{
                     text: "SUN",
-                    checked: false
+                    checked: false,
+                    value: 0
                 }, {
                     text: "MON",
-                    checked: false
+                    checked: false,
+                    value: 1
                 }, {
                     text: "TUE",
-                    checked: false
+                    checked: false,
+                    value: 2
                 }, {
                     text: "WED",
-                    checked: false
+                    checked: false,
+                    value: 3
                 }, {
                     text: "THUR",
-                    checked: false
+                    checked: false,
+                    value: 4
                 }, {
                     text: "FRI",
-                    checked: false
+                    checked: false,
+                    value: 5
                 }, {
                     text: "SAT",
-                    checked: false
+                    checked: false,
+                    value: 6
                 }, ];
 
-            $scope.dispHour = 00;
+            $scope.dispHour = 0;
 
 
 

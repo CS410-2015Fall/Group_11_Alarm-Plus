@@ -1,15 +1,13 @@
 angular.module('Alarm-Plus.controllers')
 
 .factory('Alarm', ['$ionicPopup', '$timeout', '$state', function($ionicPopup, $timeout, $state) {
-    function Alarm( name, hour, minute, timeofday, weekDays, task) {
+    function Alarm(name, hour, minute, timeofday, weekDays, task) {
         this.name = name;
         this.hour = hour;
         this.minute = minute;
         this.tod = timeofday;
+        this.weekDays = weekDays;
         this.task = task;
-        this.snoozeCredit = 3;
-        this.active = {};
-        this.weekDays = weekDays; // TODO: weekdays should be an array of number
     };
 
     Alarm.prototype.setHour = function(hour) {
@@ -20,6 +18,9 @@ angular.module('Alarm-Plus.controllers')
         this.minute = minute;
     };
 
+    Alarm.prototype.setWeekDays = function(weekDays) {
+        this.weekDays = weekDays;
+    };
     Alarm.prototype.setTimeOfDay = function(tod) {
         this.tod = tod;
     };

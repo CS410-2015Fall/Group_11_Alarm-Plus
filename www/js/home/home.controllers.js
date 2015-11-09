@@ -22,6 +22,12 @@ angular.module('Alarm-Plus.controllers')
 
             // Remove an alarm on Home Page
             $scope.removeAlarm = function(index) {
+                // TODO : remove the localnotification:
+                // var a = $scope.alarms[index];
+                // cordova.plugins.notification.local.cancel(, function() {
+                //     alert("done");
+                // });
+
                 $scope.alarms.splice(index, 1);
                 window.localStorage.setItem("alarms", JSON.stringify($scope.alarms));
             };
