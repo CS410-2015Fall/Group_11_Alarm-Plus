@@ -58,6 +58,11 @@ color: #000;
 font-size: 30px;
 text-align: center;
 }
+swipe-card .histq {
+    color: #0000FF;
+    font-size: 30px;
+    text-align: center;
+}
 swipe-card .answera {
 color: #000;
 font-size: 30px;
