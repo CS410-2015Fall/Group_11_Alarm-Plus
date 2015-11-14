@@ -19,13 +19,22 @@
             <ion-checkbox ng-repeat="day in alarmDays track by $index" ng-model="day.checked">{{day.text}} {{day.checked}}</ion-checkbox>
             <div class="clickArea">
                 <!-- <button class="button button-block button-positive" ng-click="createAlarm()"> Create </button> -->
-                <button class="button button-block button-balanced" ng-click="testAlarm()"> Create  </button>
-                <button class="button button-block button-positive" ng-click="test()"> ClosestDate </button>
-                <button class="button button-block button-balanced" ng-click="getLocalNotification()"> allLocalNoti </button>
-                <!-- <button class="button button-positive" ng-click="dispCurTime()"> Show Time </button> -->
+                <div class="row">
+                    <div class="col">
+                        <button class="button button-block button-positive" ng-click=""> Math Task </button>
+                    </div>
+                    <div class="col">
+                        <button class="button button-block button-positive" ng-click=""> Snake Task </button>
+                    </div>
+                </div>
+                <button class="button button-block button-balanced" ng-click="testAlarm()"> Create </button>
+            </div>
+            <!-- <button class="button button-block button-positive" ng-click="test()"> ClosestDate </button> -->
+            <button class="button button-block button-balanced" ng-click="getLocalNotification()"> allLocalNoti </button>
+            <!-- <button class="button button-positive" ng-click="dispCurTime()"> Show Time </button> -->
             </div>
             <!-- {{my_form.$pristine}} -->
         </form>
-       <!--  {{curTime}} {{ alarmTod.time }} -->
+        <!--  {{curTime}} {{ alarmTod.time }} -->
     </ion-content>
 </ion-modal-view>

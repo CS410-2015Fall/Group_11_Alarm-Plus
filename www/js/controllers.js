@@ -115,9 +115,6 @@ angular.module('Alarm-Plus.controllers', [])
 
             $scope.dispHour = 0;
 
-
-
-
             $scope.getCurSecond = function() {
                 var today = new Date();
                 currSeconds = today.getSeconds();
@@ -153,50 +150,10 @@ angular.module('Alarm-Plus.controllers', [])
                         //alarm.start();
                         //debugger;
                     }
-
-                    // $timeout(function() {
-                    //     for (var b in $scope.alarms) {
-                    //         $scope.alarms[b].start();
-                    //     }
-                    // }, (60 - $scope.getCurSecond()) * 1000);
                 }
             };
 
             $scope.initAlarms();
-
-
-            // Triggered in the setup modal to close it
-            $scope.closeSetup = function() {
-                $scope.modal.hide();
-            };
-
-            // Open the setup modal
-            $scope.setup = function() {
-                $scope.modal.show();
-            };
-
-            $scope.createAlarm = function() {
-
-                // Create an alarm based on user's input
-                // var id = Math.floor((Math.random() * 15) + 1);
-                var nalarm = new Alarm(this.alarmName, this.alarmHour,
-                    this.alarmMinute, this.alarmTod.time, this.alarmDays);
-
-                $scope.alarms.push(nalarm);
-
-                // start an alarm at second = 0
-                console.log($scope.getCurSecond());
-                $timeout(function() {
-                    $scope.alarms[$scope.alarms.length - 1].start();
-                }, (60 - $scope.getCurSecond()) * 1000);
-
-                window.localStorage.setItem("alarms", JSON.stringify($scope.alarms));
-                console.log($scope.alarmDays);
-                console.log($scope.alarms);
-                // cleart Box input
-
-                $scope.closeModal(2);
-            };
 
             $scope.findAlarm = function(alarm) {
                 var index = $scope.alarms.indexOf(alarm);
@@ -260,6 +217,9 @@ angular.module('Alarm-Plus.controllers', [])
                     cordova.plugins.notification.local.schedule({
                         id: myId,
                         title: title,
+                        data: {
+                            task: 1
+                        },
                         at: new Date(year, month, day, hour, min)
                     });
                     arrayID.push(myId);
@@ -279,7 +239,14 @@ angular.module('Alarm-Plus.controllers', [])
             */
             cordova.plugins.notification.local.on("trigger", function(notification) {
                 //alert("triggered: " + notification.id);
-                $state.go('app.task');
+                var task = JSON.parse(notification.data).task;
+                console.log(task);
+                // TODO: do something on the task:
+                if (task == 2) {
+                  // TODO: apply task2
+                } else {
+                    $state.go('app.task');
+                }
             });
 
             $scope.testAlarm = function() {
@@ -332,29 +299,6 @@ angular.module('Alarm-Plus.controllers', [])
                     navigator.notification.alert(allID);
                 });
             };
-
-            $scope.dispCurTime = function() {
-                var today = new Date();
-                var currentHours = today.getHours();
-                var currentMinutes = today.getMinutes();
-                var currentSeconds = today.getSeconds();
-
-                // Pad the minutes and seconds with leading zeros, if required
-                currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
-                currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
-
-                // set the format of the time
-                var timeOfDay = (currentHours < 12) ? "AM" : "PM";
-                currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
-                currentHours = (currentHours === 0) ? 12 : currentHours;
-                $scope.curTime = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
-
-                $timeout(function() {
-                    $scope.dispCurTime();
-                }, 1000);
-            };
-
-
         });
     }
 ]);
