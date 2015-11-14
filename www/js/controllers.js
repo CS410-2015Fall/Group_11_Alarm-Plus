@@ -135,23 +135,24 @@ angular.module('Alarm-Plus.controllers', [])
                     window.localStorage.setItem("alarms", JSON.stringify(tempt));
                     $scope.alarms = tempt;
                 } else {
-                    $scope.alarms = JSON.parse(window.localStorage.getItem("alarms"));
-                    //$scope.alarms = [];
-                    // for (var a in alarms) {
+                    var alarms = JSON.parse(window.localStorage.getItem("alarms"));
+                    $scope.alarms = [];
+                    for (var a in alarms) {
 
-                    //     //var hi = $.extend(new Alarm(), $scope.alarms[a]);
-                    //     // debugger;
-                    //     //$scope.alarms[a].start();
-                    //     var alarm = new Alarm();
-                    //     alarm.name = alarms[a].name;
-                    //     alarm.hour = alarms[a].hour;
-                    //     alarm.minute = alarms[a].minute;
-                    //     alarm.tod = alarms[a].tod;
-                    //     alarm.weekDays = alarms[a].weekDays;
-                    //     $scope.alarms.push(alarm);
-                    //     //alarm.start();
-                    //     //debugger;
-                    // }
+                        //var hi = $.extend(new Alarm(), $scope.alarms[a]);
+                        // debugger;
+                        //$scope.alarms[a].start();
+                        var alarm = new Alarm();
+                        alarm.id = alarms[a].id;
+                        alarm.name = alarms[a].name;
+                        alarm.hour = alarms[a].hour;
+                        alarm.minute = alarms[a].minute;
+                        alarm.tod = alarms[a].tod;
+                        alarm.weekDays = alarms[a].weekDays;
+                        $scope.alarms.push(alarm);
+                        //alarm.start();
+                        //debugger;
+                    }
 
                     // $timeout(function() {
                     //     for (var b in $scope.alarms) {
@@ -241,6 +242,7 @@ angular.module('Alarm-Plus.controllers', [])
                 var now = today.getTime();
                 var tod = (hour < 12) ? "AM" : "PM";
                 var alarms = [];
+                var arrayID = [];
 
                 for (var i in wday) {
                     if (wday[i].checked) {
@@ -248,21 +250,22 @@ angular.module('Alarm-Plus.controllers', [])
                         alarms.push(tempt);
                     }
                 }
-                // TODO: decide on what the ID should be:
-                // Current problem: we can only make one alarm for each day of the week.
-                console.log(alarms);
+
                 for (var j in alarms) {
                     var day = $scope.closestDate(alarms[j]);
+                    var myId = new Date(day).getDay(); // Currently correspond to each day
                     day = new Date(day).getDate();
                     console.log("my js is " + j + " so day is " + day);
                     cordova.plugins.notification.local.schedule({
-                        id: j,
+                        id: myId,
                         title: title,
                         at: new Date(year, month, day, hour, min)
                     });
-                }
 
-                var alarm = new Alarm(name, hour, min, tod, wday);
+                    arrayID.push(myId);
+                }
+                console.log("my arrayID is " + arrayID);
+                var alarm = new Alarm(arrayID, name, hour, min, tod, wday);
                 $scope.alarms.push(alarm);
 
                 window.localStorage.setItem("alarms", JSON.stringify($scope.alarms));
@@ -317,6 +320,18 @@ angular.module('Alarm-Plus.controllers', [])
                         // console.log($scope.alarmHour + " " + $scope.alarmMinute + " " + $scope.alarmTod.time);
                 }
             }
+
+            /*
+            Get all LocaNotification
+            */
+            $scope.getLocalNotification = function() {
+                var allID;
+                cordova.plugins.notification.local.getAllIds(function(ids) {
+                    // getIds() as alias can also be used!
+                    allID = ids;
+                    navigator.notification.alert(allID);
+                });
+            };
 
             $scope.dispCurTime = function() {
                 var today = new Date();
