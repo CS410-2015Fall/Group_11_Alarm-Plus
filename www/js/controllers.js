@@ -218,7 +218,7 @@ angular.module('Alarm-Plus.controllers', [])
                 }
                 var daysUntilNext = day - today_day;
                 var wanted = new Date().setDate(today.getDate() + daysUntilNext);
-                navigator.notification.alert(day + new Date(wanted));
+                //navigator.notification.alert(day + new Date(wanted));
                 return new Date().setDate(today.getDate() + daysUntilNext);
             };
 
@@ -253,7 +253,8 @@ angular.module('Alarm-Plus.controllers', [])
 
                 for (var j in alarms) {
                     var day = $scope.closestDate(alarms[j]);
-                    var myId = new Date(day).getDay(); // Currently correspond to each day
+                    //var myId = new Date(day).getDay(); // Currently correspond to each day
+                    var myId = new Date().getUTCMilliseconds();
                     day = new Date(day).getDate();
                     console.log("my js is " + j + " so day is " + day);
                     cordova.plugins.notification.local.schedule({
@@ -261,7 +262,6 @@ angular.module('Alarm-Plus.controllers', [])
                         title: title,
                         at: new Date(year, month, day, hour, min)
                     });
-
                     arrayID.push(myId);
                 }
                 console.log("my arrayID is " + arrayID);
@@ -293,7 +293,7 @@ angular.module('Alarm-Plus.controllers', [])
             $scope.timePickerObject = {
                 inputEpochTime: ((new Date()).getHours() * 60 * 60), //Optional
                 step: 1, //Optional
-                format: 12, //Optional
+                format: 24, //Optional
                 titleLabel: 'SETUP', //Optional
                 setLabel: 'Set', //Optional
                 closeLabel: 'Cancel', //Optional

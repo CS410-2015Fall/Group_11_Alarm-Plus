@@ -15,14 +15,12 @@ angular.module('Alarm-Plus.controllers')
                 var a = $scope.alarms[index];
                 var toBeDeleted = a.id;
                 for (var id in toBeDeleted) {
-                    cordova.plugins.notification.local.cancel(toBeDeleted[id], function() {
-                        console.log("just deletd : " + toBeDeleted[id]);
-                    });
+                    cordova.plugins.notification.local.cancel(toBeDeleted[id], function() {});
                 }
-
 
                 $scope.alarms.splice(index, 1);
                 window.localStorage.setItem("alarms", JSON.stringify($scope.alarms));
+                navigator.notification.alert("Successfully deleted");
             };
 
             // Modify the alarm on Home page
