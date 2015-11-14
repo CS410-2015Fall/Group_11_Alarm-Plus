@@ -16,7 +16,7 @@ angular.module('Alarm-Plus.controllers')
                             rank: 0.5 - Math.random()
                             }, {
                             title: 'Swipe down to clear the card',
-                            histq: 'Who was the first Prime Minister of Canad?a',
+                            histq: 'Who was the first Prime Minister of Canada?',
                             answer: "John A. Macdonald", //answer
                             choices: ["John A. Macdonald", "Pierre Trudeau", "Paul Martin", "Brian Mulroney"],
                             rank: 0.5 - Math.random()
