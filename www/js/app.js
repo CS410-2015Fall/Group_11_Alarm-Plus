@@ -71,8 +71,8 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
             url: '/task2',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/task2.html',
-                    controller: 'task2Controller'
+                    templateUrl: 'templates/task3.html',
+                    controller: 'task3Controller'
                     // TODO : CHanged controller to ur controller newTAsk
                 }
             }
