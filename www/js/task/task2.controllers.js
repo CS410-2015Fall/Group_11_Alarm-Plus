@@ -32,7 +32,41 @@ angular.module('Alarm-Plus.controllers')
                             answer: "Lake Superior", //answer
                             choices: ["Lake Erie", "Lake Huron", "Lake Ontario", "Lake Superior"],
                             rank: 0.5 - Math.random()
-                            }];
+                            }, {
+                            title: 'Swipe down to clear the card',
+                            histq: 'How many teams were there when the NHL was founded?',
+                            answer: "6", //answer
+                            choices: ["5", "6", "7", "12"],
+                            rank: 0.5 - Math.random()
+                            }, {
+                            title: 'Swipe down to clear the card',
+                            histq: 'Which year did World War I end?',
+                            answer: "1918", //answer
+                            choices: ["1944", "1918", "1914", "1980"],
+                            rank: 0.5 - Math.random()
+                            }, {
+                            title: 'Swipe down to clear the card',
+                            histq: 'Which city is the capital of Canada?',
+                            answer: "Ottawa", //answer
+                            choices: ["Vancouver", "Toronto", "Ottawa", "Montreal"],
+                            rank: 0.5 - Math.random()
+                            }, {
+                            title: 'Swipe down to clear the card',
+                            histq: 'In Canada, which national holiday occurs on July 1st?',
+                            answer: "Canada Day", //answer
+                            choices: ["Family Day", "Victory Day", "Victoria Day", "Canada Day"],
+                            rank: 0.5 - Math.random()
+                            }, {
+                            title: 'Swipe down to clear the card',
+                            histq: 'Which city is the capital of BC?',
+                            answer: "Victoria", //answer
+                            choices: ["Victoria", "Vancouver", "Ottawa", "Edmonton"],
+                            rank: 0.5 - Math.random()
+                            }
+
+                        
+                            
+                            ];
             
             $scope.count = 3;
             $scope.currIndex = "";
