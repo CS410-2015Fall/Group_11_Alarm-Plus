@@ -24,8 +24,10 @@ angular.module('Alarm-Plus.controllers')
             };
 
             // Modify the alarm on Home page
-            $scope.editAlarm = function() {
-
+            $scope.editAlarm = function(index) {
+              var a = $scope.alarms[index];
+              // TODO: use another modal or direct us to the setup modal.
+              navigator.notification.alert("Successfully updated");
             };
 
             // Remove all item in the localStorage

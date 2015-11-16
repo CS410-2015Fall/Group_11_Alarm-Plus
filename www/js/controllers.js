@@ -75,9 +75,8 @@ angular.module('Alarm-Plus.controllers', [])
 
 
             // Setup page:
-            $scope.curTime = "oh";
             $scope.tod = ["AM", "PM"],
-                $scope.alarmName = "410 due today",
+                $scope.alarmName = "guest",
                 $scope.alarmHour = 0,
                 $scope.alarmMinute = 0,
                 $scope.alarmTod = {
@@ -204,7 +203,7 @@ angular.module('Alarm-Plus.controllers', [])
             /*
             Alarms with the same id will result in using only the latest one.
             */
-            $scope.schedule = function(name, title, msg, hour, min, wday) {
+            $scope.schedule = function(name, msg, hour, min, wday) {
                 var today = new Date();
                 var year = today.getYear() + 1900;
                 var month = today.getMonth();
@@ -228,11 +227,12 @@ angular.module('Alarm-Plus.controllers', [])
                     console.log("my js is " + j + " so day is " + day);
                     cordova.plugins.notification.local.schedule({
                         id: myId,
-                        title: title,
+                        title: name,
                         data: {
                             task: 1
                         },
-                        at: new Date(year, month, day, hour, min)
+                        firstAt: new Date(year, month, day, hour, min),
+                        every: "week"
                     });
                     arrayID.push(myId);
                 }
@@ -241,7 +241,7 @@ angular.module('Alarm-Plus.controllers', [])
                 $scope.alarms.push(alarm);
 
                 window.localStorage.setItem("alarms", JSON.stringify($scope.alarms));
-                navigator.notification.alert("Reminder added successfully" + new Date(year, month, day, hour, min));
+                //navigator.notification.alert("Reminder added successfully" + new Date(year, month, day, hour, min));
                 $scope.closeModal(2);
             };
 
@@ -262,7 +262,7 @@ angular.module('Alarm-Plus.controllers', [])
             });
 
             $scope.testAlarm = function() {
-                $scope.schedule(this.alarmName, "Alarm-Plus", "Productive TIME", this.alarmHour, this.alarmMinute, JSON.parse(JSON.stringify(this.alarmDays)));
+                $scope.schedule(this.alarmName, "Productive TIME", this.alarmHour, this.alarmMinute, JSON.parse(JSON.stringify(this.alarmDays)));
                 $scope.clearInputBox();
             };
 
