@@ -190,6 +190,18 @@ angular.module('Alarm-Plus.controllers', [])
             };
 
             /*
+            Clear the input after each create
+            */
+            $scope.clearInputBox = function() {
+                this.alarmMinute = 0,
+                    this.alarmHour = 0,
+                    this.alarmTod = 'PM';
+                for (var day in this.alarmDays) {
+                    this.alarmDays[day].checked = false;
+                }
+            };
+
+            /*
             Alarms with the same id will result in using only the latest one.
             */
             $scope.schedule = function(name, title, msg, hour, min, wday) {
@@ -243,7 +255,7 @@ angular.module('Alarm-Plus.controllers', [])
                 console.log(task);
                 // TODO: do something on the task:
                 if (task == 2) {
-                  // TODO: apply task2
+                    // TODO: apply task2
                 } else {
                     $state.go('app.task');
                 }
@@ -251,6 +263,7 @@ angular.module('Alarm-Plus.controllers', [])
 
             $scope.testAlarm = function() {
                 $scope.schedule(this.alarmName, "Alarm-Plus", "Productive TIME", this.alarmHour, this.alarmMinute, JSON.parse(JSON.stringify(this.alarmDays)));
+                $scope.clearInputBox();
             };
 
             $scope.reset = function() {
