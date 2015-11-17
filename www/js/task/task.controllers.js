@@ -31,22 +31,44 @@ angular.module('Alarm-Plus.controllers')
         answer: 3, //answer
         choices: [2, 7, 3, 10],
         rank: 0.5 - Math.random()
-    }];
+    }, {
+        title: 'Swipe down to clear the card',
+        equation: '22 + 222' = X',
+        answer: 244, //answer
+        choices: [22 222, 4444, 244, 2424,
+        rank: 0.5 - Math.random()
+        },
+                              {
+                              title: 'Swipe down to clear the card',
+                              equation: '333/3 = X',
+                              answer: 111, //answer
+                              choices: [333, 3, 100, 111],
+                              rank: 0.5 - Math.random()
+                              },
+                              {
+                              title: 'Swipe down to clear the card',
+                              equation: '1000 + 1000 = X',
+                              answer: 2000, //answer
+                              choices: [1000 000, 1000 1000, 20000, 1100],
+                              rank: 0.5 - Math.random()
+                              },
+                              {
+                              title: 'Swipe down to clear the card',
+                              equation: '50 x 50 = X',
+                              answer: 2500, //answer
+                              choices: [2500, 5050, 25000, 5000],
+                              rank: 0.5 - Math.random()
+                              },
+                              {
+                              title: 'Swipe down to clear the card',
+                              equation: '50 + 150 = X',
+                              answer: 200, //answer
+                              choices: [50150, 200, 100, 5150],
+                              rank: 0.5 - Math.random()
+                              }];
 
     $scope.count = 3;
     $scope.currIndex = "";
-
-    //$scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
-
-    // $scope.cardSwiped = function(index) {
-    //   console.log("swipe " + index);
-    //     $scope.addCard();
-    // };
-
-    // $scope.cardDestroyed = function(index) {
-    //   console.log("destroy " + index);
-    //     $scope.cards.splice(index, 1);
-    // };
 
     $scope.randomQ = function() {
         return Math.floor((Math.random() * 5) + 1);
@@ -79,17 +101,7 @@ angular.module('Alarm-Plus.controllers')
         //$scope.cards.push(angular.extend({}, newCard));
     }
 
-    // $scope.goAway = function() {
-    //     var card = $ionicSwipeCardDelegate.getSwipeableCard($scope);
-    //     card.swipe();
-    // };
 
-    // $scope.stay = function() {
-
-    //     // Vibrate 100ms
-    //     $cordovaVibration.vibrate(100);
-
-    // };
 
     $scope.random = function() {
         return 0.5 - Math.random();
