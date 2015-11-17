@@ -33,9 +33,9 @@ angular.module('Alarm-Plus.controllers')
         rank: 0.5 - Math.random()
     }, {
         title: 'Swipe down to clear the card',
-        equation: '22 + 222' = X',
+        equation: '22 + 222 = X',
         answer: 244, //answer
-        choices: [22 222, 4444, 244, 2424,
+        choices: [22222, 4444, 244, 2424],
         rank: 0.5 - Math.random()
         },
                               {
@@ -49,7 +49,7 @@ angular.module('Alarm-Plus.controllers')
                               title: 'Swipe down to clear the card',
                               equation: '1000 + 1000 = X',
                               answer: 2000, //answer
-                              choices: [1000 000, 1000 1000, 20000, 1100],
+                              choices: [1000000, 10001000, 20000, 1100],
                               rank: 0.5 - Math.random()
                               },
                               {
