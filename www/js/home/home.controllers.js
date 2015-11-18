@@ -23,8 +23,8 @@ angular.module('Alarm-Plus.controllers')
                 navigator.notification.alert("Successfully deleted");
             };
 
-            // Modify the alarm on Home page
-            $scope.editAlarm = function(index) {
+            // Click to turn alarm ON/OFF
+            $scope.alarmOnOff = function(index) {
               var a = $scope.alarms[index];
               // TODO: use another modal or direct us to the setup modal.
               navigator.notification.alert("Successfully updated");

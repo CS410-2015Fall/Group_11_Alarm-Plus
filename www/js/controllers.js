@@ -6,7 +6,6 @@ angular.module('Alarm-Plus.controllers', [])
             // Login Area
             $scope.loginData = {};
 
-
             // Create the login modal that we will use later
             $ionicModal.fromTemplateUrl('templates/login.html', {
                 id: '1',
@@ -124,10 +123,6 @@ angular.module('Alarm-Plus.controllers', [])
                     var alarms = JSON.parse(window.localStorage.getItem("alarms"));
                     $scope.alarms = [];
                     for (var a in alarms) {
-
-                        //var hi = $.extend(new Alarm(), $scope.alarms[a]);
-                        // debugger;
-                        //$scope.alarms[a].start();
                         var alarm = new Alarm();
                         alarm.id = alarms[a].id;
                         alarm.name = alarms[a].name;
@@ -136,8 +131,6 @@ angular.module('Alarm-Plus.controllers', [])
                         alarm.tod = alarms[a].tod;
                         alarm.weekDays = alarms[a].weekDays;
                         $scope.alarms.push(alarm);
-                        //alarm.start();
-                        //debugger;
                     }
                 }
             };
@@ -235,7 +228,6 @@ angular.module('Alarm-Plus.controllers', [])
                 //navigator.notification.alert("Reminder added successfully" + new Date(year, month, day, hour, min));
                 $scope.closeModal(2);
             };
-
 
             /*
             Things need to be done when the alarm fires:
