@@ -64,7 +64,6 @@ angular.module('Alarm-Plus.controllers')
                             rank: 0.5 - Math.random()
                             }
 
-                        
                             
                             ];
             
