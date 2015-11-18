@@ -93,6 +93,16 @@ angular.module('Alarm-Plus.controllers', [])
                 }, ];
 
             $scope.dispHour = 0;
+            $scope.taskOptions = [{
+                text: "MathQuestion",
+                value: 1
+            }, {
+                text: "HistoryQuestion",
+                value: 2
+            }];
+            $scope.chosenTask = {
+                value: 1
+            };
 
             $scope.getCurSecond = function() {
                 var today = new Date();
@@ -184,7 +194,7 @@ angular.module('Alarm-Plus.controllers', [])
             /*
             Alarms with the same id will result in using only the latest one.
             */
-            $scope.schedule = function(name, msg, hour, min, wday) {
+            $scope.schedule = function(name, msg, hour, min, wday, ctask) {
                 var today = new Date();
                 var year = today.getYear() + 1900;
                 var month = today.getMonth();
@@ -210,10 +220,9 @@ angular.module('Alarm-Plus.controllers', [])
                         id: myId,
                         title: name,
                         data: {
-                            task: 1
+                            task: ctask
                         },
-                        firstAt: new Date(year, month, day, hour, min),
-                        every: "week",
+                        at: new Date(year, month, day, hour, min),
                         sound: "file://sound/reminder.mp3"
                     });
                     arrayID.push(myId);
@@ -234,17 +243,18 @@ angular.module('Alarm-Plus.controllers', [])
             cordova.plugins.notification.local.on("trigger", function(notification) {
                 //alert("triggered: " + notification.id);
                 var task = JSON.parse(notification.data).task;
-                console.log(task);
+                console.log("task number is " + task);
                 // TODO: do something on the task:
                 if (task == 2) {
-                    // TODO: apply task2
+                    $state.go('app.task2');
                 } else {
                     $state.go('app.task');
                 }
             });
 
-            $scope.testAlarm = function() {
-                $scope.schedule(this.alarmName, "Productive TIME", this.alarmHour, this.alarmMinute, JSON.parse(JSON.stringify(this.alarmDays)));
+            $scope.createAlarm = function() {
+                console.log("my chosenTask value is " + this.chosenTask.value);
+                $scope.schedule(this.alarmName, "Productive TIME", this.alarmHour, this.alarmMinute, JSON.parse(JSON.stringify(this.alarmDays)), this.chosenTask.value);
                 $scope.clearInputBox();
             };
 

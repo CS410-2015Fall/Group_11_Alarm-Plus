@@ -16,18 +16,13 @@
                     <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
                 </button>
             </ionic-timepicker>
-            <ion-checkbox ng-repeat="day in alarmDays track by $index" ng-model="day.checked">{{day.text}} {{day.checked}}</ion-checkbox>
+            <ion-checkbox ng-repeat="day in alarmDays track by $index" ng-model="day.checked">{{day.text}}</ion-checkbox>
             <div class="clickArea">
                 <!-- <button class="button button-block button-positive" ng-click="createAlarm()"> Create </button> -->
-                <div class="row">
-                    <div class="col">
-                        <button class="button button-block button-positive" ng-click=""> Math Task </button>
-                    </div>
-                    <div class="col">
-                        <button class="button button-block button-positive" ng-click=""> Snake Task </button>
-                    </div>
-                </div>
-                <button class="button button-block button-balanced" ng-click="testAlarm()"> Create </button>
+                <ion-radio ng-repeat="task in taskOptions" ng-value="task.value" ng-model="chosenTask.value">
+                    {{ task.text }}
+                </ion-radio>
+                <button class="button button-block button-balanced" ng-click="createAlarm()"> Create </button>
             </div>
             <!-- <button class="button button-block button-positive" ng-click="test()"> ClosestDate </button> -->
             <button class="button button-block button-balanced" ng-click="getLocalNotification()"> allLocalNoti </button>
