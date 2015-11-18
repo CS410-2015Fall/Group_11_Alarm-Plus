@@ -6,61 +6,41 @@ angular.module('Alarm-Plus.controllers', [])
             // Login Area
             $scope.loginData = {};
 
-            // // Create the login modal that we will use later
-            // $ionicModal.fromTemplateUrl('templates/login.html', {
-            //     id: '1',
-            //     scope: $scope,
-            //     animation: 'slide-in-up'
-            // }).then(function(modal) {
-            //     $scope.modal1 = modal;
-            // });
 
-            // $ionicModal.fromTemplateUrl('templates/setup.html', {
-            //     id: '2',
-            //     scope: $scope,
-            //     animation: 'slide-in-up'
-            // }).then(function(modal) {
-            //     $scope.modal2 = modal;
-            // });
+            // Create the login modal that we will use later
+            $ionicModal.fromTemplateUrl('templates/login.html', {
+                id: '1',
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function(modal) {
+                $scope.modal1 = modal;
+            });
+
+            $ionicModal.fromTemplateUrl('templates/setup.html', {
+                id: '2',
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function(modal) {
+                $scope.modal2 = modal;
+            });
 
             // Triggered in the login modal to close it
             $scope.closeModal = function(index) {
                 if (index == 1) {
-                    $scope.modal1.remove();
+                    $scope.modal1.hide();
                 } else if (index == 2) {
-                    $scope.modal2.remove();
+                    $scope.modal2.hide();
                 }
             };
 
             // Open the login modal
             $scope.openModal = function(index) {
-                var modalOptions = {
-                    scope: $scope,
-                    animation: 'slide-in-up'
-                };
                 if (index == 1) {
-                    $ionicModal.fromTemplateUrl('templates/login.html', modalOptions).then(function(dialog) {
-                        $scope.modal1 = dialog;
-                        $scope.modal1.show();
-                    });
+                    $scope.modal1.show();
                 } else if (index == 2) {
-                    $ionicModal.fromTemplateUrl('templates/setup.html', modalOptions).then(function(dialog) {
-                        $scope.modal2 = dialog;
-                        $scope.modal2.show();
-                    });
+                    $scope.modal2.show();
                 }
             };
-
-            // $scope.openModal = function(item) {
-            //     var modalOptions = {
-            //         scope: $scope,
-            //         animation: 'slide-in-up'
-            //     };
-            //     $ionicModal.fromTemplateUrl('templates/availability.html', modalOptions).then(function(dialog) {
-            //         $scope.testModal = dialog;
-            //         $scope.testModal.show();
-            //     });
-            // }
 
             // Perform the login action when the user submits the login form
             $scope.doLogin = function() {
@@ -192,7 +172,8 @@ angular.module('Alarm-Plus.controllers', [])
             Clear the input after each create
             */
             $scope.clearInputBox = function() {
-                this.alarmMinute = 0,
+                this.alarmName = "guest",
+                    this.alarmMinute = 0,
                     this.alarmHour = 0,
                     this.alarmTod = 'PM';
                 for (var day in this.alarmDays) {
@@ -232,7 +213,8 @@ angular.module('Alarm-Plus.controllers', [])
                             task: 1
                         },
                         firstAt: new Date(year, month, day, hour, min),
-                        every: "week"
+                        every: "week",
+                        sound: "file://sound/reminder.mp3"
                     });
                     arrayID.push(myId);
                 }
@@ -264,10 +246,6 @@ angular.module('Alarm-Plus.controllers', [])
             $scope.testAlarm = function() {
                 $scope.schedule(this.alarmName, "Productive TIME", this.alarmHour, this.alarmMinute, JSON.parse(JSON.stringify(this.alarmDays)));
                 $scope.clearInputBox();
-            };
-
-            $scope.reset = function() {
-                $scope.myForm.$setPristine();
             };
 
             $scope.timePickerObject = {
