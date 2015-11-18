@@ -61,7 +61,7 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
         .state('app.home', {
             url: '/home',
             views: {
-                'menuContent': {
+                'home-tab': {
                     templateUrl: 'templates/home.html',
                     controller: 'homeController'
                 }
@@ -70,7 +70,7 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
         .state('app.task2', {
             url: '/task2',
             views: {
-                'menuContent': {
+                'task2-tab': {
                     templateUrl: 'templates/task2.html',
                     controller: 'task2Controller'
                         // TODO : CHanged controller to ur controller newTAsk
@@ -80,7 +80,7 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
         .state('app.task', {
             url: '/task',
             views: {
-                'menuContent': {
+                'task-tab': {
                     templateUrl: 'templates/task.html',
                     controller: 'CardsCtrl'
                 }

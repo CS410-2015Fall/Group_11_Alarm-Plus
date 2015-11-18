@@ -4,7 +4,9 @@
         <ion-list can-swipe="listCanSwipe">
             <ion-item ng-repeat="alarm in alarms track by $index">
                 <div class="row">
-                    <h1> {{alarm.name}} </h2>
+                    <div class="col col-75">
+                        <h1> {{alarm.name}} </h2></div>
+                <div class="col col-25"></div>
             </div>
             <div class="row">
               <div class="col">
