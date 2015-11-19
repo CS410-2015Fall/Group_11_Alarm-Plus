@@ -1,7 +1,7 @@
 angular.module('Alarm-Plus.controllers')
 
 // newGameController
-.controller('task3Controller', ['$scope', '$timeout', '$window', function($scope, $timeout, $window) {
+.controller('task3Controller', ['$scope', '$timeout', '$state', '$window', function($scope, $timeout, $state, $window) {
 
 var BOARD_SIZE = 20;
 
@@ -14,10 +14,10 @@ var BOARD_SIZE = 20;
 
     var COLORS = {
       GAME_OVER: '#820303',
-      FRUIT: '#E80505',
-      SNAKE_HEAD: '#078F00',
-      SNAKE_BODY: '#0DFF00',
-      BOARD: '#000'
+      FRUIT: '#0033CC',
+      SNAKE_HEAD: '#FF3300',
+      SNAKE_BODY: '#FF751A',
+      BOARD: '#686868'
     };
 
     var snake = {
@@ -55,6 +55,8 @@ var BOARD_SIZE = 20;
 
       if (boardCollision(newHead) || selfCollision(newHead)) {
         return gameOver();
+      } else if (lengthmet(newHead)) {
+        return youwin();
       } else if (fruitCollision(newHead)) {
         eatFruit();
       }
@@ -96,6 +98,10 @@ var BOARD_SIZE = 20;
       return $scope.board[part.y][part.x] === true;
     }
 
+    function lengthmet() {
+      return $scope.score == 3;
+    }
+
     function fruitCollision(part) {
       return part.x === fruit.x && part.y === fruit.y;
     }
@@ -124,6 +130,7 @@ var BOARD_SIZE = 20;
     }
 
     function gameOver() {
+      //TODO just start new game since you lost
       isGameOver = true;
 
       $timeout(function() {
@@ -131,6 +138,19 @@ var BOARD_SIZE = 20;
       },500);
 
       setupBoard();
+    }
+
+    function youwin() {
+      //TODO make the game and alarm close when you win
+      isGameOver = true;
+
+       $timeout(function() {
+        isGameOver = false;
+      },500);
+
+      setupBoard();
+     
+      $state.go('app.home');
     }
 
     function setupBoard() {
