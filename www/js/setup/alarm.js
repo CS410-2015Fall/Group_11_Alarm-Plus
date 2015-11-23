@@ -9,6 +9,7 @@ angular.module('Alarm-Plus.controllers')
         this.tod = timeofday;
         this.weekDays = weekDays;
         this.task = task;
+        this.status = true;
     };
 
     Alarm.prototype.setHour = function(hour) {

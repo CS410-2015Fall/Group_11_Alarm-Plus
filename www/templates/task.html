@@ -1,5 +1,5 @@
-<ion-view view-title="task">
-    <ion-pane>
+<ion-modal-view>
+    <ion-content ng-controller="CardsCtrl">
         <!--  <swipe-cards> -->
         <!--  <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
       {{card.equation}} -->
@@ -33,5 +33,5 @@
                 <button class="button button-full button-positive" ng-repeat="choice in card.choices" ng-click="isCorrect(choice, currIndex)"> {{choice}}</button>
             </swipe-card>
         </swipe-cards>
-    </ion-pane>
-</ion-view>
+    </ion-content>
+</ion-modal-view>

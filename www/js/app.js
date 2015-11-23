@@ -82,7 +82,6 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
             views: {
                 'task-tab': {
                     templateUrl: 'templates/task.html',
-                    controller: 'CardsCtrl'
                 }
             }
         });

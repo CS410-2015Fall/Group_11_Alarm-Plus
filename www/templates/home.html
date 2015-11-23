@@ -5,8 +5,8 @@
             <ion-item ng-repeat="alarm in alarms track by $index">
                 <div class="row">
                     <div class="col col-75">
-                        <h1> {{alarm.name}} </h2></div>
-                <div class="col col-25"></div>
+                        <h1> {{alarm.name}}</h2></div>
+                <div class="col col-25"> <i ng-class="alarm.status? 'icon ion-toggle' : 'icon ion-toggle-filled'" ng-click="toggleCustom($index)"></i> </div>
             </div>
             <div class="row">
               <div class="col">
@@ -14,6 +14,7 @@
               </div>
               <div class="col">
                 <h3> <span ng-repeat="day in alarm.weekDays" ng-if="day.checked"> {{day.text}} </span></h3>
+                <i ng-class="{'icon ion-calculator':alarm.task==1,'icon ion-ios-game-controller-b-outline':alarm.task == 2}"></i>
               </div>
             </div>
             <div class="row">
