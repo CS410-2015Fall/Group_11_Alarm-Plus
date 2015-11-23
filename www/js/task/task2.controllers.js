@@ -63,8 +63,6 @@ angular.module('Alarm-Plus.controllers')
                             choices: ["Victoria", "Vancouver", "Ottawa", "Edmonton"],
                             rank: 0.5 - Math.random()
                             }
-
-                            
                             ];
             
             $scope.count = 3;
