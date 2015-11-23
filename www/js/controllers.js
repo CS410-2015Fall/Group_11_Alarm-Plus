@@ -23,6 +23,23 @@ angular.module('Alarm-Plus.controllers', [])
                 $scope.modal2 = modal;
             });
 
+            $ionicModal.fromTemplateUrl('templates/task.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function(modal) {
+                $scope.modalTask = modal;
+            });
+
+            // Start Task:
+            $scope.startTask = function() {
+              console.log($scope);
+              $scope.modalTask.show();
+            };
+
+            $scope.closeTask = function() {
+              $scope.modalTask.hide();
+            };
+
             // Triggered in the login modal to close it
             $scope.closeModal = function(index) {
                 if (index == 1) {
@@ -130,6 +147,7 @@ angular.module('Alarm-Plus.controllers', [])
                         alarm.hour = alarms[a].hour;
                         alarm.minute = alarms[a].minute;
                         alarm.tod = alarms[a].tod;
+                        alarm.task = alarms[a].task;
                         alarm.weekDays = alarms[a].weekDays;
                         $scope.alarms.push(alarm);
                     }
@@ -338,7 +356,6 @@ angular.module('Alarm-Plus.controllers', [])
                         myItem = item;
                         console.log("hihi " + myItem);
                     });
-                    debugger;
                 }
             };
         });
