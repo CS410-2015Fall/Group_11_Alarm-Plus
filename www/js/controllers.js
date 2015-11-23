@@ -6,57 +6,49 @@ angular.module('Alarm-Plus.controllers', [])
             // Login Area
             $scope.loginData = {};
 
-            // Create the login modal that we will use later
-            $ionicModal.fromTemplateUrl('templates/login.html', {
-                id: '1',
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function(modal) {
-                $scope.modal1 = modal;
-            });
-
-            $ionicModal.fromTemplateUrl('templates/setup.html', {
-                id: '2',
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function(modal) {
-                $scope.modal2 = modal;
-            });
-
-            $ionicModal.fromTemplateUrl('templates/task.html', {
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function(modal) {
-                $scope.modalTask = modal;
-            });
-
-            // Start Task:
-            $scope.startTask = function() {
-              console.log($scope);
-              $scope.modalTask.show();
-            };
-
-            $scope.closeTask = function() {
-              $scope.modalTask.hide();
-            };
-
-            // Triggered in the login modal to close it
+            // Login and Setup Pages:
             $scope.closeModal = function(index) {
                 if (index == 1) {
-                    $scope.modal1.hide();
+                    $scope.modal1.remove();
                 } else if (index == 2) {
-                    $scope.modal2.hide();
+                    $scope.modal2.remove();
                 }
             };
 
             // Open the login modal
             $scope.openModal = function(index) {
+                var modalOptions = {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                };
                 if (index == 1) {
-                    $scope.modal1.show();
+                    $ionicModal.fromTemplateUrl('templates/login.html', modalOptions).then(function(dialog) {
+                        $scope.modal1 = dialog;
+                        $scope.modal1.show();
+                    });
                 } else if (index == 2) {
-                    $scope.modal2.show();
+                    $ionicModal.fromTemplateUrl('templates/setup.html', modalOptions).then(function(dialog) {
+                        $scope.modal2 = dialog;
+                        $scope.modal2.show();
+                    });
                 }
             };
+
+            // Start Task:
+            $scope.startMathTask = function() {
+                var modalOptions = {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                };
+                $ionicModal.fromTemplateUrl('templates/task.html', modalOptions).then(function(dialog) {
+                    $scope.modalTask = dialog;
+                    $scope.modalTask.show();
+                });
+            };
+            $scope.closeMathTask = function() {
+                $scope.modalTask.remove();
+            };
+
 
             // Perform the login action when the user submits the login form
             $scope.doLogin = function() {
@@ -292,9 +284,11 @@ angular.module('Alarm-Plus.controllers', [])
                 console.log("task number is " + task);
                 // TODO: do something on the task:
                 if (task == 2) {
-                    $state.go('app.task2');
+                    $scope.openModal(2);
+                    //$state.go('app.task2');
                 } else {
-                    $state.go('app.task');
+                    $scope.startMathTask();
+                    //$state.go('app.task');
                 }
             });
 
@@ -335,7 +329,6 @@ angular.module('Alarm-Plus.controllers', [])
                     currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
                     currentHours = (currentHours === 0) ? 12 : currentHours;
                     $scope.dispHour = currentHours
-                        // console.log($scope.alarmHour + " " + $scope.alarmMinute + " " + $scope.alarmTod.time);
                 }
             }
 
@@ -350,13 +343,12 @@ angular.module('Alarm-Plus.controllers', [])
                     allID = ids;
                     navigator.notification.alert(allID);
                 });
-
-                for (var id in allID) {
-                    cordova.plugins.notification.local.get(allID[id], function(item) {
-                        myItem = item;
-                        console.log("hihi " + myItem);
-                    });
-                }
+                // for (var id in allID) {
+                //     cordova.plugins.notification.local.get(allID[id], function(item) {
+                //         myItem = item;
+                //         console.log("hihi " + myItem);
+                //     });
+                // }
             };
         });
     }

@@ -108,7 +108,7 @@ angular.module('Alarm-Plus.controllers')
             }
 
             if ($scope.count == 0) {
-                $scope.closeTask();
+                $scope.closeMathTask();
             }
         };
     }
