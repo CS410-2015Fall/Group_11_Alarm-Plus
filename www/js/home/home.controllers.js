@@ -8,11 +8,18 @@ angular.module('Alarm-Plus.controllers')
             $scope.shouldShowReorder = false;
             $scope.listCanSwipe = true
 
-            $scope.selectedIndex = 0;
-
             $scope.toggleCustom = function(index) {
                 var a = $scope.alarms[index];
                 a.status = a.status === false ? true : false;
+                console.log("status is " + a.status);
+                var ids = a.id;
+                if (a.status) {
+                    $scope.updateAlarms(a.id,a.name, "Productive TIME", a.hour, a.minute, a.weekDays, a.task);
+                } else {
+                    for (var id in ids) {
+                        cordova.plugins.notification.local.cancel(ids[id], function() {});
+                    }
+                }
             };
 
             // Remove an alarm on Home Page
@@ -27,14 +34,6 @@ angular.module('Alarm-Plus.controllers')
                 $scope.alarms.splice(index, 1);
                 window.localStorage.setItem("alarms", JSON.stringify($scope.alarms));
                 navigator.notification.alert("Successfully deleted");
-            };
-
-            // Click to turn alarm ON/OFF
-            $scope.alarmOnOff = function(index) {
-                var a = $scope.alarms[index];
-                // TODO: use another modal or direct us to the setup modal.
-
-                navigator.notification.alert("Successfully updated");
             };
 
             // Remove all item in the localStorage

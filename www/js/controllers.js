@@ -99,6 +99,7 @@ angular.module('Alarm-Plus.controllers', [])
                 text: "HistoryQuestion",
                 value: 2
             }];
+
             $scope.chosenTask = {
                 value: 1
             };
@@ -221,16 +222,51 @@ angular.module('Alarm-Plus.controllers', [])
                     arrayID.push(myId);
                 }
                 console.log("my arrayID is " + arrayID);
-                var alarm = new Alarm(arrayID, name, hour, min, tod, wday);
-                $scope.alarms.push(alarm);
+                var alarm = new Alarm(arrayID, name, hour, min, tod, wday, ctask);
+                return alarm;
+            };
 
-                window.localStorage.setItem("alarms", JSON.stringify($scope.alarms));
-                //navigator.notification.alert("Reminder added successfully" + new Date(year, month, day, hour, min));
-                $scope.closeModal(2);
+            $scope.updateAlarms = function(ids, name, msg, hour, min, wday, ctask) {
+                var today = new Date();
+                var year = today.getYear() + 1900;
+                var month = today.getMonth();
+                var now = today.getTime();
+                var tod = (hour < 12) ? "AM" : "PM";
+                var alarms = [];
+                var closestDay = []
+
+                for (var i in wday) {
+                    if (wday[i].checked) {
+                        var tempt = wday[i].text;
+                        alarms.push(tempt);
+                    }
+                }
+
+                for (var j in alarms) {
+                    var day = $scope.closestDate(alarms[j]);
+                    day = new Date(day).getDate();
+                    closestDay.push(day);
+                }
+
+                console.log(closestDay + " length is " + closestDay.length);
+
+                for (var id in ids) {
+                    cordova.plugins.notification.local.schedule({
+                        id: ids[id],
+                        title: name,
+                        data: {
+                            task: ctask
+                        },
+                        at: new Date(year, month, closestDay[closestDay.length - 1], hour, min),
+                        sound: "file://sound/reminder.mp3"
+                    });
+                    console.log("check this: " + closestDay[closestDay.length - 1]);
+                    closestDay.pop();
+                }
             };
 
             /*
-            Things need to be done when the alarm fires:
+            Things need to  be done when the alarm fires:
             */
             cordova.plugins.notification.local.on("trigger", function(notification) {
                 //alert("triggered: " + notification.id);
@@ -246,8 +282,12 @@ angular.module('Alarm-Plus.controllers', [])
 
             $scope.createAlarm = function() {
                 console.log("my chosenTask value is " + this.chosenTask.value);
-                $scope.schedule(this.alarmName, "Productive TIME", this.alarmHour, this.alarmMinute, JSON.parse(JSON.stringify(this.alarmDays)), this.chosenTask.value);
+                var alarm = $scope.schedule(this.alarmName, "Productive TIME", this.alarmHour, this.alarmMinute, JSON.parse(JSON.stringify(this.alarmDays)), this.chosenTask.value);
+                $scope.alarms.push(alarm);
+                window.localStorage.setItem("alarms", JSON.stringify($scope.alarms));
+                //navigator.notification.alert("Reminder added successfully" + new Date(year, month, day, hour, min));
                 $scope.clearInputBox();
+                $scope.closeModal(2);
             };
 
             $scope.timePickerObject = {
@@ -286,11 +326,20 @@ angular.module('Alarm-Plus.controllers', [])
             */
             $scope.getLocalNotification = function() {
                 var allID;
+                var myItem;
                 cordova.plugins.notification.local.getAllIds(function(ids) {
                     // getIds() as alias can also be used!
                     allID = ids;
                     navigator.notification.alert(allID);
                 });
+
+                for (var id in allID) {
+                    cordova.plugins.notification.local.get(allID[id], function(item) {
+                        myItem = item;
+                        console.log("hihi " + myItem);
+                    });
+                    debugger;
+                }
             };
         });
     }
