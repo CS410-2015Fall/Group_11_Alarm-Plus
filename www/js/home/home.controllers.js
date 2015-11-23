@@ -8,6 +8,12 @@ angular.module('Alarm-Plus.controllers')
             $scope.shouldShowReorder = false;
             $scope.listCanSwipe = true
 
+            $scope.selectedIndex = 0;
+
+            $scope.toggleCustom = function(index) {
+                var a = $scope.alarms[index];
+                a.status = a.status === false ? true : false;
+            };
 
             // Remove an alarm on Home Page
             $scope.removeAlarm = function(index) {
@@ -25,10 +31,10 @@ angular.module('Alarm-Plus.controllers')
 
             // Click to turn alarm ON/OFF
             $scope.alarmOnOff = function(index) {
-              var a = $scope.alarms[index];
-              // TODO: use another modal or direct us to the setup modal.
+                var a = $scope.alarms[index];
+                // TODO: use another modal or direct us to the setup modal.
 
-              navigator.notification.alert("Successfully updated");
+                navigator.notification.alert("Successfully updated");
             };
 
             // Remove all item in the localStorage
