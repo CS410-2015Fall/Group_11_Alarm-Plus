@@ -68,7 +68,6 @@ angular.module('Alarm-Plus.controllers')
             $scope.count = 3;
             $scope.currIndex = "";
             
-          
             
             $scope.randomQ = function() {
             return Math.floor((Math.random() * 5) + 1);
