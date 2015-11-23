@@ -140,6 +140,7 @@ angular.module('Alarm-Plus.controllers', [])
                         alarm.minute = alarms[a].minute;
                         alarm.tod = alarms[a].tod;
                         alarm.task = alarms[a].task;
+                        alarm.status = alarms[a].status;
                         alarm.weekDays = alarms[a].weekDays;
                         $scope.alarms.push(alarm);
                     }
@@ -287,6 +288,25 @@ angular.module('Alarm-Plus.controllers', [])
                     $scope.openModal(2);
                     //$state.go('app.task2');
                 } else {
+                    // navigator.startApp.start([
+                    //         ["com.ionicframework.alarmplus636473", "android.intent.action.MAIN"]
+                    //     ], function(message) { /* success */
+                    //         console.log(message); // => OK
+                    //     },
+                    //     function(error) { /* error */
+                    //         console.log(error);
+                    //     });
+
+                    // navigator.startApp.start([
+                    //         ["action", "MAIN"],
+                    //         ["tel:+79109999999"]
+                    //     ], function(message) { /* success */
+                    //         console.log(message); // => OK
+                    //     },
+                    //     function(error) { /* error */
+                    //         console.log(error);
+                    //     });
+
                     $scope.startMathTask();
                     //$state.go('app.task');
                 }
