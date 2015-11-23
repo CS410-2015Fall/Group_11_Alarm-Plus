@@ -85,22 +85,10 @@ angular.module('Alarm-Plus.controllers')
             $scope.cards.splice(index, 1);
             };
             
-//            $scope.cardSwiped = function(index) {
-//            console.log("swipe " + index);
-//            var newCard = {
-//            title: 'Swipe down to clear the card',
-//            equation: '8 - x = 2',
-//            answer: 6, //answer
-//            choices: [6, 7, 9, 10]
-//            };
-//            $scope.cards.push(newCard);
-//            };
             
             $scope.self = $scope;
             $scope.addCard = function() {
             var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
-            // newCard.id = Math.random();
-            //$scope.cards.push(angular.extend({}, newCard));
             }
             
            
@@ -117,7 +105,7 @@ angular.module('Alarm-Plus.controllers')
             var card = $ionicSwipeCardDelegate.getSwipeableCard(this);
             card.swipe();
             } else {
-            //$cordovaVibration.vibrate(100);
+            $cordovaVibration.vibrate(100);
             }
             
             if ($scope.count == 0) {
@@ -127,4 +115,4 @@ angular.module('Alarm-Plus.controllers')
             };
             })
 
-//$state.go('app.home');
+
