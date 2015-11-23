@@ -27,6 +27,7 @@ angular.module('Alarm-Plus.controllers')
             $scope.alarmOnOff = function(index) {
               var a = $scope.alarms[index];
               // TODO: use another modal or direct us to the setup modal.
+
               navigator.notification.alert("Successfully updated");
             };
 
