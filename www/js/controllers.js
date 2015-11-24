@@ -1,7 +1,7 @@
 angular.module('Alarm-Plus.controllers', [])
 
-.controller('AppCtrl', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', '$ionicModal', '$state',
-    function($scope, $ionicPlatform, $timeout, Alarm, $q, $ionicModal, $state) {
+.controller('AppCtrl', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', '$ionicModal', '$state', '$cordovaFacebook',
+    function($scope, $ionicPlatform, $timeout, Alarm, $q, $ionicModal, $state, $cordovaFacebook) {
         $ionicPlatform.ready(function() {
             // Login Area
             $scope.loginData = {};
@@ -52,15 +52,34 @@ angular.module('Alarm-Plus.controllers', [])
 
             // Perform the login action when the user submits the login form
             $scope.doLogin = function() {
-                console.log('Doing login', $scope.loginData);
+                var fbLoginSuccess = function(userData) {
+                    alert("UserInfo: " + JSON.stringify(userData));
+                    facebookConnectPlugin.getLoginStatus(
+                        function(status) {
+                            alert("current status: " + JSON.stringify(status));
 
-                // Simulate a login delay. Remove this and replace with your login
-                // code if using a login system
-                $timeout(function() {
-                    $scope.closeLogin();
-                }, 1000);
+                            var options = {
+                                method: "feed"
+                            };
+                            facebookConnectPlugin.showDialog(options,
+                                function(result) {
+                                    alert("Posted. " + JSON.stringify(result));
+                                },
+                                function(e) {
+                                    alert("Failed: " + e);
+                                });
+                        }
+                    );
+                };
+
+                facebookConnectPlugin.login(["public_profile"],
+                    fbLoginSuccess,
+                    function(error) {
+                        console.log(error);
+                        alert("error : " + error)
+                    }
+                );
             };
-
 
             // Setup page:
             $scope.tod = ["AM", "PM"],
