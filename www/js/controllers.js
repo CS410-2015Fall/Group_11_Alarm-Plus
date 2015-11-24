@@ -1,7 +1,7 @@
 angular.module('Alarm-Plus.controllers', [])
 
 .controller('AppCtrl', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', '$ionicModal', '$state',
-    function($scope, $ionicPlatform, $timeout, Alarm, $q, $ionicModal, $state) {
+    function($scope, $ionicPlatform, $timeout, Alarm, $q, $ionicModal, $state, $cordovaMedia) {
         $ionicPlatform.ready(function() {
             // Login Area
             $scope.loginData = {};
@@ -36,13 +36,18 @@ angular.module('Alarm-Plus.controllers', [])
 
             // Start Task:
             $scope.startMathTask = function() {
+                var src = "/android_asset/www/sound/buzzer.mp3";
+                var media = new Media(src, null, null, null);
+
                 var modalOptions = {
                     scope: $scope,
                     animation: 'slide-in-up'
                 };
+                media.play();
                 $ionicModal.fromTemplateUrl('templates/task.html', modalOptions).then(function(dialog) {
                     $scope.modalTask = dialog;
                     $scope.modalTask.show();
+
                 });
             };
             $scope.closeMathTask = function() {

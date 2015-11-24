@@ -1,7 +1,7 @@
 angular.module('Alarm-Plus.controllers')
 
 .controller('CardsCtrl', ['$scope', '$ionicSwipeCardDelegate', '$cordovaVibration', '$state', '$timeout',
-    function($scope, $ionicSwipeCardDelegate, $cordovaVibration, $state, $rootScope, $timeout, $cordovaMedia) {
+    function($scope, $ionicSwipeCardDelegate, $cordovaVibration, $state, $rootScope, $timeout) {
         $scope.cards = [{
             title: 'Swipe down to clear the card',
             equation: '5 + x = 15',
@@ -49,14 +49,13 @@ angular.module('Alarm-Plus.controllers')
         //     $scope.cards.splice(index, 1);
         // };
 
-        $scope.play = function(src) {
-
-            var media = new Media(src, null, null, null);
+            // var src = "/android_asset/www/sound/buzzer.mp3";
+            // var media = new Media(src, null, null, null);
             
-            document.addEventListener("deviceready", function () {
-            $cordovaMedia.play(media);
-            }, false);
-        }
+            // document.addEventListener("deviceready", function () {
+            // media.play();
+            // }, false);
+
 
         
 
