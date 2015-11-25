@@ -1,7 +1,7 @@
 angular.module('Alarm-Plus.controllers')
 
 .controller('CardsCtrl', ['$scope', '$ionicSwipeCardDelegate', '$cordovaVibration', '$state', '$timeout',
-    function($scope, $ionicSwipeCardDelegate, $cordovaVibration, $state, $rootScope, $timeout) {
+    function($scope, $ionicSwipeCardDelegate, $cordovaVibration, $state, $rootScope, $timeout, $cordovaMedia) {
         $scope.cards = [{
             title: 'Swipe down to clear the card',
             equation: '5 + x = 15',
@@ -50,14 +50,28 @@ angular.module('Alarm-Plus.controllers')
         // };
 
             // var src = "/android_asset/www/sound/buzzer.mp3";
-            // var media = new Media(src, null, null, null);
+            // var media = new Media(src, null, null, loop);
+
+        $scope.myMedia;
+
+        var loop = function (status) {
+            if (status === Media.MEDIA_STOPPED) {
+                 //document.addEventListener("deviceready", function () {
+                    $scope.myMedia.play();
+                    //media.setVolume(1.0);
+                  //  }, false);
+                }
+            if (status === Media.MEDIA_RUNNING & $scope.count == 0){
+                $scope.myMedia.stop();
+            } 
+            };
+
+            $scope.myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, loop);
+            $scope.myMedia.play();
             
-            // document.addEventListener("deviceready", function () {
-            // media.play();
-            // }, false);
 
-
-        
+            
+    
 
 
         $scope.randomQ = function() {
@@ -119,6 +133,7 @@ angular.module('Alarm-Plus.controllers')
             }
 
             if ($scope.count == 0) {
+                $scope.myMedia.stop();
                 $scope.closeMathTask();
             }
         };
