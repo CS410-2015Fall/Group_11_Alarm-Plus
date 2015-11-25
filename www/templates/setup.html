@@ -19,9 +19,23 @@
             <ion-checkbox ng-repeat="day in alarmDays track by $index" ng-model="day.checked">{{day.text}}</ion-checkbox>
             <div class="clickArea">
                 <!-- <button class="button button-block button-positive" ng-click="createAlarm()"> Create </button> -->
-                <ion-radio ng-repeat="task in taskOptions" ng-value="task.value" ng-model="chosenTask.value">
+                <!-- <ion-radio ng-repeat="task in taskOptions" ng-value="task.value" ng-model="chosenTask.value">
                     {{ task.text }}
+                </ion-radio> -->
+                <ion-radio class="calm" ng-value="1" ng-model="chosenTask.value">
+                    Easy Math
                 </ion-radio>
+                <ion-radio class="balanced" ng-value="3" ng-model="chosenTask.value">
+                    Hard Math
+                </ion-radio>
+                <ion-radio class="energized" ng-value="2" ng-model="chosenTask.value">
+                    History Question
+                </ion-radio>
+                <ion-radio class="assertive" ng-value="4" ng-model="chosenTask.value">
+                    Snake Game
+                </ion-radio>
+
+
                 <button class="button button-block button-balanced" ng-click="createAlarm()"> Create </button>
             </div>
             <!-- <button class="button button-block button-positive" ng-click="test()"> ClosestDate </button> -->

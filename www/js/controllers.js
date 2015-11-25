@@ -54,22 +54,6 @@ angular.module('Alarm-Plus.controllers', [])
             $scope.doLogin = function() {
                 var fbLoginSuccess = function(userData) {
                     alert("UserInfo: " + JSON.stringify(userData));
-                    facebookConnectPlugin.getLoginStatus(
-                        function(status) {
-                            alert("current status: " + JSON.stringify(status));
-
-                            var options = {
-                                method: "feed"
-                            };
-                            facebookConnectPlugin.showDialog(options,
-                                function(result) {
-                                    alert("Posted. " + JSON.stringify(result));
-                                },
-                                function(e) {
-                                    alert("Failed: " + e);
-                                });
-                        }
-                    );
                 };
 
                 facebookConnectPlugin.login(["public_profile"],
@@ -77,6 +61,25 @@ angular.module('Alarm-Plus.controllers', [])
                     function(error) {
                         console.log(error);
                         alert("error : " + error)
+                    }
+                );
+            };
+
+            $scope.sharePost = function() {
+                facebookConnectPlugin.getLoginStatus(
+                    function(status) {
+                        alert("current status: " + JSON.stringify(status));
+
+                        var options = {
+                            method: "feed"
+                        };
+                        facebookConnectPlugin.showDialog(options,
+                            function(result) {
+                                alert("Posted. " + JSON.stringify(result));
+                            },
+                            function(e) {
+                                alert("Failed: " + e);
+                            });
                     }
                 );
             };
@@ -121,11 +124,17 @@ angular.module('Alarm-Plus.controllers', [])
 
             $scope.dispHour = 0;
             $scope.taskOptions = [{
-                text: "MathQuestion",
+                text: "Easy Math",
                 value: 1
             }, {
                 text: "HistoryQuestion",
                 value: 2
+            }, {
+                text: "Hard Math",
+                value: 3
+            }, {
+                text: "Snake Game",
+                value: 4
             }];
 
             $scope.chosenTask = {
@@ -299,7 +308,17 @@ angular.module('Alarm-Plus.controllers', [])
             Things need to  be done when the alarm fires:
             */
             cordova.plugins.notification.local.on("trigger", function(notification) {
-                alert("triggered: " + notification.id);
+                //alert("triggered: " + notification.id);
+                // navigator.startApp.start([
+                //         ["com.ionicframework.alarmplus636473", "com.ionicframework.alarmplus636473.MainActivity"]
+                //     ], function(message) { /* success */
+                //         console.log(message); // => OK
+                //         console.log("what is ");
+                //     },
+                //     function(error) { /* error */
+                //         console.log(error);
+                //         console.log("uhhhhh ");
+                //     });
                 var task = JSON.parse(notification.data).task;
                 console.log("task number is " + task);
                 // TODO: do something on the task:
@@ -307,17 +326,6 @@ angular.module('Alarm-Plus.controllers', [])
                     $scope.openModal(2);
                     //$state.go('app.task2');
                 } else {
-                    navigator.startApp.start([
-                            ["com.ionicframework.alarmplus636473", "MainActivity"]
-                        ], function(message) { /* success */
-                            console.log(message); // => OK
-                            console.log("what is ");
-                        },
-                        function(error) { /* error */
-                            console.log(error);
-                            console.log("uhhhhh ");
-                        });
-
                     // navigator.startApp.start([
                     //         ["action", "MAIN"],
                     //         ["tel:+79109999999"]
@@ -331,6 +339,7 @@ angular.module('Alarm-Plus.controllers', [])
                     $scope.startMathTask();
                     //$state.go('app.task');
                 }
+
             });
 
             $scope.createAlarm = function() {
