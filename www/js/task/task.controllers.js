@@ -63,6 +63,7 @@ angular.module('Alarm-Plus.controllers')
                 }
             if (status === Media.MEDIA_RUNNING & $scope.count == 0){
                 myMedia.stop();
+                myMedia.release();
             } 
             };
 
