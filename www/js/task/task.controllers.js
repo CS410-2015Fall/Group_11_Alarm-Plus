@@ -36,6 +36,7 @@ angular.module('Alarm-Plus.controllers')
 
         $scope.count = 3;
         $scope.currIndex = "";
+        $scope.soundCount = 0;
 
         //$scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
 
@@ -49,29 +50,30 @@ angular.module('Alarm-Plus.controllers')
         //     $scope.cards.splice(index, 1);
         // };
 
-            // var src = "/android_asset/www/sound/buzzer.mp3";
-            // var media = new Media(src, null, null, loop);
+        // var src = "/android_asset/www/sound/buzzer.mp3";
+        // var media = new Media(src, null, null, loop);
 
         $scope.myMedia;
 
-        var loop = function (status) {
+        var loop = function(status) {
             if (status === Media.MEDIA_STOPPED) {
-                 //document.addEventListener("deviceready", function () {
-                    $scope.myMedia.play();
-                    //media.setVolume(1.0);
-                  //  }, false);
-                }
-            if (status === Media.MEDIA_RUNNING & $scope.count == 0){
+                //document.addEventListener("deviceready", function () {
+                $scope.myMedia.play();
+                //media.setVolume(1.0);
+                //  }, false);
+                $scope.soundCount = $scope.soundCount + 1;
+            }
+            if (status === Media.MEDIA_RUNNING & $scope.count == 0) {
                 $scope.myMedia.stop();
-            } 
-            };
+            }
+        };
 
-            $scope.myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, loop);
-            $scope.myMedia.play();
-            
+        $scope.myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, loop);
+        $scope.myMedia.play();
 
-            
-    
+
+
+
 
 
         $scope.randomQ = function() {
@@ -128,16 +130,38 @@ angular.module('Alarm-Plus.controllers')
                 $scope.count = $scope.count - 1;
                 var card = $ionicSwipeCardDelegate.getSwipeableCard(this);
                 card.swipe();
+
             } else {
                 $cordovaVibration.vibrate(100);
             }
-
+            // When the Task is completed:
             if ($scope.count == 0) {
                 $scope.myMedia.stop();
+                // TODO: ionic popup
                 $scope.closeMathTask();
             }
         };
     }
 ])
+
+
+$scope.sharePost = function() {
+    facebookConnectPlugin.getLoginStatus(
+        function(status) {
+            alert("current status: " + JSON.stringify(status));
+
+            var options = {
+                method: "feed"
+            };
+            facebookConnectPlugin.showDialog(options,
+                function(result) {
+                    alert("Posted. " + JSON.stringify(result));
+                },
+                function(e) {
+                    alert("Failed: " + e);
+                });
+        }
+    );
+};
 
 //$state.go('app.home');
