@@ -299,7 +299,7 @@ angular.module('Alarm-Plus.controllers', [])
             Things need to  be done when the alarm fires:
             */
             cordova.plugins.notification.local.on("trigger", function(notification) {
-                //alert("triggered: " + notification.id);
+                alert("triggered: " + notification.id);
                 var task = JSON.parse(notification.data).task;
                 console.log("task number is " + task);
                 // TODO: do something on the task:
@@ -307,14 +307,16 @@ angular.module('Alarm-Plus.controllers', [])
                     $scope.openModal(2);
                     //$state.go('app.task2');
                 } else {
-                    // navigator.startApp.start([
-                    //         ["com.ionicframework.alarmplus636473", "android.intent.action.MAIN"]
-                    //     ], function(message) { /* success */
-                    //         console.log(message); // => OK
-                    //     },
-                    //     function(error) { /* error */
-                    //         console.log(error);
-                    //     });
+                    navigator.startApp.start([
+                            ["com.ionicframework.alarmplus636473", "MainActivity"]
+                        ], function(message) { /* success */
+                            console.log(message); // => OK
+                            console.log("what is ");
+                        },
+                        function(error) { /* error */
+                            console.log(error);
+                            console.log("uhhhhh ");
+                        });
 
                     // navigator.startApp.start([
                     //         ["action", "MAIN"],
