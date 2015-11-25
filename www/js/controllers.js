@@ -36,6 +36,7 @@ angular.module('Alarm-Plus.controllers', [])
 
             // Start Task:
             $scope.startMathTask = function() {
+
                 var modalOptions = {
                     scope: $scope,
                     animation: 'slide-in-up'
@@ -43,6 +44,7 @@ angular.module('Alarm-Plus.controllers', [])
                 $ionicModal.fromTemplateUrl('templates/task.html', modalOptions).then(function(dialog) {
                     $scope.modalTask = dialog;
                     $scope.modalTask.show();
+
                 });
             };
             $scope.closeMathTask = function() {
