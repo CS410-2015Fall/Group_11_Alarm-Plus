@@ -52,22 +52,22 @@ angular.module('Alarm-Plus.controllers')
             // var src = "/android_asset/www/sound/buzzer.mp3";
             // var media = new Media(src, null, null, loop);
 
-        $scope.myMedia;
+        var myMedia;
 
         var loop = function (status) {
             if (status === Media.MEDIA_STOPPED) {
-                 //document.addEventListener("deviceready", function () {
-                    $scope.myMedia.play();
-                    //media.setVolume(1.0);
-                  //  }, false);
+                 document.addEventListener("deviceready", function () {
+                    myMedia.play();
+                    myMedia.setVolume(1.0);
+                    }, false);
                 }
             if (status === Media.MEDIA_RUNNING & $scope.count == 0){
-                $scope.myMedia.stop();
+                myMedia.stop();
             } 
             };
 
-            $scope.myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, loop);
-            $scope.myMedia.play();
+            myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, loop);
+            myMedia.play();
             
 
             
@@ -133,7 +133,7 @@ angular.module('Alarm-Plus.controllers')
             }
 
             if ($scope.count == 0) {
-                $scope.myMedia.stop();
+                //$scope.myMedia.stop();
                 $scope.closeMathTask();
             }
         };
