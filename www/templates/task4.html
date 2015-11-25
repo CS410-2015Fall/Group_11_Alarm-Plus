@@ -1,0 +1,16 @@
+<ion-view view-title="task4">
+    <ion-pane>
+        <swipe-cards>
+            
+            <swipe-card ng-repeat="card in cards track by $index | orderBy:'rank'" on-destroy="cardDestroyed($index)" ng-init="currIndex = $index">
+                <div class="title">
+                    Swipe down to skip the question. {{ currIndex }}
+                </div>
+                <div class="hardm">
+                    {{card.hardm}}
+                </div>
+                <button class="button button-full button-positive" ng-repeat="choice in card.choices track by $index" ng-click="isCorrect(choice, currIndex)"> {{choice}}</button>
+            </swipe-card>
+        </swipe-cards>
+    </ion-pane>
+</ion-view>
