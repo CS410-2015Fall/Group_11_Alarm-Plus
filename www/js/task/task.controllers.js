@@ -142,8 +142,8 @@ angular.module('Alarm-Plus.controllers')
             }
             // When the Task is completed:
             if ($scope.count == 0) {
-               $scope.myMedia.stop();
-               $scope.myMedia.release();
+               //$scope.myMedia.stop();
+               //$scope.myMedia.release();
                 // TODO: ionic popup
                 $scope.closeMathTask();
             }
