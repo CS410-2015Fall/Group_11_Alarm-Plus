@@ -1,8 +1,8 @@
 angular.module('Alarm-Plus.controllers', [])
 
 .controller('AppCtrl', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', '$ionicModal', '$state', '$cordovaFacebook',
-    function($scope, $ionicPlatform, $timeout, Alarm, $q, $ionicModal, $state, $cordovaFacebook) {
-        $ionicPlatform.ready(function() {
+function($scope, $ionicPlatform, $timeout, Alarm, $q, $ionicModal, $state, $cordovaFacebook) {
+    $ionicPlatform.ready(function() {
             // Login Area
             $scope.loginData = {};
 
@@ -200,6 +200,8 @@ angular.module('Alarm-Plus.controllers', [])
                 var daysUntilNext = day - today_day;
                 var wanted = new Date().setDate(today.getDate() + daysUntilNext);
                 //navigator.notification.alert(day + new Date(wanted));
+                console.log(day + new Date(wanted));
+                console.log("date value: " + new Date().setDate(today.getDate() + daysUntilNext));
                 return new Date().setDate(today.getDate() + daysUntilNext);
             };
 
@@ -230,217 +232,219 @@ angular.module('Alarm-Plus.controllers', [])
             Alarms with the same id will result in using only the latest one.
             */
             $scope.schedule = function(name, msg, hour, min, wday, ctask) {
-                var today = new Date();
-                var year = today.getYear() + 1900;
-                var month = today.getMonth();
-                var now = today.getTime();
-                var tod = (hour < 12) ? "AM" : "PM";
-                var alarms = [];
-                var arrayID = [];
+            var alarms = [];
+            var arrayID = [];
+            var tod;
 
-                for (var i in wday) {
-                    if (wday[i].checked) {
-                        var tempt = wday[i].text;
-                        alarms.push(tempt);
-                    }
-                }
-
-                for (var j in alarms) {
-                    var day = $scope.closestDate(alarms[j]);
-                    //var myId = new Date(day).getDay(); // Currently correspond to each day
-                    var myId = new Date().getUTCMilliseconds();
-                    day = new Date(day).getDate();
-                    console.log("my js is " + j + " so day is " + day);
-                    cordova.plugins.notification.local.schedule({
-                        id: myId,
-                        title: name,
-                        data: {
-                            task: ctask
-                        },
-                        at: new Date(year, month, day, hour, min),
-                        sound: "file://sound/reminder.mp3"
-                    });
-                    arrayID.push(myId);
-                }
-                console.log("my arrayID is " + arrayID);
-                var alarm = new Alarm(arrayID, name, hour, min, tod, wday, ctask);
-                return alarm;
-            };
-
-            $scope.updateAlarms = function(ids, name, msg, hour, min, wday, ctask) {
-                var today = new Date();
-                var year = today.getYear() + 1900;
-                var month = today.getMonth();
-                var now = today.getTime();
-                var tod = (hour < 12) ? "AM" : "PM";
-                var alarms = [];
-                var closestDay = []
-
-                for (var i in wday) {
-                    if (wday[i].checked) {
-                        var tempt = wday[i].text;
-                        alarms.push(tempt);
-                    }
-                }
-
-                for (var j in alarms) {
-                    var day = $scope.closestDate(alarms[j]);
-                    day = new Date(day).getDate();
-                    closestDay.push(day);
-                }
-
-                console.log(closestDay + " length is " + closestDay.length);
-
-                for (var id in ids) {
-                    cordova.plugins.notification.local.schedule({
-                        id: ids[id],
-                        title: name,
-                        data: {
-                            task: ctask
-                        },
-                        at: new Date(year, month, closestDay[closestDay.length - 1], hour, min),
-                        sound: "file://sound/reminder.mp3"
-                    });
-                    console.log("check this: " + closestDay[closestDay.length - 1]);
-                    closestDay.pop();
-                }
-            };
-
-            /*
-            Things need to  be done when the alarm fires:
-            */
-            cordova.plugins.notification.local.on("trigger", function(notification) {
-                //alert("triggered: " + notification.id);
-                // navigator.startApp.start([
-                //         ["com.ionicframework.alarmplus636473", "com.ionicframework.alarmplus636473.MainActivity"]
-                //     ], function(message) { /* success */
-                //         console.log(message); // => OK
-                //         console.log("what is ");
-                //     },
-                //     function(error) { /* error */
-                //         console.log(error);
-                //         console.log("uhhhhh ");
-                //     });
-                var task = JSON.parse(notification.data).task;
-                console.log("task number is " + task);
-                // TODO: do something on the task:
-                if (task == 1) {
-
-                    $scope.startMathTask();
-                    //$state.go('app.task2');
-                } else if (task == 2) {
-                    // navigator.startApp.start([
-                    //         ["action", "MAIN"],
-                    //         ["tel:+79109999999"]
-                    //     ], function(message) { /* success */
-                    //         console.log(message); // => OK
-                    //     },
-                    //     function(error) { /* error */
-                    //         console.log(error);
-                    //     });
-                    $scope.startMathHardTask();
-
-                    //$state.go('app.task');
-                } else if (task == 3) {
-                    $scope.startHistoryTask();
-
-                } else if (task == 4) {
-                    $scope.startSnakeTask();
-                }
-            });
-
-            // Start Task:
-            $scope.startMathHardTask = function() {
-
-                var modalOptions = {
-                    scope: $scope,
-                    animation: 'slide-in-up'
-                };
-                $ionicModal.fromTemplateUrl('templates/task4.html', modalOptions).then(function(dialog) {
-                    $scope.modalHardTask = dialog;
-                    $scope.modalHardTask.show();
-
-                });
-            };
-            $scope.closeMathHardTask = function() {
-                $scope.modalHardTask.remove();
-            };
-
-            // Start Task:
-            $scope.startHistoryTask = function() {
-
-                var modalOptions = {
-                    scope: $scope,
-                    animation: 'slide-in-up'
-                };
-                $ionicModal.fromTemplateUrl('templates/task2.html', modalOptions).then(function(dialog) {
-                    $scope.modalHistoryTask = dialog;
-                    $scope.modalHistoryTask.show();
-
-                });
-            };
-            $scope.closeHistoryTask = function() {
-                $scope.modalHistoryTask.remove();
-            };
-
-            $scope.createAlarm = function() {
-                console.log("my chosenTask value is " + this.chosenTask.value);
-                var alarm = $scope.schedule(this.alarmName, "Productive TIME", this.alarmHour, this.alarmMinute, JSON.parse(JSON.stringify(this.alarmDays)), this.chosenTask.value);
-                $scope.alarms.push(alarm);
-                window.localStorage.setItem("alarms", JSON.stringify($scope.alarms));
-                //navigator.notification.alert("Reminder added successfully" + new Date(year, month, day, hour, min));
-                $scope.clearInputBox();
-                $scope.closeModal(2);
-            };
-
-            $scope.timePickerObject = {
-                inputEpochTime: ((new Date()).getHours() * 60 * 60), //Optional
-                step: 1, //Optional
-                format: 24, //Optional
-                titleLabel: 'SETUP', //Optional
-                setLabel: 'Set', //Optional
-                closeLabel: 'Cancel', //Optional
-                setButtonType: 'button-positive', //Optional
-                closeButtonType: 'button-stable', //Optional
-                callback: function(val) { //Mandatory
-                    timePickerCallback(val);
-                }
-            };
-
-            function timePickerCallback(val) {
-                if (typeof(val) === 'undefined') {
-                    console.log('Time not selected');
-                } else {
-                    var selectedTime = new Date(val * 1000);
-                    console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), ':', selectedTime.getUTCMinutes(), 'in UTC');
-                    $scope.alarmMinute = selectedTime.getUTCMinutes();
-                    var currentHours = selectedTime.getUTCHours();
-                    $scope.alarmHour = currentHours;
-                    $scope.alarmTod.time = (currentHours < 12) ? "AM" : "PM";
-                    currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
-                    currentHours = (currentHours === 0) ? 12 : currentHours;
-                    $scope.dispHour = currentHours
+            for (var i in wday) {
+                if (wday[i].checked) {
+                    var tempt = wday[i].text;
+                    alarms.push(tempt);
                 }
             }
 
-            /*
-            Get all LocaNotification
-            */
-            $scope.getLocalNotification = function() {
-                var allID;
-                var myItem;
-                cordova.plugins.notification.local.getAllIds(function(ids) {
-                    // getIds() as alias can also be used!
-                    allID = ids;
-                    navigator.notification.alert(allID);
+            console.log(alarms);
+
+            for (var j in alarms) {
+                var day = $scope.closestDate(alarms[j]);
+                //var myId = new Date(day).getDay(); // Currently correspond to each day
+                var myId = new Date().getUTCMilliseconds();
+                var tempt = new Date(day);
+                var day = tempt.getDate();
+                var month = tempt.getMonth();
+                var year = tempt.getYear() + 1900;
+                tod = (hour < 12) ? "AM" : "PM";
+
+                console.log("my js is " + j + " so day is " + day);
+                console.log("new date is " + new Date(year, month, day, hour, min));
+                debugger;
+                cordova.plugins.notification.local.schedule({
+                    id: myId,
+                    title: name,
+                    data: {
+                        task: ctask
+                    },
+                    at: new Date(year, month, day, hour, min)
                 });
-                // for (var id in allID) {
-                //     cordova.plugins.notification.local.get(allID[id], function(item) {
-                //         myItem = item;
-                //         console.log("hihi " + myItem);
+                //sound: "file://sound/reminder.mp3"
+                arrayID.push(myId);
+            }
+            console.log("my arrayID is " + arrayID);
+            var alarm = new Alarm(arrayID, name, hour, min, tod, wday, ctask);
+            return alarm;
+        };
+
+        $scope.updateAlarms = function(ids, name, msg, hour, min, wday, ctask) {
+            var month;
+            var year;
+            var alarms = [];
+            var closestDay = []
+
+            for (var i in wday) {
+                if (wday[i].checked) {
+                    var tempt = wday[i].text;
+                    alarms.push(tempt);
+                }
+            }
+
+            for (var j in alarms) {
+                var day = $scope.closestDate(alarms[j]);
+                var tempt = new Date(day);
+                day = tempt.getDate();
+                year = tempt.getYear()+1900;
+                month = tempt.getMonth();
+                closestDay.push(day);
+            }
+            // sound: "file://sound/reminder.mp3"
+            console.log(closestDay + " length is " + closestDay.length);
+
+            for (var id in ids) {
+              console.log("updated date is " + new Date(year, month, closestDay[closestDay.length - 1], hour, min));
+                cordova.plugins.notification.local.schedule({
+                    id: ids[id],
+                    title: name,
+                    data: {
+                        task: ctask
+                    },
+                    at: new Date(year, month, closestDay[closestDay.length - 1], hour, min)
+                });
+                console.log("check this: " + closestDay[closestDay.length - 1]);
+                closestDay.pop();
+            }
+        };
+
+        /*
+        Things need to  be done when the alarm fires:
+        */
+        cordova.plugins.notification.local.on("trigger", function(notification) {
+            //alert("triggered: " + notification.id);
+            // navigator.startApp.start([
+            //         ["com.ionicframework.alarmplus636473", "com.ionicframework.alarmplus636473.MainActivity"]
+            //     ], function(message) { /* success */
+            //         console.log(message); // => OK
+            //         console.log("what is ");
+            //     },
+            //     function(error) { /* error */
+            //         console.log(error);
+            //         console.log("uhhhhh ");
+            //     });
+            var task = JSON.parse(notification.data).task;
+            console.log("task number is " + task);
+            // TODO: do something on the task:
+            if (task == 1) {
+
+                $scope.startMathTask();
+                //$state.go('app.task2');
+            } else if (task == 2) {
+                // navigator.startApp.start([
+                //         ["action", "MAIN"],
+                //         ["tel:+79109999999"]
+                //     ], function(message) { /* success */
+                //         console.log(message); // => OK
+                //     },
+                //     function(error) { /* error */
+                //         console.log(error);
                 //     });
-                // }
-            };
+                $scope.startMathHardTask();
+
+                //$state.go('app.task');
+            } else if (task == 3) {
+                $scope.startHistoryTask();
+
+            } else if (task == 4) {
+                $scope.startSnakeTask();
+            }
         });
-    }
-]);
+
+        // Start Task:
+        $scope.startMathHardTask = function() {
+
+            var modalOptions = {
+                scope: $scope,
+                animation: 'slide-in-up'
+            };
+            $ionicModal.fromTemplateUrl('templates/task4.html', modalOptions).then(function(dialog) {
+                $scope.modalHardTask = dialog;
+                $scope.modalHardTask.show();
+
+            });
+        }; $scope.closeMathHardTask = function() {
+            $scope.modalHardTask.remove();
+        };
+
+        // Start Task:
+        $scope.startHistoryTask = function() {
+
+            var modalOptions = {
+                scope: $scope,
+                animation: 'slide-in-up'
+            };
+            $ionicModal.fromTemplateUrl('templates/task2.html', modalOptions).then(function(dialog) {
+                $scope.modalHistoryTask = dialog;
+                $scope.modalHistoryTask.show();
+
+            });
+        }; $scope.closeHistoryTask = function() {
+            $scope.modalHistoryTask.remove();
+        };
+
+        $scope.createAlarm = function() {
+            console.log("my chosenTask value is " + this.chosenTask.value);
+            var alarm = $scope.schedule(this.alarmName, "Productive TIME", this.alarmHour, this.alarmMinute, JSON.parse(JSON.stringify(this.alarmDays)), this.chosenTask.value);
+            $scope.alarms.push(alarm);
+            window.localStorage.setItem("alarms", JSON.stringify($scope.alarms));
+            //navigator.notification.alert("Reminder added successfully" + new Date(year, month, day, hour, min));
+            $scope.clearInputBox();
+            $scope.closeModal(2);
+        };
+
+        $scope.timePickerObject = {
+            inputEpochTime: ((new Date()).getHours() * 60 * 60), //Optional
+            step: 1, //Optional
+            format: 24, //Optional
+            titleLabel: 'SETUP', //Optional
+            setLabel: 'Set', //Optional
+            closeLabel: 'Cancel', //Optional
+            setButtonType: 'button-positive', //Optional
+            closeButtonType: 'button-stable', //Optional
+            callback: function(val) { //Mandatory
+                timePickerCallback(val);
+            }
+        };
+
+        function timePickerCallback(val) {
+            if (typeof(val) === 'undefined') {
+                console.log('Time not selected');
+            } else {
+                var selectedTime = new Date(val * 1000);
+                console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), ':', selectedTime.getUTCMinutes(), 'in UTC');
+                $scope.alarmMinute = selectedTime.getUTCMinutes();
+                var currentHours = selectedTime.getUTCHours();
+                $scope.alarmHour = currentHours;
+                $scope.alarmTod.time = (currentHours < 12) ? "AM" : "PM";
+                currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
+                currentHours = (currentHours === 0) ? 12 : currentHours;
+                $scope.dispHour = currentHours
+            }
+        }
+
+        /*
+        Get all LocaNotification
+        */
+        $scope.getLocalNotification = function() {
+            var allID;
+            var myItem;
+            cordova.plugins.notification.local.getAllIds(function(ids) {
+                // getIds() as alias can also be used!
+                allID = ids;
+                navigator.notification.alert(allID);
+            });
+            // for (var id in allID) {
+            //     cordova.plugins.notification.local.get(allID[id], function(item) {
+            //         myItem = item;
+            //         console.log("hihi " + myItem);
+            //     });
+            // }
+        };
+    });
+}]);
