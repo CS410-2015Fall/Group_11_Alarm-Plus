@@ -2,7 +2,7 @@ angular.module('Alarm-Plus.controllers')
 
 
 .controller('CardsCtrl', ['$scope', '$ionicSwipeCardDelegate', '$cordovaVibration', '$state', '$timeout',
-    function($scope, $ionicSwipeCardDelegate, $cordovaVibration, $state, $rootScope, $timeout, $cordovaMedia) {
+    function($scope, $ionicSwipeCardDelegate, $cordovaVibration, $state, $rootScope, $timeout, $cordovaMedia, $ionicPlatform) {
     $scope.cards = [{
         title: 'Swipe down to clear the card',
         equation: '5 + x = 15',
@@ -51,7 +51,7 @@ angular.module('Alarm-Plus.controllers')
          title: 'Swipe down to clear the card',
          equation: '1000 + 1000 = X',
          answer: 2000, //answer
-         choices: [1000000, 10001000, 20000, 1100],
+         choices: [1000000, 10001000, 2000, 1100],
          rank: 0.5 - Math.random()
          },
          {
@@ -93,30 +93,35 @@ angular.module('Alarm-Plus.controllers')
         //     e.preventDefault();
         //     }
 
-        $scope.myMedia;
+
+// Loop the buzzer, and stop once the correct number of questions have been answered.
+        var myMedia;
 
         var loop = function(status) {
             if (status === Media.MEDIA_STOPPED) {
                 //document.addEventListener("deviceready", function () {
-                $scope.myMedia.play();
+                myMedia.play();
                 window.system.setSystemVolume(1.0);
                 //  }, false);
 
             }
             if (status === Media.MEDIA_RUNNING & $scope.count == 0) {
-                $scope.myMedia.stop();
-                $scope.myMedia.release();
+                myMedia.stop();
+                myMedia.release();
             }
         };
 
+// Create the Media object and begin playing it.
+        myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, loop);
+        myMedia.play();
 
-        //$scope.myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, loop);
-        //$scope.myMedia.play();
+// TODO: override the Back button to prevent leaving the task prematurely.
+// Current attempt: registerBackButtonAction is not being recognized.
 
-
-
-
-
+        // $ionicPlatform.registerBackButtonAction(function(event) {
+        //     event.preventDefault();
+        //     alert('nope, you gotta wake up');
+        //     }, 1000);
 
 
         $scope.randomQ = function() {
