@@ -324,10 +324,11 @@ angular.module('Alarm-Plus.controllers', [])
                 var task = JSON.parse(notification.data).task;
                 console.log("task number is " + task);
                 // TODO: do something on the task:
-                if (task == 2) {
-                    $scope.openModal(2);
+                if (task == 1) {
+
+                    $scope.startMathTask();
                     //$state.go('app.task2');
-                } else {
+                } else if (task == 2) {
                     // navigator.startApp.start([
                     //         ["action", "MAIN"],
                     //         ["tel:+79109999999"]
@@ -337,12 +338,50 @@ angular.module('Alarm-Plus.controllers', [])
                     //     function(error) { /* error */
                     //         console.log(error);
                     //     });
+                    $scope.startMathHardTask();
 
-                    $scope.startMathTask();
                     //$state.go('app.task');
-                }
+                } else if (task == 3) {
+                    $scope.startHistoryTask();
 
+                } else if (task == 4) {
+                    $scope.startSnakeTask();
+                }
             });
+
+            // Start Task:
+            $scope.startMathHardTask = function() {
+
+                var modalOptions = {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                };
+                $ionicModal.fromTemplateUrl('templates/task4.html', modalOptions).then(function(dialog) {
+                    $scope.modalHardTask = dialog;
+                    $scope.modalHardTask.show();
+
+                });
+            };
+            $scope.closeMathHardTask = function() {
+                $scope.modalHardTask.remove();
+            };
+
+            // Start Task:
+            $scope.startHistoryTask = function() {
+
+                var modalOptions = {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                };
+                $ionicModal.fromTemplateUrl('templates/task2.html', modalOptions).then(function(dialog) {
+                    $scope.modalHistoryTask = dialog;
+                    $scope.modalHistoryTask.show();
+
+                });
+            };
+            $scope.closeHistoryTask = function() {
+                $scope.modalHistoryTask.remove();
+            };
 
             $scope.createAlarm = function() {
                 console.log("my chosenTask value is " + this.chosenTask.value);

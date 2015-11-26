@@ -65,15 +65,26 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
                     templateUrl: 'templates/home.html',
                     controller: 'homeController'
                 }
+
+            }
+        })
+        .state('app.task4', {
+            url: '/task4',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/task4.html'
+
+                }
             }
         })
         .state('app.task2', {
+
             url: '/task2',
             views: {
                 'task2-tab': {
-                    templateUrl: 'templates/task2.html',
-                    controller: 'task2Controller'
-                        // TODO : CHanged controller to ur controller newTAsk
+                    templateUrl: 'templates/task2.html'
+
+
                 }
             }
         })
@@ -81,7 +92,7 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
             url: '/task',
             views: {
                 'task-tab': {
-                    templateUrl: 'templates/task.html',
+                    templateUrl: 'templates/task.html'
                 }
             }
         });
