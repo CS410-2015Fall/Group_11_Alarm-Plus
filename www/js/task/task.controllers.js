@@ -51,7 +51,7 @@ angular.module('Alarm-Plus.controllers')
          title: 'Swipe down to clear the card',
          equation: '1000 + 1000 = X',
          answer: 2000, //answer
-         choices: [1000000, 10001000, 20000, 1100],
+         choices: [1000000, 10001000, 2000, 1100],
          rank: 0.5 - Math.random()
          },
          {
@@ -93,25 +93,25 @@ angular.module('Alarm-Plus.controllers')
         //     e.preventDefault();
         //     }
 
-        $scope.myMedia;
+        var myMedia;
 
         var loop = function(status) {
             if (status === Media.MEDIA_STOPPED) {
                 //document.addEventListener("deviceready", function () {
-                $scope.myMedia.play();
+                myMedia.play();
                 window.system.setSystemVolume(1.0);
                 //  }, false);
 
             }
             if (status === Media.MEDIA_RUNNING & $scope.count == 0) {
-                $scope.myMedia.stop();
-                $scope.myMedia.release();
+                myMedia.stop();
+                myMedia.release();
             }
         };
 
 
-        //$scope.myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, loop);
-        //$scope.myMedia.play();
+        myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, loop);
+        myMedia.play();
 
 
 

@@ -54,7 +54,7 @@ angular.module('Alarm-Plus.controllers')
         title: 'Swipe down to clear the card',
         histq: 'In Canada, which national holiday occurs on July 1st?',
         answer: "Canada Day", //answer
-        choices: ["Family Day", "Victory Day", "Victoria Day", "Canada Day"],
+        choices: ["Family Day", "Labour Day", "Victoria Day", "Canada Day"],
         rank: 0.5 - Math.random()
     }, {
         title: 'Swipe down to clear the card',

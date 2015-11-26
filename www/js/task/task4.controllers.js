@@ -18,7 +18,7 @@ angular.module('Alarm-Plus.controllers')
         title: 'Swipe down to clear the card',
         hardm: 'If I flip a coin 4 times, what is the probability that I get 4 heads?',
         answer: "0.0625", //answer
-        choices: ["0/025", "1", "0.25", "0.0625"],
+        choices: ["0.025", "1", "0.25", "0.0625"],
         rank: 0.5 - Math.random()
     }, {
         title: 'Swipe down to clear the card',
