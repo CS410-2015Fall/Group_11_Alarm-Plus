@@ -3,32 +3,37 @@ angular.module('Alarm-Plus.controllers')
 .controller('homeController', ['$scope', '$ionicPlatform', 'Alarm',
     function($scope, $ionicPlatform, Alarm) {
         $ionicPlatform.ready(function() {
-            // Testing Purpose:
-            // // TODO: sync the singleton array to the localstorage
-            // var permanentStorage = window.localStorage;
-            // var testalarm = new Alarm("cool", 10, 20, "AM");
-            // testalarm = JSON.stringify(testalarm);
-            // window.localStorage.setItem("key", testalarm);
-            // var coolalarm = ["babe", "love"];
-            // window.localStorage.setItem("key2", coolalarm);
-            // var value = window.localStorage.getItem("key");
-            // var value2 = window.localStorage.getItem("key2");
-            // console.log(value);
 
             $scope.shouldShowDelete = false;
             $scope.shouldShowReorder = false;
             $scope.listCanSwipe = true
 
+            $scope.toggleCustom = function(index) {
+                var a = $scope.alarms[index];
+                a.status = a.status === false ? true : false;
+                console.log("status is " + a.status);
+                var ids = a.id;
+                if (a.status) {
+                    $scope.updateAlarms(a.id,a.name, "Productive TIME", a.hour, a.minute, a.weekDays, a.task);
+                } else {
+                    for (var id in ids) {
+                        cordova.plugins.notification.local.cancel(ids[id], function() {});
+                    }
+                }
+            };
 
             // Remove an alarm on Home Page
             $scope.removeAlarm = function(index) {
+                // Remove notification based on its id.
+                var a = $scope.alarms[index];
+                var toBeDeleted = a.id;
+                for (var id in toBeDeleted) {
+                    cordova.plugins.notification.local.cancel(toBeDeleted[id], function() {});
+                }
+
                 $scope.alarms.splice(index, 1);
                 window.localStorage.setItem("alarms", JSON.stringify($scope.alarms));
-            };
-
-            // Modify the alarm on Home page
-            $scope.editAlarm = function() {
-
+                navigator.notification.alert("Successfully deleted");
             };
 
             // Remove all item in the localStorage

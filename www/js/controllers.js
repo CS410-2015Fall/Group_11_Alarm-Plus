@@ -1,62 +1,94 @@
 angular.module('Alarm-Plus.controllers', [])
 
-.controller('AppCtrl', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', '$ionicModal',
-    function($scope, $ionicPlatform, $timeout, Alarm, $q, $ionicModal) {
+.controller('AppCtrl', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', '$ionicModal', '$state', '$cordovaFacebook',
+    function($scope, $ionicPlatform, $timeout, Alarm, $q, $ionicModal, $state, $cordovaFacebook) {
         $ionicPlatform.ready(function() {
             // Login Area
             $scope.loginData = {};
 
-            // Create the login modal that we will use later
-            $ionicModal.fromTemplateUrl('templates/login.html', {
-                id: '1',
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function(modal) {
-                $scope.modal1 = modal;
-            });
-
-            $ionicModal.fromTemplateUrl('templates/setup.html', {
-                id: '2',
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function(modal) {
-                $scope.modal2 = modal;
-            });
-
-            // Triggered in the login modal to close it
+            // Login and Setup Pages:
             $scope.closeModal = function(index) {
                 if (index == 1) {
-                    $scope.modal1.hide();
+                    $scope.modal1.remove();
                 } else if (index == 2) {
-                    $scope.modal2.hide();
+                    $scope.modal2.remove();
                 }
             };
 
             // Open the login modal
             $scope.openModal = function(index) {
+                var modalOptions = {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                };
                 if (index == 1) {
-                    $scope.modal1.show();
+                    $ionicModal.fromTemplateUrl('templates/login.html', modalOptions).then(function(dialog) {
+                        $scope.modal1 = dialog;
+                        $scope.modal1.show();
+                    });
                 } else if (index == 2) {
-                    $scope.modal2.show();
+                    $ionicModal.fromTemplateUrl('templates/setup.html', modalOptions).then(function(dialog) {
+                        $scope.modal2 = dialog;
+                        $scope.modal2.show();
+                    });
                 }
             };
 
-            // Perform the login action when the user submits the login form
-            $scope.doLogin = function() {
-                console.log('Doing login', $scope.loginData);
+            // Start Task:
+            $scope.startMathTask = function() {
 
-                // Simulate a login delay. Remove this and replace with your login
-                // code if using a login system
-                $timeout(function() {
-                    $scope.closeLogin();
-                }, 1000);
+                var modalOptions = {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                };
+                $ionicModal.fromTemplateUrl('templates/task.html', modalOptions).then(function(dialog) {
+                    $scope.modalTask = dialog;
+                    $scope.modalTask.show();
+
+                });
+            };
+            $scope.closeMathTask = function() {
+                $scope.modalTask.remove();
             };
 
 
+            // Perform the login action when the user submits the login form
+            $scope.doLogin = function() {
+                var fbLoginSuccess = function(userData) {
+                    alert("UserInfo: " + JSON.stringify(userData));
+                };
+
+                facebookConnectPlugin.login(["public_profile"],
+                    fbLoginSuccess,
+                    function(error) {
+                        console.log(error);
+                        alert("error : " + error)
+                    }
+                );
+            };
+
+            $scope.sharePost = function() {
+                facebookConnectPlugin.getLoginStatus(
+                    function(status) {
+                        alert("current status: " + JSON.stringify(status));
+
+                        var options = {
+                            method: "feed"
+                        };
+                        facebookConnectPlugin.showDialog(options,
+                            function(result) {
+                                alert("Posted. " + JSON.stringify(result));
+                            },
+                            function(e) {
+                                alert("Failed: " + e);
+                            });
+                    }
+                );
+            };
+
             // Setup page:
-            $scope.curTime = "oh";
             $scope.tod = ["AM", "PM"],
-                $scope.alarmName = "410 due today",
+                $scope.alarmName = "guest",
                 $scope.alarmHour = 0,
                 $scope.alarmMinute = 0,
                 $scope.alarmTod = {
@@ -64,28 +96,52 @@ angular.module('Alarm-Plus.controllers', [])
                 },
                 $scope.alarmDays = [{
                     text: "SUN",
-                    checked: false
+                    checked: false,
+                    value: 0
                 }, {
                     text: "MON",
-                    checked: false
+                    checked: false,
+                    value: 1
                 }, {
                     text: "TUE",
-                    checked: false
+                    checked: false,
+                    value: 2
                 }, {
                     text: "WED",
-                    checked: false
+                    checked: false,
+                    value: 3
                 }, {
                     text: "THUR",
-                    checked: false
+                    checked: false,
+                    value: 4
                 }, {
                     text: "FRI",
-                    checked: false
+                    checked: false,
+                    value: 5
                 }, {
                     text: "SAT",
-                    checked: false
+                    checked: false,
+                    value: 6
                 }, ];
 
+            $scope.dispHour = 0;
+            $scope.taskOptions = [{
+                text: "Easy Math",
+                value: 1
+            }, {
+                text: "HistoryQuestion",
+                value: 2
+            }, {
+                text: "Hard Math",
+                value: 3
+            }, {
+                text: "Snake Game",
+                value: 4
+            }];
 
+            $scope.chosenTask = {
+                value: 1
+            };
 
             $scope.getCurSecond = function() {
                 var today = new Date();
@@ -94,84 +150,253 @@ angular.module('Alarm-Plus.controllers', [])
             };
 
 
+            /*
+            Synchronize the array of alarms with localStorage
+            */
             $scope.initAlarms = function() {
                 // Check if key alrms is already exist
                 if (window.localStorage.getItem("alarms") === null) {
                     var tempt = [];
                     window.localStorage.setItem("alarms", JSON.stringify(tempt));
-                    $scope.alarms = JSON.parse(window.localStorage.getItem("alarms"));
+                    $scope.alarms = tempt;
                 } else {
                     var alarms = JSON.parse(window.localStorage.getItem("alarms"));
                     $scope.alarms = [];
                     for (var a in alarms) {
-
-                        //var hi = $.extend(new Alarm(), $scope.alarms[a]);
-                        // debugger;
-                        //$scope.alarms[a].start();
                         var alarm = new Alarm();
+                        alarm.id = alarms[a].id;
                         alarm.name = alarms[a].name;
                         alarm.hour = alarms[a].hour;
                         alarm.minute = alarms[a].minute;
                         alarm.tod = alarms[a].tod;
+                        alarm.task = alarms[a].task;
+                        alarm.status = alarms[a].status;
                         alarm.weekDays = alarms[a].weekDays;
                         $scope.alarms.push(alarm);
-                        //alarm.start();
-                         //debugger;
                     }
-
-                    $timeout(function() {
-                        for (var b in $scope.alarms) {
-                            $scope.alarms[b].start();
-                        }
-                    }, (60 - $scope.getCurSecond()) * 1000);
                 }
             };
 
             $scope.initAlarms();
-
-
-            // Triggered in the setup modal to close it
-            $scope.closeSetup = function() {
-                $scope.modal.hide();
-            };
-
-            // Open the setup modal
-            $scope.setup = function() {
-                $scope.modal.show();
-            };
-
-            $scope.createAlarm = function() {
-
-                // Create an alarm based on user's input
-                // var id = Math.floor((Math.random() * 15) + 1);
-                var nalarm = new Alarm(this.alarmName, this.alarmHour,
-                    this.alarmMinute, this.alarmTod.time, this.alarmDays);
-
-                $scope.alarms.push(nalarm);
-
-                // start an alarm at second = 0
-                console.log($scope.getCurSecond());
-                $timeout(function() {
-                    $scope.alarms[$scope.alarms.length - 1].start();
-                }, (60 - $scope.getCurSecond()) * 1000);
-
-                window.localStorage.setItem("alarms", JSON.stringify($scope.alarms));
-                console.log($scope.alarmDays);
-                console.log($scope.alarms);
-                // cleart Box input
-
-                $scope.closeModal(2);
-            };
 
             $scope.findAlarm = function(alarm) {
                 var index = $scope.alarms.indexOf(alarm);
                 console.log(index);
             };
 
+            /*
+            Return the closest date:
+            day = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
+            */
+            $scope.closestDate = function(day) {
+                var today = new Date();
+                var today_day = today.getDay();
+                for (var i = 7; i--;) {
+                    if (day === $scope.alarmDays[i].text) {
+                        day = (i < today_day) ? (i + 7) : i;
+                        break;
+                    }
+                }
+                var daysUntilNext = day - today_day;
+                var wanted = new Date().setDate(today.getDate() + daysUntilNext);
+                //navigator.notification.alert(day + new Date(wanted));
+                return new Date().setDate(today.getDate() + daysUntilNext);
+            };
+
+            $scope.test = function() {
+                $scope.closestDate('SUN');
+                $scope.closestDate('MON');
+                $scope.closestDate('TUE');
+                $scope.closestDate('WED');
+                $scope.closestDate('THUR');
+                $scope.closestDate('FRI');
+                $scope.closestDate('SAT');
+            };
+
+            /*
+            Clear the input after each create
+            */
+            $scope.clearInputBox = function() {
+                this.alarmName = "guest",
+                    this.alarmMinute = 0,
+                    this.alarmHour = 0,
+                    this.alarmTod = 'PM';
+                for (var day in this.alarmDays) {
+                    this.alarmDays[day].checked = false;
+                }
+            };
+
+            /*
+            Alarms with the same id will result in using only the latest one.
+            */
+            $scope.schedule = function(name, msg, hour, min, wday, ctask) {
+                var today = new Date();
+                var year = today.getYear() + 1900;
+                var month = today.getMonth();
+                var now = today.getTime();
+                var tod = (hour < 12) ? "AM" : "PM";
+                var alarms = [];
+                var arrayID = [];
+
+                for (var i in wday) {
+                    if (wday[i].checked) {
+                        var tempt = wday[i].text;
+                        alarms.push(tempt);
+                    }
+                }
+
+                for (var j in alarms) {
+                    var day = $scope.closestDate(alarms[j]);
+                    //var myId = new Date(day).getDay(); // Currently correspond to each day
+                    var myId = new Date().getUTCMilliseconds();
+                    day = new Date(day).getDate();
+                    console.log("my js is " + j + " so day is " + day);
+                    cordova.plugins.notification.local.schedule({
+                        id: myId,
+                        title: name,
+                        data: {
+                            task: ctask
+                        },
+                        at: new Date(year, month, day, hour, min),
+                        sound: "file://sound/reminder.mp3"
+                    });
+                    arrayID.push(myId);
+                }
+                console.log("my arrayID is " + arrayID);
+                var alarm = new Alarm(arrayID, name, hour, min, tod, wday, ctask);
+                return alarm;
+            };
+
+            $scope.updateAlarms = function(ids, name, msg, hour, min, wday, ctask) {
+                var today = new Date();
+                var year = today.getYear() + 1900;
+                var month = today.getMonth();
+                var now = today.getTime();
+                var tod = (hour < 12) ? "AM" : "PM";
+                var alarms = [];
+                var closestDay = []
+
+                for (var i in wday) {
+                    if (wday[i].checked) {
+                        var tempt = wday[i].text;
+                        alarms.push(tempt);
+                    }
+                }
+
+                for (var j in alarms) {
+                    var day = $scope.closestDate(alarms[j]);
+                    day = new Date(day).getDate();
+                    closestDay.push(day);
+                }
+
+                console.log(closestDay + " length is " + closestDay.length);
+
+                for (var id in ids) {
+                    cordova.plugins.notification.local.schedule({
+                        id: ids[id],
+                        title: name,
+                        data: {
+                            task: ctask
+                        },
+                        at: new Date(year, month, closestDay[closestDay.length - 1], hour, min),
+                        sound: "file://sound/reminder.mp3"
+                    });
+                    console.log("check this: " + closestDay[closestDay.length - 1]);
+                    closestDay.pop();
+                }
+            };
+
+            /*
+            Things need to  be done when the alarm fires:
+            */
+            cordova.plugins.notification.local.on("trigger", function(notification) {
+                //alert("triggered: " + notification.id);
+                // navigator.startApp.start([
+                //         ["com.ionicframework.alarmplus636473", "com.ionicframework.alarmplus636473.MainActivity"]
+                //     ], function(message) { /* success */
+                //         console.log(message); // => OK
+                //         console.log("what is ");
+                //     },
+                //     function(error) { /* error */
+                //         console.log(error);
+                //         console.log("uhhhhh ");
+                //     });
+                var task = JSON.parse(notification.data).task;
+                console.log("task number is " + task);
+                // TODO: do something on the task:
+                if (task == 1) {
+
+                    $scope.startMathTask();
+                    //$state.go('app.task2');
+                } else if (task == 2) {
+                    // navigator.startApp.start([
+                    //         ["action", "MAIN"],
+                    //         ["tel:+79109999999"]
+                    //     ], function(message) { /* success */
+                    //         console.log(message); // => OK
+                    //     },
+                    //     function(error) { /* error */
+                    //         console.log(error);
+                    //     });
+                    $scope.startMathHardTask();
+
+                    //$state.go('app.task');
+                } else if (task == 3) {
+                    $scope.startHistoryTask();
+
+                } else if (task == 4) {
+                    $scope.startSnakeTask();
+                }
+            });
+
+            // Start Task:
+            $scope.startMathHardTask = function() {
+
+                var modalOptions = {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                };
+                $ionicModal.fromTemplateUrl('templates/task4.html', modalOptions).then(function(dialog) {
+                    $scope.modalHardTask = dialog;
+                    $scope.modalHardTask.show();
+
+                });
+            };
+            $scope.closeMathHardTask = function() {
+                $scope.modalHardTask.remove();
+            };
+
+            // Start Task:
+            $scope.startHistoryTask = function() {
+
+                var modalOptions = {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                };
+                $ionicModal.fromTemplateUrl('templates/task2.html', modalOptions).then(function(dialog) {
+                    $scope.modalHistoryTask = dialog;
+                    $scope.modalHistoryTask.show();
+
+                });
+            };
+            $scope.closeHistoryTask = function() {
+                $scope.modalHistoryTask.remove();
+            };
+
+            $scope.createAlarm = function() {
+                console.log("my chosenTask value is " + this.chosenTask.value);
+                var alarm = $scope.schedule(this.alarmName, "Productive TIME", this.alarmHour, this.alarmMinute, JSON.parse(JSON.stringify(this.alarmDays)), this.chosenTask.value);
+                $scope.alarms.push(alarm);
+                window.localStorage.setItem("alarms", JSON.stringify($scope.alarms));
+                //navigator.notification.alert("Reminder added successfully" + new Date(year, month, day, hour, min));
+                $scope.clearInputBox();
+                $scope.closeModal(2);
+            };
+
             $scope.timePickerObject = {
                 inputEpochTime: ((new Date()).getHours() * 60 * 60), //Optional
                 step: 1, //Optional
-                format: 12, //Optional
+                format: 24, //Optional
                 titleLabel: 'SETUP', //Optional
                 setLabel: 'Set', //Optional
                 closeLabel: 'Cancel', //Optional
@@ -188,35 +413,33 @@ angular.module('Alarm-Plus.controllers', [])
                 } else {
                     var selectedTime = new Date(val * 1000);
                     console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), ':', selectedTime.getUTCMinutes(), 'in UTC');
-                    $scope.alarmMinute = selectedTime.getMinutes();
+                    $scope.alarmMinute = selectedTime.getUTCMinutes();
                     var currentHours = selectedTime.getUTCHours();
+                    $scope.alarmHour = currentHours;
                     $scope.alarmTod.time = (currentHours < 12) ? "AM" : "PM";
                     currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
                     currentHours = (currentHours === 0) ? 12 : currentHours;
-                    $scope.alarmHour = currentHours
-                    console.log($scope.alarmHour + " " + $scope.alarmMinute + " " + $scope.alarmTod.time);
+                    $scope.dispHour = currentHours
                 }
             }
 
-            $scope.dispCurTime = function() {
-                var today = new Date();
-                var currentHours = today.getHours();
-                var currentMinutes = today.getMinutes();
-                var currentSeconds = today.getSeconds();
-
-                // Pad the minutes and seconds with leading zeros, if required
-                currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
-                currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
-
-                // set the format of the time
-                var timeOfDay = (currentHours < 12) ? "AM" : "PM";
-                currentHours = (currentHours > 12) ? currentHours - 12 : currentHours;
-                currentHours = (currentHours === 0) ? 12 : currentHours;
-                $scope.curTime = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
-
-                $timeout(function() {
-                    $scope.dispCurTime();
-                }, 1000);
+            /*
+            Get all LocaNotification
+            */
+            $scope.getLocalNotification = function() {
+                var allID;
+                var myItem;
+                cordova.plugins.notification.local.getAllIds(function(ids) {
+                    // getIds() as alias can also be used!
+                    allID = ids;
+                    navigator.notification.alert(allID);
+                });
+                // for (var id in allID) {
+                //     cordova.plugins.notification.local.get(allID[id], function(item) {
+                //         myItem = item;
+                //         console.log("hihi " + myItem);
+                //     });
+                // }
             };
         });
     }

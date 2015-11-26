@@ -6,22 +6,42 @@
         </div>
     </ion-header-bar>
     <ion-content>
-        <form name="form" novalidate>
+        <form name="myForm">
             <label class="item item-input">
                 <span class="input-label"> Name </span>
                 <input type="text" maxlength="30" ng-value="string" ng-model="alarmName" />
             </label>
             <ionic-timepicker input-obj="timePickerObject">
-                <button class="button button-block button-balanced overflowShow"> Time: {{alarmHour}} : {{alarmMinute}} {{alarmTod.time}}
+                <button class="button button-block button-balanced overflowShow"> Time: {{dispHour}} : {{alarmMinute}} {{alarmTod.time}}
                     <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
                 </button>
             </ionic-timepicker>
-            <ion-checkbox ng-repeat="day in alarmDays" ng-model="day.checked" checked="day.checked">{{day.text}}</ion-checkbox>
+            <ion-checkbox ng-repeat="day in alarmDays track by $index" ng-model="day.checked">{{day.text}}</ion-checkbox>
             <div class="clickArea">
-                <button class="button button-block button-positive" ng-click="createAlarm()"> Create </button>
-                <!-- <button class="button button-positive" ng-click="dispCurTime()"> Show Time </button> -->
+                <!-- <button class="button button-block button-positive" ng-click="createAlarm()"> Create </button> -->
+                <!-- <ion-radio ng-repeat="task in taskOptions" ng-value="task.value" ng-model="chosenTask.value">
+                    {{ task.text }}
+                </ion-radio> -->
+                <ion-radio class="calm" ng-value="1" ng-model="chosenTask.value">
+                    Easy Math {{chosenTask.value}}
+                </ion-radio>
+                <ion-radio class="balanced" ng-value="2" ng-model="chosenTask.value">
+                    Hard Math
+                </ion-radio>
+                <ion-radio class="energized" ng-value="3" ng-model="chosenTask.value">
+                    History Question
+                </ion-radio>
+                <ion-radio class="assertive" ng-value="4" ng-model="chosenTask.value">
+                    Snake Game
+                </ion-radio>
+
+
+                <button class="button button-block button-balanced" ng-click="createAlarm()"> Create </button>
+            </div>
+            <!-- <button class="button button-block button-positive" ng-click="test()"> ClosestDate </button> -->
+            <button class="button button-block button-balanced" ng-click="getLocalNotification()"> allLocalNoti </button>
+            <!-- <button class="button button-positive" ng-click="dispCurTime()"> Show Time </button> -->
             </div>
         </form>
-       <!--  {{curTime}} {{ alarmTod.time }} -->
     </ion-content>
 </ion-modal-view>

@@ -18,22 +18,22 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
         }
 
         // Android customization
-        cordova.plugins.backgroundMode.setDefaults({
-            title: "Alarm-Plus",
-            text: "Let's go"
-        });
+        // cordova.plugins.backgroundMode.setDefaults({
+        //     title: "Alarm-Plus",
+        //     text: "Let's go"
+        // });
         // Enable background mode
-        cordova.plugins.backgroundMode.enable();
+        // cordova.plugins.backgroundMode.enable();
 
         // Called when background mode has been activated
-        cordova.plugins.backgroundMode.onactivate = function() {
-            setTimeout(function() {
-                // Modify the currently displayed notification
-                cordova.plugins.backgroundMode.configure({
-                    text: 'Running in background for more than 5s now.'
-                });
-            }, 5000);
-        };
+        // cordova.plugins.backgroundMode.onactivate = function() {
+        //     setTimeout(function() {
+        //         // Modify the currently displayed notification
+        //         cordova.plugins.backgroundMode.configure({
+        //             text: 'Running in background for more than 5s now.'
+        //         });
+        //     }, 5000);
+        // };
     });
 })
 
@@ -61,28 +61,38 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
         .state('app.home', {
             url: '/home',
             views: {
-                'menuContent': {
+                'home-tab': {
                     templateUrl: 'templates/home.html',
                     controller: 'homeController'
                 }
+
             }
         })
-         .state('app.task2', {
-            url: '/task2',
+        .state('app.task4', {
+            url: '/task4',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/task2.html',
-                    controller: 'task2Controller'
-                    // TODO : CHanged controller to ur controller newTAsk
+                    templateUrl: 'templates/task4.html'
+
+                }
+            }
+        })
+        .state('app.task2', {
+
+            url: '/task2',
+            views: {
+                'task2-tab': {
+                    templateUrl: 'templates/task2.html'
+
+
                 }
             }
         })
         .state('app.task', {
             url: '/task',
             views: {
-                'menuContent': {
-                    templateUrl: 'templates/task.html',
-                    controller: 'CardsCtrl'
+                'task-tab': {
+                    templateUrl: 'templates/task.html'
                 }
             }
         });
