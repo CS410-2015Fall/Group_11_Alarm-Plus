@@ -2,7 +2,7 @@ angular.module('Alarm-Plus.controllers')
 
 
 .controller('CardsCtrl', ['$scope', '$ionicSwipeCardDelegate', '$cordovaVibration', '$state', '$timeout',
-    function($scope, $ionicSwipeCardDelegate, $cordovaVibration, $state, $rootScope, $timeout, $cordovaMedia) {
+    function($scope, $ionicSwipeCardDelegate, $cordovaVibration, $state, $rootScope, $timeout, $cordovaMedia, $ionicPlatform) {
     $scope.cards = [{
         title: 'Swipe down to clear the card',
         equation: '5 + x = 15',
@@ -93,6 +93,8 @@ angular.module('Alarm-Plus.controllers')
         //     e.preventDefault();
         //     }
 
+
+// Loop the buzzer, and stop once the correct number of questions have been answered.
         var myMedia;
 
         var loop = function(status) {
@@ -109,14 +111,17 @@ angular.module('Alarm-Plus.controllers')
             }
         };
 
-
+// Create the Media object and begin playing it.
         myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, loop);
         myMedia.play();
 
+// TODO: override the Back button to prevent leaving the task prematurely.
+// Current attempt: registerBackButtonAction is not being recognized.
 
-
-
-
+        // $ionicPlatform.registerBackButtonAction(function(event) {
+        //     event.preventDefault();
+        //     alert('nope, you gotta wake up');
+        //     }, 1000);
 
 
         $scope.randomQ = function() {

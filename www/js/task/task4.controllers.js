@@ -1,7 +1,7 @@
 angular.module('Alarm-Plus.controllers')
 
 // newGameController
-.controller('task4Controller', function($scope, $ionicSwipeCardDelegate, $cordovaVibration, $state, $rootScope) {
+.controller('task4Controller', function($scope, $ionicSwipeCardDelegate, $cordovaVibration, $state, $rootScope, $cordovaMedia) {
     $scope.cards = [{
         title: 'Swipe down to clear the card',
         hardm: 'I have a deck of cards, and I draw the King of Spades (without replacement), what is the probability that I will draw the King of hearts next?',
@@ -66,6 +66,28 @@ angular.module('Alarm-Plus.controllers')
 
     $scope.count = 3;
     $scope.currIndex = "";
+
+
+    // Loop the buzzer, and stop once the correct number of questions have been answered.
+        var myMedia;
+
+        var loop = function(status) {
+            if (status === Media.MEDIA_STOPPED) {
+                //document.addEventListener("deviceready", function () {
+                myMedia.play();
+                window.system.setSystemVolume(1.0);
+                //  }, false);
+
+            }
+            if (status === Media.MEDIA_RUNNING & $scope.count == 0) {
+                myMedia.stop();
+                myMedia.release();
+            }
+        };
+
+// Create the Media object and begin playing it.
+        myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, loop);
+        myMedia.play();
 
 
     $scope.randomQ = function() {
