@@ -53,23 +53,29 @@ angular.module('Alarm-Plus.controllers')
         // var src = "/android_asset/www/sound/buzzer.mp3";
         // var media = new Media(src, null, null, loop);
 
-        var myMedia;
+        // document.addEventListener("backbutton", onBackKeyDown, false);
+        //     function onBackKeyDown(e) {
+        //     e.preventDefault();
+        //     }
+
+        $scope.myMedia;
 
         var loop = function(status) {
             if (status === Media.MEDIA_STOPPED) {
                 //document.addEventListener("deviceready", function () {
-                myMedia.play();
+                $scope.myMedia.play();
                 window.system.setSystemVolume(1.0);
                 //  }, false);
                 
             }
             if (status === Media.MEDIA_RUNNING & $scope.count == 0) {
-                myMedia.stop();
+                $scope.myMedia.stop();
+                $scope.myMedia.release();
             }
         };
 
-        myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, loop);
-        myMedia.play();
+        $scope.myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, loop);
+        $scope.myMedia.play();
 
 
 
@@ -136,7 +142,8 @@ angular.module('Alarm-Plus.controllers')
             }
             // When the Task is completed:
             if ($scope.count == 0) {
-               // $scope.myMedia.stop();
+               $scope.myMedia.stop();
+               $scope.myMedia.release();
                 // TODO: ionic popup
                 $scope.closeMathTask();
             }
