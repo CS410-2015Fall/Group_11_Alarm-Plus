@@ -99,9 +99,26 @@ angular.module('Alarm-Plus.controllers')
                 $scope.myMedia.play();
                 // window.system.setSystemVolume(1.0);
                 //  }, false);
+            }
 
+            if (status === Media.MEDIA_RUNNING && $scope.count == 0) {
+                $scope.myMedia.stop();
+                $scope.myMedia.release();
             }
         };
+
+        //  $scope.keepPlaying = function() {
+        //     while ($scope.count != 0) {
+        //         $scope.myMedia.play();
+
+        //         if ($scope.count === 0) {
+        //             $scope.myMedia.stop();
+        //             $scope.myMedia.release();
+        //             break;
+        //         }
+        //     }
+        // };
+        // $scope.keepPlaying();
 
         // Create the Media object and begin playing it.
         $scope.myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, $scope.loop);
@@ -176,8 +193,6 @@ angular.module('Alarm-Plus.controllers')
             }
             // When the Task is completed:
             if ($scope.count == 0) {
-                $scope.myMedia.stop();
-                $scope.myMedia.release();
                 // TODO: ionic popup
                 $scope.closeMathTask();
             }
