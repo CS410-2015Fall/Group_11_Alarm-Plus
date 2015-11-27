@@ -7,7 +7,7 @@
 - cordova plugin add cordova-plugin-device
 - cordova plugin add ionic-plugin-keyboard
 - cordova plugin add cordova-plugin-vibration
-- cordova plugin add cordova-plugin-media
+- cordova plugin add org.apache.cordova.media
 - cordova plugin add https://github.com/Jiliac/phonegap-plugin-systemvolume.git
 
 ####Used resources:
