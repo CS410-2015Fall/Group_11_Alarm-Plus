@@ -175,10 +175,6 @@ swipe-card.pop-in {
     color: $light;
 }
 
-* {
-  font-family: "Lucida Grande";
-}
-
 #gameContainer, #pastScores {
   width: 600px;
   float: left;
