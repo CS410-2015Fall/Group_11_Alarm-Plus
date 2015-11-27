@@ -91,38 +91,37 @@ angular.module('Alarm-Plus.controllers')
 
 
         // Loop the buzzer, and stop once the correct number of questions have been answered.
-        $scope.myMedia;
 
-        $scope.loop = function(status) {
-            if (status === Media.MEDIA_STOPPED) {
-                //document.addEventListener("deviceready", function () {
+        // $scope.loop = function(status) {
+        //     if (status === Media.MEDIA_STOPPED) {
+        //         //document.addEventListener("deviceready", function () {
+        //         $scope.myMedia.play();
+        //         // window.system.setSystemVolume(1.0);
+        //         //  }, false);
+        //     }
+
+        //     if (status === Media.MEDIA_RUNNING && $scope.count == 0) {
+        //         $scope.myMedia.stop();
+        //         $scope.myMedia.release();
+        //     }
+        // };
+
+        $scope.myMedia = new Media("/android_asset/www/sound/buzzer.mp3");
+
+        $scope.keepPlaying = function() {
+            while ($scope.count !== 0) {
                 $scope.myMedia.play();
-                // window.system.setSystemVolume(1.0);
-                //  }, false);
-            }
 
-            if (status === Media.MEDIA_RUNNING && $scope.count == 0) {
-                $scope.myMedia.stop();
-                $scope.myMedia.release();
+                if ($scope.count === 0) {
+                    $scope.myMedia.stop();
+                    break;
+                }
             }
         };
 
-        //  $scope.keepPlaying = function() {
-        //     while ($scope.count != 0) {
-        //         $scope.myMedia.play();
-
-        //         if ($scope.count === 0) {
-        //             $scope.myMedia.stop();
-        //             $scope.myMedia.release();
-        //             break;
-        //         }
-        //     }
-        // };
-        // $scope.keepPlaying();
+        $scope.keepPlaying();
 
         // Create the Media object and begin playing it.
-        $scope.myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, $scope.loop);
-        $scope.myMedia.play();
 
         // TODO: override the Back button to prevent leaving the task prematurely.
         // Current attempt: registerBackButtonAction is not being recognized.
@@ -187,7 +186,6 @@ angular.module('Alarm-Plus.controllers')
                 $scope.count = $scope.count - 1;
                 var card = $ionicSwipeCardDelegate.getSwipeableCard(this);
                 card.swipe();
-
             } else {
                 $cordovaVibration.vibrate(100);
             }
