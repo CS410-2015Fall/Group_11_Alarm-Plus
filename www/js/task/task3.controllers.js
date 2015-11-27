@@ -1,7 +1,7 @@
 angular.module('Alarm-Plus.controllers')
 
 // newGameController
-.controller('task3Controller', ['$scope', '$timeout', '$state', '$window', function($scope, $timeout, $state, $window) {
+.controller('task3Controller', ['$scope', '$timeout', '$ionicGesture', '$state', '$window', function($scope, $timeout, $ionicGesture, $state, $window) {
 
 var BOARD_SIZE = 20;
 
@@ -176,6 +176,33 @@ var BOARD_SIZE = 20;
       }
     });
 
+    $scope.onSwipeUp = function() {
+      if (snake.direction !== DIRECTIONS.DOWN) {
+        tempDirection = DIRECTIONS.UP;
+    }
+  };
+
+   $scope.onSwipeDown = function() {
+      if (snake.direction !== DIRECTIONS.UP) {
+        tempDirection = DIRECTIONS.DOWN;
+    }
+  };
+
+ $scope.onSwipeRight = function() {
+      if (snake.direction !== DIRECTIONS.LEFT) {
+        tempDirection = DIRECTIONS.RIGHT;
+    }
+  };
+
+ $scope.onSwipeLeft = function() {
+      if (ssnake.direction !== DIRECTIONS.RIGHT) {
+        tempDirection = DIRECTIONS.LEFT;
+    }
+  };
+
+
+    
+
     $scope.startGame = function() {
       $scope.score = 0;
       snake = {direction: DIRECTIONS.LEFT, parts: []};
@@ -184,8 +211,8 @@ var BOARD_SIZE = 20;
       interval = 150;
 
       // Set up initial snake
-      for (var i = 0; i < 5; i++) {
-        snake.parts.push({x: 10 + i, y: 10});
+      for (var i = 0; i < 4; i++) {
+        snake.parts.push({x: 8 + i, y: 8});
       }
       resetFruit();
       update();
