@@ -265,7 +265,6 @@ angular.module('Alarm-Plus.controllers', [])
 
                     console.log("my js is " + j + " so day is " + day);
                     console.log("new date is " + new Date(year, month, day, hour, min));
-                    debugger;
                     cordova.plugins.notification.local.schedule({
                         id: myId,
                         title: name,
@@ -286,7 +285,8 @@ angular.module('Alarm-Plus.controllers', [])
                 var month;
                 var year;
                 var alarms = [];
-                var closestDay = []
+                var closestDay = [];
+                var closestMonth = [];
 
                 for (var i in wday) {
                     if (wday[i].checked) {
@@ -302,21 +302,26 @@ angular.module('Alarm-Plus.controllers', [])
                     year = tempt.getYear() + 1900;
                     month = tempt.getMonth();
                     closestDay.push(day);
+                    closestMonth.push(month);
                 }
                 // sound: "file://sound/reminder.mp3"
-                console.log(closestDay + " length is " + closestDay.length);
+                //console.log(closestDay + " length is " + closestDay.length);
+                //console.log(closestMonth + " length is" + closestMonth.length);
 
                 for (var id in ids) {
-                    console.log("updated date is " + new Date(year, month, closestDay[closestDay.length - 1], hour, min));
+                    console.log(" my month is " + closestMonth[closestMonth.length - 1]);
+                    console.log(" my day is " + closestDay[closestDay.length - 1]);
+                    console.log("updated date is " + new Date(year, closestMonth[closestMonth.length - 1], closestDay[closestDay.length - 1], hour, min));
                     cordova.plugins.notification.local.schedule({
                         id: ids[id],
                         title: name,
                         data: {
                             task: ctask
                         },
-                        at: new Date(year, month, closestDay[closestDay.length - 1], hour, min)
+                        at: new Date(year, closestMonth[closestMonth.length - 1], closestDay[closestDay.length - 1], hour, min)
                     });
                     console.log("check this: " + closestDay[closestDay.length - 1]);
+                    closestMonth.pop();
                     closestDay.pop();
                 }
             };

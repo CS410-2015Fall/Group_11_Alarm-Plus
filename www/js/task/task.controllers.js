@@ -96,7 +96,7 @@ angular.module('Alarm-Plus.controllers')
         $scope.loop = function(status) {
             if (status === Media.MEDIA_STOPPED) {
                 //document.addEventListener("deviceready", function () {
-                myMedia.play();
+                $scope.myMedia.play();
                 // window.system.setSystemVolume(1.0);
                 //  }, false);
 
