@@ -10,6 +10,10 @@
 - cordova plugin add org.apache.cordova.media
 - cordova plugin add https://github.com/Jiliac/phonegap-plugin-systemvolume.git
 
+#### Facebook Installation:
+- http://ngcordova.com/docs/plugins/facebook/
+
+
 ####Used resources:
 
 http://ionicframework.com/demos/swipe-cards/
