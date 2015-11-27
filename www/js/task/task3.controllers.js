@@ -4,6 +4,8 @@ angular.module('Alarm-Plus.controllers')
 .controller('task3Controller', ['$scope', '$timeout', '$ionicGesture', '$state', '$window', function($scope, $timeout, $ionicGesture, $state, $window) {
 
 var BOARD_SIZE = 20;
+var BOARD_SIZE_y = 20;
+var BOARD_SIZE_x = 14;
 
     var DIRECTIONS = {
       LEFT: 37,
@@ -91,7 +93,7 @@ var BOARD_SIZE = 20;
     }
 
     function boardCollision(part) {
-      return part.x === BOARD_SIZE || part.x === -1 || part.y === BOARD_SIZE || part.y === -1;
+      return part.x === BOARD_SIZE_y || part.x === -1 || part.y === BOARD_SIZE_x || part.y === -1;
     }
 
     function selfCollision(part) {
@@ -107,8 +109,8 @@ var BOARD_SIZE = 20;
     }
 
     function resetFruit() {
-      var x = Math.floor(Math.random() * BOARD_SIZE);
-      var y = Math.floor(Math.random() * BOARD_SIZE);
+      var x = Math.floor(Math.random() * BOARD_SIZE_y);
+      var y = Math.floor(Math.random() * BOARD_SIZE_x);
 
       if ($scope.board[y][x] === true) {
         return resetFruit();
@@ -155,9 +157,9 @@ var BOARD_SIZE = 20;
 
     function setupBoard() {
       $scope.board = [];
-      for (var i = 0; i < BOARD_SIZE; i++) {
+      for (var i = 0; i < BOARD_SIZE_y; i++) {
         $scope.board[i] = [];
-        for (var j = 0; j < BOARD_SIZE; j++) {
+        for (var j = 0; j < BOARD_SIZE_x; j++) {
           $scope.board[i][j] = false;
         }
       }

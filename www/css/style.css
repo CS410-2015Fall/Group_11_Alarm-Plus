@@ -180,11 +180,11 @@ swipe-card.pop-in {
   float: left;
 }
 
-.row {
+board-layout .row {
   height: 26px;
 }
 
-.column {
+board-layout .column {
   border: 1px solid white;
   width: 24px;
   height: 24px;
