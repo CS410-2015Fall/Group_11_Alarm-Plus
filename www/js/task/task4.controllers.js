@@ -58,7 +58,7 @@ angular.module('Alarm-Plus.controllers')
         rank: 0.5 - Math.random()
     }, {
         title: 'Swipe down to clear the card',
-        hardm: '5 + 5 x 5 + 5 - 5?',
+        hardm: '5 + 5 x 5 + 5 - 5 = ?',
         answer: "30", //answer
         choices: ["10", "20", "30", "25"],
         rank: 0.5 - Math.random()
