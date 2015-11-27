@@ -24,5 +24,8 @@
   "cordovaPlatforms": [
     "ios",
     "android"
-  ]
+  ],
+  "scripts": {
+    "test": "myTest.js"
+  }
 }
