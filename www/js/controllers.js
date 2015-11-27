@@ -413,6 +413,21 @@ angular.module('Alarm-Plus.controllers', [])
                 $scope.modalHistoryTask.remove();
             };
 
+            // Start Snake Task:
+            $scope.startSnakeTask = function() {
+                var modalOptions = {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                };
+                $ionicModal.fromTemplateUrl('templates/task3.html', modalOptions).then(function(dialog) {
+                    $scope.modalSnakeTask = dialog;
+                    $scope.modalSnakeTask.show();
+                });
+            };
+            $scope.closeSnakeTask = function() {
+                $scope.modalSnakeTask.remove();
+            };
+
             $scope.createAlarm = function() {
                 console.log("my chosenTask value is " + this.chosenTask.value);
                 var alarm = $scope.schedule(this.alarmName, "Productive TIME", this.alarmHour, this.alarmMinute, JSON.parse(JSON.stringify(this.alarmDays)), this.chosenTask.value);

@@ -118,7 +118,7 @@ var BOARD_SIZE = 20;
 
     function eatFruit() {
       $scope.score++;
-      
+
       // Grow by 1
       var tail = angular.copy(snake.parts[snake.parts.length-1]);
       snake.parts.push(tail);
@@ -149,8 +149,8 @@ var BOARD_SIZE = 20;
       },500);
 
       setupBoard();
-     
-      $state.go('app.home');
+
+      $scope.modalSnakeTask.remove();
     }
 
     function setupBoard() {
@@ -201,7 +201,7 @@ var BOARD_SIZE = 20;
   };
 
 
-    
+
 
     $scope.startGame = function() {
       $scope.score = 0;
