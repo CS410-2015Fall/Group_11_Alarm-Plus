@@ -68,26 +68,22 @@ angular.module('Alarm-Plus.controllers')
     $scope.currIndex = "";
 
 
-// Loop the buzzer, and stop once the correct number of questions have been answered.
-    var myMedia;
+    // Loop the buzzer, and stop once the correct number of questions have been answered.
+    $scope.myMedia;
 
-        var loop = function(status) {
-            if (status === Media.MEDIA_STOPPED) {
-                //document.addEventListener("deviceready", function () {
-                myMedia.play();
-                window.system.setSystemVolume(1.0);
-                //  }, false);
+    $scope.loop = function(status) {
+        if (status === Media.MEDIA_STOPPED) {
+            //document.addEventListener("deviceready", function () {
+            $scope.myMedia.play();
+            // window.system.setSystemVolume(1.0);
+            //  }, false);
+        }
+    };
 
-            }
-            if (status === Media.MEDIA_RUNNING & $scope.count == 0) {
-                myMedia.stop();
-                myMedia.release();
-            }
-        };
 
-// Create the Media object and begin playing it.
-        myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, loop);
-        myMedia.play();
+    // Create the Media object and begin playing it.
+    $scope.myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, $scope.loop);
+    $scope.myMedia.play();
 
 
     $scope.randomQ = function() {
@@ -127,7 +123,9 @@ angular.module('Alarm-Plus.controllers')
         }
 
         if ($scope.count == 0) {
-          $scope.modalHistoryTask.remove();
+            $scope.myMedia.stop();
+            $scope.myMedia.release();
+            $scope.modalHistoryTask.remove();
         }
 
     };
