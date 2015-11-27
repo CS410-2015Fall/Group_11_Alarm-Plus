@@ -386,6 +386,26 @@ angular.module('Alarm-Plus.controllers', [])
                 $scope.modalHardTask.remove();
             };
 
+
+            //Star Snake Task:
+               $scope.startSnakeTask = function() {
+
+                var modalOptions = {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                };
+                $ionicModal.fromTemplateUrl('templates/task3.html', modalOptions).then(function(dialog) {
+                    $scope.modalSnakeTask = dialog;
+                    $scope.modalSnakeTask.show();
+
+                });
+            };
+            $scope.closeSnakeTask = function() {
+                $scope.modalSnakeTask.remove();
+            };
+
+
+
             // Start Task:
             $scope.startHistoryTask = function() {
 
