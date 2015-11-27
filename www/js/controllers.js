@@ -55,43 +55,53 @@ angular.module('Alarm-Plus.controllers', [])
             // Perform the login action when the user submits the login form
             $scope.doLogin = function() {
                 var fbLoginSuccess = function(userData) {
-                    alert("UserInfo: " + JSON.stringify(userData));
+                    navigator.notification.alert("successfully logged in");
                 };
                 facebookConnectPlugin.login(["public_profile"],
                     fbLoginSuccess,
                     function(error) {
                         console.log(error);
-                        alert("error : " + error)
+                        navigator.notification.alert("something went wrong.");
                     }
                 );
             };
 
-            $scope.sharePost = function() {
+            $scope.fbIn = function() {
                 facebookConnectPlugin.getLoginStatus(
                     function(status) {
-                        alert("current status: " + JSON.stringify(status));
-
-                        var options = {
-                            method: "feed"
-                        };
-                        // facebookConnectPlugin.showDialog(options,
-                        //     function(result) {
-                        //         alert("Posted. " + JSON.stringify(result));
-                        //     },
-                        //     function(e) {
-                        //         alert("Failed: " + e);
-                        //     });
-
-                        $cordovaFacebook.api("me/feed", ["public_profile"])
-                            .then(function(success) {
-                                // success
-                                console.log(success);
-                            }, function(error) {
-                                console.log(error);
-                            });
-
+                        var tempt = status;
+                        console.log("current status: " + tempt);
+                        if (tempt.status === "connected") {
+                            navigator.notification.alert("you've already logged in.");
+                        } else {
+                            $scope.doLogin();
+                        }
                     }
                 );
+            };
+
+            $scope.fbPost = function() {
+                facebookConnectPlugin.getLoginStatus(
+                    function(status) {
+                        var tempt = status;
+                        if (tempt.status === "connected") {
+                            var options = {
+                                method: "feed"
+                            };
+
+                            facebookConnectPlugin.showDialog(options,
+                                function(result) {
+                                    alert("Posted. " + JSON.stringify(result));
+                                },
+                                function(e) {
+                                    console.log(e);
+                                });
+                        } else {
+                            navigator.notification.alert("You've not logged in.");
+                        }
+                    }
+                );
+
             };
 
             // Setup page:

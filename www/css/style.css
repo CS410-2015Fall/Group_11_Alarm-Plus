@@ -150,9 +150,10 @@ swipe-card.pop-in {
     width: 30px;
     padding: 30px;
     font-size: 40px;
-    background: $warning;
+    background: #4a87ee;
     position: fixed;
     bottom: 20px;
+
     /* Adjust to where you want it */
     right: 20px;
     /* Adjust to where you want it */

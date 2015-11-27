@@ -156,25 +156,6 @@ angular.module('Alarm-Plus.controllers')
             $scope.cards.push(newCard);
         };
 
-        $scope.self = $scope;
-        $scope.addCard = function() {
-            var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
-            // newCard.id = Math.random();
-            //$scope.cards.push(angular.extend({}, newCard));
-        }
-
-        // $scope.goAway = function() {
-        //     var card = $ionicSwipeCardDelegate.getSwipeableCard($scope);
-        //     card.swipe();
-        // };
-
-        // $scope.stay = function() {
-
-        //     // Vibrate 100ms
-        //     $cordovaVibration.vibrate(100);
-
-        // };
-
         $scope.random = function() {
             return 0.5 - Math.random();
         };
