@@ -57,7 +57,6 @@ angular.module('Alarm-Plus.controllers', [])
                 var fbLoginSuccess = function(userData) {
                     alert("UserInfo: " + JSON.stringify(userData));
                 };
-
                 facebookConnectPlugin.login(["public_profile"],
                     fbLoginSuccess,
                     function(error) {
@@ -82,6 +81,7 @@ angular.module('Alarm-Plus.controllers', [])
                         //     function(e) {
                         //         alert("Failed: " + e);
                         //     });
+
                         $cordovaFacebook.api("me/feed", ["public_profile"])
                             .then(function(success) {
                                 // success
