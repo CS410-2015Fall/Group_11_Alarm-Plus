@@ -1,0 +1,19 @@
+<ion-modal-view>
+    <ion-pane ng-controller="task3Controller">
+
+<ion-content class="has-header">
+    <div id="gameContainer">
+     <div>
+          <div class="row" ng-repeat="column in board" on-swipe-up="onSwipeUp()" on-swipe-down="onSwipeDown()" on-swipe-right="onSwipeRight()" on-swipe-left="onSwipeLeft()">
+              <div class="column"
+                  ng-style="{'background-color': setStyling($parent.$index, $index)}"
+                  ng-repeat="row in column track by $index"
+              ></div>
+          </div>
+      </div>
+      <div id="startGame" ng-click="startGame()">Start Game</div>
+       <div class="title">Score: {{score}}</div>
+    </div>
+</ion-content>
+</ion-pane>
+</ion-modal-view>
