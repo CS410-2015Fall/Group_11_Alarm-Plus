@@ -134,7 +134,7 @@ angular.module('Alarm-Plus.controllers', [])
             $scope.showConfirm = function() {
                 var confirmPopup = $ionicPopup.confirm({
                     title: 'Share Your Success',
-                    template: ':)'
+                    template: 'One commit to rule them all.'
                 });
                 confirmPopup.then(function(res) {
                     if (res) {
@@ -306,7 +306,6 @@ angular.module('Alarm-Plus.controllers', [])
 
                 for (var j in alarms) {
                     var day = $scope.closestDate(alarms[j]);
-                    //var myId = new Date(day).getDay(); // Currently correspond to each day
                     var myId = new Date().getUTCMilliseconds();
                     var tempt = new Date(day);
                     var day = tempt.getDate();
