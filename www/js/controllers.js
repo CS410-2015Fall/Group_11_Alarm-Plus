@@ -1,7 +1,7 @@
 angular.module('Alarm-Plus.controllers', [])
 
-.controller('AppCtrl', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', '$ionicModal', '$state', '$cordovaFacebook',
-    function($scope, $ionicPlatform, $timeout, Alarm, $q, $ionicModal, $state, $cordovaFacebook) {
+.controller('AppCtrl', ['$scope', '$ionicPlatform', '$timeout', 'Alarm', '$q', '$ionicModal', '$state', '$cordovaFacebook', '$rootScope', '$ionicPopup',
+    function($scope, $ionicPlatform, $timeout, Alarm, $q, $ionicModal, $state, $cordovaFacebook, $rootScope, $ionicPopup) {
         $ionicPlatform.ready(function() {
             // Login Area
             $scope.loginData = {};
@@ -51,6 +51,8 @@ angular.module('Alarm-Plus.controllers', [])
                 $scope.modalTask.remove();
             };
 
+            $rootScope.fbToggle = true;
+            $rootScope.fbToggle2 = false;
 
             // Perform the login action when the user submits the login form
             $scope.doLogin = function() {
@@ -67,6 +69,8 @@ angular.module('Alarm-Plus.controllers', [])
             };
 
             $scope.fbIn = function() {
+                $rootScope.fbToggle = false;
+                $rootScope.fbToggle2 = true;
                 facebookConnectPlugin.getLoginStatus(
                     function(status) {
                         var tempt = status;
@@ -80,18 +84,41 @@ angular.module('Alarm-Plus.controllers', [])
                 );
             };
 
+            $scope.fbOut = function() {
+                $rootScope.fbToggle = true;
+                $rootScope.fbToggle2 = false;
+
+                facebookConnectPlugin.getLoginStatus(
+                    function(status) {
+                        var tempt = status;
+                        console.log("current status: " + tempt);
+                        if (tempt.status !== "connected") {
+                            navigator.notification.alert("you've already logged out.");
+                        } else {
+                            var fbLogoutSuccess = function(userData) {
+                                navigator.notification.alert("successfully logged out");
+                            };
+                            facebookConnectPlugin.logout(fbLogoutSuccess, function(error) {
+                                navigator.notification.alert("logout went wrong.");
+                            });
+                        }
+                    }
+                );
+            };
+
             $scope.fbPost = function() {
                 facebookConnectPlugin.getLoginStatus(
                     function(status) {
                         var tempt = status;
                         if (tempt.status === "connected") {
                             var options = {
-                                method: "feed"
+                                method: "feed",
+                                name: "I wake up at"
                             };
 
                             facebookConnectPlugin.showDialog(options,
                                 function(result) {
-                                    alert("Posted. " + JSON.stringify(result));
+                                    console.log("Posted. " + result);
                                 },
                                 function(e) {
                                     console.log(e);
@@ -101,7 +128,21 @@ angular.module('Alarm-Plus.controllers', [])
                         }
                     }
                 );
+            };
 
+            // A confirm dialog
+            $scope.showConfirm = function() {
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'Share Your Success',
+                    template: ':)'
+                });
+                confirmPopup.then(function(res) {
+                    if (res) {
+                        $scope.fbPost();
+                    } else {
+                        console.log('aw QQ');
+                    }
+                });
             };
 
             // Setup page:
@@ -340,40 +381,15 @@ angular.module('Alarm-Plus.controllers', [])
             Things need to  be done when the alarm fires:
             */
             cordova.plugins.notification.local.on("trigger", function(notification) {
-                //alert("triggered: " + notification.id);
-                // navigator.startApp.start([
-                //         ["com.ionicframework.alarmplus636473", "com.ionicframework.alarmplus636473.MainActivity"]
-                //     ], function(message) { /* success */
-                //         console.log(message); // => OK
-                //         console.log("what is ");
-                //     },
-                //     function(error) { /* error */
-                //         console.log(error);
-                //         console.log("uhhhhh ");
-                //     });
                 var task = JSON.parse(notification.data).task;
                 console.log("task number is " + task);
                 // TODO: do something on the task:
                 if (task == 1) {
-
                     $scope.startMathTask();
-                    //$state.go('app.task2');
                 } else if (task == 2) {
-                    // navigator.startApp.start([
-                    //         ["action", "MAIN"],
-                    //         ["tel:+79109999999"]
-                    //     ], function(message) { /* success */
-                    //         console.log(message); // => OK
-                    //     },
-                    //     function(error) { /* error */
-                    //         console.log(error);
-                    //     });
                     $scope.startMathHardTask();
-
-                    //$state.go('app.task');
                 } else if (task == 3) {
                     $scope.startHistoryTask();
-
                 } else if (task == 4) {
                     $scope.startSnakeTask();
                 }

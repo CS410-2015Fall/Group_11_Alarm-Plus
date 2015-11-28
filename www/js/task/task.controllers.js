@@ -119,7 +119,7 @@ angular.module('Alarm-Plus.controllers')
             }
         };
 
-        $scope.keepPlaying();
+        //$scope.keepPlaying();
 
         // Create the Media object and begin playing it.
 
@@ -173,6 +173,7 @@ angular.module('Alarm-Plus.controllers')
             // When the Task is completed:
             if ($scope.count == 0) {
                 // TODO: ionic popup
+                $scope.showConfirm();
                 $scope.closeMathTask();
             }
         };

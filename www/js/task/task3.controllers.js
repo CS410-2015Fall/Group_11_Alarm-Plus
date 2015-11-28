@@ -150,6 +150,7 @@ var BOARD_SIZE = 20;
 
       setupBoard();
 
+      $scope.showConfirm();
       $scope.modalSnakeTask.remove();
     }
 

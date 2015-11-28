@@ -7,11 +7,10 @@
     <ion-tab title="Home" icon="ion-home" href="#/app/home">
         <ion-nav-view name="home-tab"></ion-nav-view>
     </ion-tab>
-    <!-- <ion-tab title="Login" icon="ion-log-in" on-select="openModal(1)"> -->
-    <!-- <ion-tab title="Login" icon="ion-log-in" on-select="fbPost()"> -->
-        <!-- <ion-nav-view name="home-tab"></ion-nav-view> -->
     </ion-tab>
-    <ion-tab title="Facebook Login" icon-on="ion-happy" icon-off="ion-sad" on-select="fbIn()">
+    <ion-tab title="Login" icon="ion-happy" on-select="fbOut()" hidden="{{fbToggle}}">
+    </ion-tab>
+    <ion-tab title="Facebook Login" icon="ion-sad" on-select="fbIn()" hidden="{{fbToggle2}}">
     </ion-tab>
 </ion-tabs>
 <div class="float-button">

@@ -81,8 +81,8 @@ angular.module('Alarm-Plus.controllers')
     };
 
     // Create the Media object and begin playing it.
-    $scope.myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, $scope.loop);
-    $scope.myMedia.play();
+    //$scope.myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, $scope.loop);
+    //$scope.myMedia.play();
 
 
     $scope.randomQ = function() {
@@ -122,8 +122,8 @@ angular.module('Alarm-Plus.controllers')
         }
 
         if ($scope.count == 0) {
-            $scope.myMedia.stop();
-            $scope.myMedia.release();
+
+            $scope.showConfirm();
             $scope.closeMathHardTask();
         }
 
