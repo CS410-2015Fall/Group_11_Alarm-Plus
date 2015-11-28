@@ -12,7 +12,7 @@
                 <input type="text" maxlength="30" ng-value="string" ng-model="alarmName" />
             </label>
             <ionic-timepicker input-obj="timePickerObject">
-                <button class="button button-block button-balanced overflowShow"> Time: {{dispHour}} : {{alarmMinute}} {{alarmTod.time}}
+                <button class="button button-block button-positive overflowShow"> Time: {{dispHour}} : {{alarmMinute}} {{alarmTod.time}}
                     <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
                 </button>
             </ionic-timepicker>
@@ -36,10 +36,10 @@
                 </ion-radio>
 
 
-                <button class="button button-block button-balanced" ng-click="createAlarm()"> Create </button>
+                <button class="button button-block button-positive" ng-click="createAlarm()"> Create </button>
             </div>
             <!-- <button class="button button-block button-positive" ng-click="test()"> ClosestDate </button> -->
-            <button class="button button-block button-balanced" ng-click="getLocalNotification()"> allLocalNoti </button>
+            <!-- <button class="button button-block button-balanced" ng-click="getLocalNotification()"> allLocalNoti </button> -->
             <!-- <button class="button button-positive" ng-click="test()"> Show Time </button> -->
             </div>
         </form>
