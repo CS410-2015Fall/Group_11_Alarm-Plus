@@ -66,7 +66,10 @@ describe("A suite", function() {
         expect(cards[0].title).toBe('Swipe down to clear the card');
         expect(cards[0].equation).toBe('5 + x = 15');
         expect(cards[0].answer).toBe(10);
+       
     });
+         
+         
 
 
 });
