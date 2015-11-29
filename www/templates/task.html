@@ -1,35 +1,18 @@
 <ion-modal-view>
     <ion-pane ng-controller="CardsCtrl">
-        <!--  <swipe-cards> -->
-        <!--  <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
-      {{card.equation}} -->
-        <!-- <div ng-controller="CardsCtrl">
-          <div class="title">
-            Swipe down to skip the question.
-          </div>
-          <div class="equation">
-            {{card.equation}}
-          </div>
-          <!-- <div class="button-bar"> -->
-        <!-- <button class="button button-full button-positive" ng-click="stay()">{{card.answera}}</button>
-        <button class="button button-full button-energized" ng-click="stay()">{{card.answerb}}</button>
-        <button class="button button-full button-royal" ng-click="goAway()">{{card.answerc}}</button>
-        <button class="button button-full button-balanced" ng-click="stay()">{{card.answerd}}</button> -->
-        <!-- </div> -->
-        <!--  </swipe-card>
-    </swipe-cards> -->
         <swipe-cards>
             <swipe-card id="start-card">
                 COMPLETE THE TASK TO TURN OFF THE ALARM
             </swipe-card>
             <swipe-card ng-repeat="card in cards track by $index | orderBy:'rank'" on-destroy="cardDestroyed($index)" ng-init="currIndex = $index">
-                <div class="title">
-                    Swipe down to skip the question. {{ currIndex }}
+                <div>
+                {{snoozeStatus}}
                 </div>
                 <div class="equation">
                     {{card.equation}}
                 </div>
                 <button class="button button-full button-positive" ng-repeat="choice in card.choices" ng-click="isCorrect(choice, currIndex)"> {{choice}}</button>
+                 <button ng-click="snooze()"><i ng-class="snoozeStatus ? 'ion-android-volume-down' : 'ion-android-volume-up'" ng-click="snooze()"></i></button>
             </swipe-card>
         </swipe-cards>
     </ion-pane>

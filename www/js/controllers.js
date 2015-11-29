@@ -134,7 +134,7 @@ angular.module('Alarm-Plus.controllers', [])
             $scope.showConfirm = function() {
                 var confirmPopup = $ionicPopup.confirm({
                     title: 'Share Your Success',
-                    template: 'One commit to rule them all.'
+                    template: ':)))))'
                 });
                 confirmPopup.then(function(res) {
                     if (res) {
