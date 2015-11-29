@@ -3,7 +3,9 @@ angular.module('Alarm-Plus.controllers')
 // newGameController
 .controller('task3Controller', ['$scope', '$timeout', '$ionicGesture', '$state', '$window', function($scope, $timeout, $ionicGesture, $state, $window) {
 
-    var BOARD_SIZE = 18;
+
+var BOARD_SIZE = 15;
+
 
     var DIRECTIONS = {
         LEFT: 37,
@@ -107,8 +109,9 @@ angular.module('Alarm-Plus.controllers')
     }
 
     function resetFruit() {
-        var x = Math.floor(Math.random() * BOARD_SIZE);
-        var y = Math.floor(Math.random() * BOARD_SIZE);
+
+      var x = Math.floor(Math.random() * (BOARD_SIZE-4));
+      var y = Math.floor(Math.random() * (BOARD_SIZE-4);
 
         if ($scope.board[y][x] === true) {
             return resetFruit();
@@ -198,11 +201,6 @@ angular.module('Alarm-Plus.controllers')
         }
     };
 
-    $scope.onSwipeLeft = function() {
-        if (ssnake.direction !== DIRECTIONS.RIGHT) {
-            tempDirection = DIRECTIONS.LEFT;
-        }
-    };
 
     $scope.loop = function(status) {
         if (status === Media.MEDIA_STOPPED) {
@@ -228,6 +226,13 @@ angular.module('Alarm-Plus.controllers')
             $scope.myMedia.setVolume(1.0);
         }, 10000);
     };
+
+ $scope.onSwipeLeft = function() {
+      if (snake.direction !== DIRECTIONS.RIGHT) {
+        tempDirection = DIRECTIONS.LEFT;
+    }
+  };
+
 
 
 
