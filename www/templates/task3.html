@@ -5,10 +5,11 @@
 <board-layout>
     <div id="gameContainer">
      <div>
-      <div class="col text-center">
-      <button class="button button-large button-balanced" ng-click="startGame()">Start Game</button>
+      <div class="bar bar-header">
+      <button class="button button-balanced" ng-click="startGame()">Start Game</button>
+      <button class="button-balanced" ng-click="snooze()" ng-hide="snoozeStatus"><i class="icon ion-social-python"></i></button>
+      <div class="title" style="color:#000000;">Score: {{score}}</div>
    </div>
-      <br>
           <div class="row" ng-repeat="column in board">
               <div class="column"
                   ng-style="{'background-color': setStyling($parent.$index, $index)}"
@@ -16,8 +17,6 @@
               ></div>
           </div>
       </div>
-       <div class="title">Score: {{score}}</div>
-       <button class="button-full" ng-click="snooze()" ng-hide="snoozeStatus"><i class="icon ion-social-python"></i></button>
     </div>
 </board-layout>
 </ion-content>

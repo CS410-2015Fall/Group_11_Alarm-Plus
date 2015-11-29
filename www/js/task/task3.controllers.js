@@ -118,8 +118,8 @@ var BOARD_SIZE_y = 30;
 
     function resetFruit() {
 
-      var x = Math.floor(Math.random() * BOARD_SIZE_x-4);
-      var y = Math.floor(Math.random() * BOARD_SIZE_y-4);
+      var x = Math.floor(Math.random() * BOARD_SIZE_x);
+      var y = Math.floor(Math.random() * BOARD_SIZE_y);
 
 
         if ($scope.board[y][x] === true) {
@@ -219,7 +219,7 @@ var BOARD_SIZE_y = 30;
             window.system.setSystemVolume(1.0);
         }
 
-        if ($scope.score == 3) {
+        if ($scope.score == 2) {
             $scope.myMedia.pause();
         }
     };
