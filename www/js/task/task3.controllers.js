@@ -111,7 +111,7 @@ var BOARD_SIZE = 15;
     function resetFruit() {
 
       var x = Math.floor(Math.random() * (BOARD_SIZE-4));
-      var y = Math.floor(Math.random() * (BOARD_SIZE-4);
+      var y = Math.floor(Math.random() * (BOARD_SIZE-4));
 
         if ($scope.board[y][x] === true) {
             return resetFruit();
