@@ -1,9 +1,16 @@
-describe("board collision", function() {
-	it("returns true if snake ran into board", function() {
-		expect(boardCollision(20)).toBe(true);
-	});
+describe('alarmplus controllers', function() {
+
+var $rootScope, task3Controller;
+
+beforeEach(module('Alarm-Plus.controllers'));
+beforeEach(inject(function($controller, $rootScope) {
+    myScope = $rootScope.$new();
+    ctrl = $controller('tsk3Controller', {
+        $scope: myScope
+    });
+}));
+
+it('works', function() {
+    expect( myScope.onSwipeUp).toBeDefined();
 });
-
-
-
-	
+});
