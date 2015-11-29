@@ -175,3 +175,33 @@ swipe-card.pop-in {
     /* Note, this must be half the font size */
     color: $light;
 }
+
+#gameContainer, #pastScores {
+  width: 600px;
+  float: left;
+}
+
+board-layout .row {
+  height: 26px;
+}
+
+board-layout .column {
+  border: 1px solid white;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+}
+
+#startGame {
+  width: 120px;
+  padding: 10px;
+  margin-top: 5px;
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+
+#startGame:hover {
+  color: red;
+  cursor: pointer;
+}

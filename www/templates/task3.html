@@ -2,6 +2,7 @@
     <ion-pane ng-controller="task3Controller">
 
 <ion-content class="has-header">
+<board-layout>
     <div id="gameContainer">
      <div>
           <div class="row" ng-repeat="column in board" on-swipe-up="onSwipeUp()" on-swipe-down="onSwipeDown()" on-swipe-right="onSwipeRight()" on-swipe-left="onSwipeLeft()">
@@ -11,9 +12,10 @@
               ></div>
           </div>
       </div>
-      <div id="startGame" ng-click="startGame()">Start Game</div>
+      <button class="button button-full button-balanced">Start Game</button>
        <div class="title">Score: {{score}}</div>
     </div>
+</board-layout>
 </ion-content>
 </ion-pane>
 </ion-modal-view>
