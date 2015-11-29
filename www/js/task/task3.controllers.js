@@ -3,7 +3,9 @@ angular.module('Alarm-Plus.controllers')
 // newGameController
 .controller('task3Controller', ['$scope', '$timeout', '$ionicGesture', '$state', '$window', function($scope, $timeout, $ionicGesture, $state, $window) {
 
-var BOARD_SIZE = 18;
+// var BOARD_SIZE = 18;
+var BOARD_SIZE_x = 20;
+var BOARD_SIZE_y = 30;
 
     var DIRECTIONS = {
       LEFT: 37,
@@ -91,15 +93,15 @@ var BOARD_SIZE = 18;
     }
 
     function boardCollision(part) {
-      return part.x === BOARD_SIZE || part.x === -1 || part.y === BOARD_SIZE || part.y === -1;
+      return part.x === BOARD_SIZE_x || part.x === -1 || part.y === BOARD_SIZE_y || part.y === -1;
     }
 
     function selfCollision(part) {
       return $scope.board[part.y][part.x] === true;
     }
-
+// Score needed to win, and complete the task.
     function lengthmet() {
-      return $scope.score == 3;
+      return $scope.score == 1;
     }
 
     function fruitCollision(part) {
@@ -107,8 +109,8 @@ var BOARD_SIZE = 18;
     }
 
     function resetFruit() {
-      var x = Math.floor(Math.random() * BOARD_SIZE);
-      var y = Math.floor(Math.random() * BOARD_SIZE);
+      var x = Math.floor(Math.random() * BOARD_SIZE_x);
+      var y = Math.floor(Math.random() * BOARD_SIZE_y);
 
       if ($scope.board[y][x] === true) {
         return resetFruit();
@@ -156,9 +158,9 @@ var BOARD_SIZE = 18;
 
     function setupBoard() {
       $scope.board = [];
-      for (var i = 0; i < BOARD_SIZE; i++) {
+      for (var i = 0; i < BOARD_SIZE_y; i++) {
         $scope.board[i] = [];
-        for (var j = 0; j < BOARD_SIZE; j++) {
+        for (var j = 0; j < BOARD_SIZE_x; j++) {
           $scope.board[i][j] = false;
         }
       }

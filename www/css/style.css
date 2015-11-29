@@ -177,8 +177,8 @@ swipe-card.pop-in {
 }
 
 #gameContainer, #pastScores {
-  width: 480px;
-  float: left;
+  /*width: 100px;*/
+  float: center;
 }
 
 board-layout .row {
@@ -186,19 +186,18 @@ board-layout .row {
 }
 
 board-layout .column {
-  border: 1px solid white;
+  /*border: 1px solid white;*/
   width: 19px;
   height: 19px;
   display: inline-block;
 }
 
-#startGame {
-  width: 100px;
-  padding: 10px;
-  margin-top: 5px;
-  text-align: center;
-  background-color: green;
-  color: black;
+board-layout {
+  /*width: 100px;*/
+  /*padding: 10px;*/
+  /*margin-top: 5px;*/
+  /*text-align: center;*/
+  /*background-color: #eee;*/
 }
 
 #startGame:hover {
