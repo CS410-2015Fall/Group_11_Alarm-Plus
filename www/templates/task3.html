@@ -1,18 +1,21 @@
 <ion-modal-view>
-    <ion-pane ng-controller="task3Controller">
+    <ion-pane ng-controller="task3Controller" on-swipe-up="onSwipeUp()" on-swipe-down="onSwipeDown()" on-swipe-right="onSwipeRight()" on-swipe-left="onSwipeLeft()">
 
 <ion-content class="has-header">
 <board-layout>
     <div id="gameContainer">
      <div>
-          <div class="row" ng-repeat="column in board" on-swipe-up="onSwipeUp()" on-swipe-down="onSwipeDown()" on-swipe-right="onSwipeRight()" on-swipe-left="onSwipeLeft()">
+      <div class="col text-center">
+      <button class="button button-large button-balanced" ng-click="startGame()">Start Game</button>
+   </div>
+      <br>
+          <div class="row" ng-repeat="column in board">
               <div class="column"
                   ng-style="{'background-color': setStyling($parent.$index, $index)}"
                   ng-repeat="row in column track by $index"
               ></div>
           </div>
       </div>
-      <button class="button button-full button-balanced" ng-click="startGame()">Start Game</button>
        <div class="title">Score: {{score}}</div>
        <button class="button-full" ng-click="snooze()" ng-hide="snoozeStatus"><i class="icon ion-social-python"></i></button>
     </div>
