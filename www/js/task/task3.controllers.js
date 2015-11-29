@@ -3,7 +3,7 @@ angular.module('Alarm-Plus.controllers')
 // newGameController
 .controller('task3Controller', ['$scope', '$timeout', '$ionicGesture', '$state', '$window', function($scope, $timeout, $ionicGesture, $state, $window) {
 
-var BOARD_SIZE = 20;
+var BOARD_SIZE = 18;
 
     var DIRECTIONS = {
       LEFT: 37,
@@ -212,8 +212,8 @@ var BOARD_SIZE = 20;
       interval = 150;
 
       // Set up initial snake
-      for (var i = 0; i < 4; i++) {
-        snake.parts.push({x: 8 + i, y: 8});
+      for (var i = 0; i < 3; i++) {
+        snake.parts.push({x: 6 + i, y: 6});
       }
       resetFruit();
       update();
