@@ -38,14 +38,6 @@ var BOARD_SIZE = 20;
       return score == 3;
     };
 
-    var boardCollision = function(part) {
-      return part.x === BOARD_SIZE || part.x === -1 || part.y === BOARD_SIZE || part.y === -1;
-    };
-
-    var fruitCollision = function(part) {
-      return part.x === fruit.x && part.y === fruit.y;
-    };
-
 
     it("check snake setup", function() {
         expect(DIRECTIONS.LEFT).toBe(37);
@@ -62,17 +54,6 @@ var BOARD_SIZE = 20;
     	expect(lengthmet()).toBe(false);
     	score = 3;
     	expect(lengthmet()).toBe(true);
-    	var part.x=20;
-    	expect(boardCollision()).toBe(true);
-    	part.x=3;
-    	var part.y=2;
-    	expect(boardCollision()).toBe(false);
-    	fruit.x=3;
-    	fruit.y=2;
-    	expect(fruitCollision()).toBe(true);
-    	fruit.x=1
-    	expect(fruitCollision()).toBe(false);
-
     });
 
 });
