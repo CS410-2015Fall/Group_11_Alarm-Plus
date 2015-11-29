@@ -96,7 +96,7 @@ angular.module('Alarm-Plus.controllers')
             $scope.snoozeStatus = true;
             $scope.myMedia.setVolume(0.2);
 
-            $timeout(function() {
+            setTimeout(function() {
                 $scope.snoozeStatus = false;
                 $scope.myMedia.setVolume(1.0);
             }, 4000);

@@ -222,7 +222,7 @@ var BOARD_SIZE = 15;
         $scope.snoozeStatus = $scope.snoozeStatus ? $scope.snoozeStatus = false : $scope.snoozeStatus = true;
         $scope.myMedia.setVolume(0.2);
 
-        $timeout(function() {
+        setTimeout(function() {
             $scope.myMedia.setVolume(1.0);
         }, 10000);
     };
