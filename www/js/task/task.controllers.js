@@ -93,12 +93,13 @@ angular.module('Alarm-Plus.controllers')
         $scope.snoozeStatus = false;
 
         $scope.snooze = function() {
-            $scope.snoozeStatus = $scope.snoozeStatus ? $scope.snoozeStatus = false : $scope.snoozeStatus = true;
+            $scope.snoozeStatus = true;
             $scope.myMedia.setVolume(0.2);
 
             $timeout(function() {
+                $scope.snoozeStatus = false;
                 $scope.myMedia.setVolume(1.0);
-            }, 10000);
+            }, 4000);
         };
 
         // Create the Media object and begin playing it.
