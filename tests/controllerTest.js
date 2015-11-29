@@ -1,12 +1,13 @@
-describe("A suite", function() {
-  it("contains spec with an expectation", function() {
-    var hi = 2;
-    expect(2>0).toBe(true);
-  });
-});
+describe('AppCtrl', function(){
+  var scope, ctrl;
 
-describe("Schedule Suit", function() {
-  it("Find closest Date given day of a week", function() {
-    expect(true).toBe(true);
+  beforeEach(module("Alarm-Plus"));
+  beforeEach(inject(function($controller, $rootScope) {
+    scope = $rootScope.$new();
+    ctrl = $controller('AppCtrl', { $scope: scope });
+  }));
+
+  it('wut', function() {
+    expect(scope).toBeDefined;
   });
 });

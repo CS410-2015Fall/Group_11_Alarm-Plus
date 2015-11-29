@@ -15,9 +15,18 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'tests/*.js'
+            'www/lib/ionic/js/ionic.bundle.js',
+            'www/lib/ngCordova/dist/ng-cordova.js',
+            'www/lib/ionic-timepicker/dist/ionic-timepicker.bundle.min.js',
+            'node_modules/angular-mocks/angular-mocks.js',
+            'www/js/ionic.swipecards.js',
+            'www/js/app.js',
+            'www/js/controllers.js',
+            'www/js/task/*.js',
+            'www/js/setup/*.js',
+            'www/js/home/*.js',
+            'tests/*.js',
         ],
-
 
         // list of files to exclude
         exclude: [],
