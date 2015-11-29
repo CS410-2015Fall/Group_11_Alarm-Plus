@@ -196,7 +196,7 @@ var BOARD_SIZE = 18;
   };
 
  $scope.onSwipeLeft = function() {
-      if (ssnake.direction !== DIRECTIONS.RIGHT) {
+      if (snake.direction !== DIRECTIONS.RIGHT) {
         tempDirection = DIRECTIONS.LEFT;
     }
   };
