@@ -1,11 +1,9 @@
-describe("length met", function() {
-	it("sets the goal of score to 3 fruits", function() {
-		expect(lengthmet()).toEqual($scope.score == 3);
+describe("board collision", function() {
+	it("returns true if snake ran into board", function() {
+		expect(boardCollision(20)).toBe(true);
 	});
 });
 
-describe("length met", function() {
-	it("sets the goal of score to 3 fruits", function() {
-		expect(lengthmet()).toEqual(4);
-	});
-});
+
+
+	
