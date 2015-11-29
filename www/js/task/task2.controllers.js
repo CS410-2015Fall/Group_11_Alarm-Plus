@@ -68,22 +68,30 @@ angular.module('Alarm-Plus.controllers')
     $scope.currIndex = "";
 
 
-    // Loop the buzzer, and stop once the correct number of questions have been answered.
-    $scope.myMedia;
-
     $scope.loop = function(status) {
         if (status === Media.MEDIA_STOPPED) {
-            //document.addEventListener("deviceready", function () {
             $scope.myMedia.play();
-            // window.system.setSystemVolume(1.0);
-            //  }, false);
+            window.system.setSystemVolume(1.0);
+        }
+
+        if ($scope.count == 0) {
+            $scope.myMedia.pause();
         }
     };
 
+    $scope.myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, $scope.loop);
+    $scope.myMedia.play();
 
-    // Create the Media object and begin playing it.
-    //$scope.myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, $scope.loop);
-    //$scope.myMedia.play();
+    $scope.snoozeStatus = false;
+
+    $scope.snooze = function() {
+        $scope.snoozeStatus = $scope.snoozeStatus ? $scope.snoozeStatus = false : $scope.snoozeStatus = true;
+        $scope.myMedia.setVolume(0.2);
+
+        $timeout(function() {
+            $scope.myMedia.setVolume(1.0);
+        }, 10000);
+    };
 
 
     $scope.randomQ = function() {

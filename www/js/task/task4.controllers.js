@@ -104,6 +104,31 @@ angular.module('Alarm-Plus.controllers')
         var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
     }
 
+    $scope.loop = function(status) {
+        if (status === Media.MEDIA_STOPPED) {
+            $scope.myMedia.play();
+            window.system.setSystemVolume(1.0);
+        }
+
+        if ($scope.count == 0) {
+            $scope.myMedia.pause();
+        }
+    };
+
+    $scope.myMedia = new Media("/android_asset/www/sound/buzzer.mp3", null, null, $scope.loop);
+    $scope.myMedia.play();
+
+    $scope.snoozeStatus = false;
+
+    $scope.snooze = function() {
+        $scope.snoozeStatus = $scope.snoozeStatus ? $scope.snoozeStatus = false : $scope.snoozeStatus = true;
+        $scope.myMedia.setVolume(0.2);
+
+        $timeout(function() {
+            $scope.myMedia.setVolume(1.0);
+        }, 10000);
+    };
+
 
 
     $scope.random = function() {
