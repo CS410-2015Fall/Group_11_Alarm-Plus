@@ -53,15 +53,13 @@ var BOARD_SIZE = 20;
         expect(DIRECTIONS.UP).toBe(38);
         expect(DIRECTIONS.DOWN).toBe(40);
         expect(snake.direction).toBe(37);
-        expect(snake.parts.x).toBe(-1);
-        expect(snake.parts.y).toBe(-1);
         expect(fruit.x).toBe(-1);
         expect(fruit.y).toBe(-1);
         expect(score).toBe(0);
     });
 
     it("check snake collision", function() {
-    	var score = 3;
+    	score = 3;
     	expect(lengthmet()).toBe(true);
     });
 });
