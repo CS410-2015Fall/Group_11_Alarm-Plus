@@ -59,7 +59,20 @@ var BOARD_SIZE = 20;
     });
 
     it("check snake collision", function() {
+    	expect(lengthmet()).toBe(false);
     	score = 3;
     	expect(lengthmet()).toBe(true);
+    	part.x=20;
+    	expect(boardCollision()).toBe(true);
+    	part.x=3;
+    	part.y=2;
+    	expect(boardCollision()).toBe(false);
+    	fruit.x=3;
+    	fruit.y=2;
+    	expect(fruitCollision()).toBe(true);
+    	fruit.x=1
+    	expect(fruitCollision()).toBe(false);
+
     });
+
 });
