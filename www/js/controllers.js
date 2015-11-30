@@ -278,7 +278,7 @@ angular.module('Alarm-Plus.controllers', [])
             Clear the input after each create
             */
             $scope.clearInputBox = function() {
-                this.alarmName = "guest",
+                this.alarmName = "",
                     this.alarmMinute = 0,
                     this.alarmHour = 0,
                     this.alarmTod = 'PM';
