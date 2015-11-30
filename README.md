@@ -18,5 +18,5 @@
 
 http://ionicframework.com/demos/swipe-cards/
 
-//Snake Game Angularjs Tutorial
+Snake Game Angularjs Tutorial                                                                                                 
 https://medium.com/@zackargyle/building-snake-with-angularjs-d3035e8be985#.w9e4rkem8
