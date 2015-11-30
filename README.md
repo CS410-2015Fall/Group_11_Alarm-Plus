@@ -1,5 +1,6 @@
 # Group_11_Alarm-Plus [![Build Status](https://magnum.travis-ci.com/CS410-2015Fall/Group_11_Alarm-Plus.svg?token=kdpSGkC8s5uNhrRZxQZQ&branch=master)](https://magnum.travis-ci.com/CS410-2015Fall/Group_11_Alarm-Plus)
 
+[Check out our app video](https://youtu.be/gg9KOqy2Te0)
 
 ####Installation:
 - cordova plugin add cordova-plugin-dialogs
