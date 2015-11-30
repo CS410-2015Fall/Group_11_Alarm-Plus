@@ -19,26 +19,9 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
 
          $ionicPlatform.registerBackButtonAction(function(event) {
             console.log(event);
-            //event.preventDefault();
-            alert('No cheating! You have to complete the task');
             }, 201);
-
-        
     });
 })
-
-// .directive('noScroll', function($document) {
-
-//   return {
-//     restrict: 'A',
-//     link: function($scope, $element, $attr) {
-
-//       $document.on('touchmove', function(e) {
-//         e.preventDefault();
-//       });
-//     }
-//   }
-// })
 
 .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -67,7 +50,6 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
                 }
             }
         })
-
         .state('app.task3', {
             url: '/task3',
             views: {
@@ -76,14 +58,12 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
                 }
             }
         })
-
         .state('app.task2', {
 
             url: '/task2',
             views: {
                 'task2-tab': {
                     templateUrl: 'templates/task2.html'
-
 
                 }
             }

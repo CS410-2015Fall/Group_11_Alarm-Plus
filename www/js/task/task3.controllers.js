@@ -3,10 +3,8 @@ angular.module('Alarm-Plus.controllers')
 // newGameController
 .controller('task3Controller', ['$scope', '$timeout', '$ionicGesture', '$state', '$window', function($scope, $timeout, $ionicGesture, $state, $window) {
 
-
-
 var BOARD_SIZE_x = 20;
-var BOARD_SIZE_y = 30;
+var BOARD_SIZE_y = 20;
 
 
     var DIRECTIONS = {

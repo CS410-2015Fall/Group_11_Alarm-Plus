@@ -147,7 +147,7 @@ angular.module('Alarm-Plus.controllers', [])
 
             // Setup page:
             $scope.tod = ["AM", "PM"],
-                $scope.alarmName = "guest",
+                $scope.alarmName = "",
                 $scope.alarmHour = 0,
                 $scope.alarmMinute = 0,
                 $scope.alarmTod = {
