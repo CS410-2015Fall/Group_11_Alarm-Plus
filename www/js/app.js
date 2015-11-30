@@ -17,23 +17,13 @@ angular.module('Alarm-Plus', ['ionic', 'Alarm-Plus.controllers', 'Alarm-Plus.ser
             StatusBar.styleDefault();
         }
 
-        // Android customization
-        // cordova.plugins.backgroundMode.setDefaults({
-        //     title: "Alarm-Plus",
-        //     text: "Let's go"
-        // });
-        // Enable background mode
-        // cordova.plugins.backgroundMode.enable();
+         $ionicPlatform.registerBackButtonAction(function(event) {
+            console.log(event);
+            //event.preventDefault();
+            alert('No cheating! You have to complete the task');
+            }, 201);
 
-        // Called when background mode has been activated
-        // cordova.plugins.backgroundMode.onactivate = function() {
-        //     setTimeout(function() {
-        //         // Modify the currently displayed notification
-        //         cordova.plugins.backgroundMode.configure({
-        //             text: 'Running in background for more than 5s now.'
-        //         });
-        //     }, 5000);
-        // };
+        
     });
 })
 
