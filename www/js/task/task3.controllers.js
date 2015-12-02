@@ -3,8 +3,7 @@ angular.module('Alarm-Plus.controllers')
 // newGameController
 .controller('task3Controller', ['$scope', '$timeout', '$ionicGesture', '$state', '$window', function($scope, $timeout, $ionicGesture, $state, $window) {
 
-var BOARD_SIZE_x = 20;
-var BOARD_SIZE_y = 20;
+var BOARD_SIZE = 20;
 
 
     var DIRECTIONS = {
@@ -94,10 +93,7 @@ var BOARD_SIZE_y = 20;
 
     function boardCollision(part) {
 
-      return part.x === BOARD_SIZE_x || part.x === -1 || part.y === BOARD_SIZE_y || part.y === -1;
-
-
-
+        return part.x === BOARD_SIZE || part.x === -1 || part.y === BOARD_SIZE || part.y === -1;
     }
 
     function selfCollision(part) {
@@ -115,9 +111,8 @@ var BOARD_SIZE_y = 20;
     }
 
     function resetFruit() {
-
-      var x = Math.floor(Math.random() * BOARD_SIZE_x);
-      var y = Math.floor(Math.random() * BOARD_SIZE_y);
+      var x = Math.floor(Math.random() * 16);
+      var y = Math.floor(Math.random() * 16);
 
 
         if ($scope.board[y][x] === true) {
@@ -170,27 +165,16 @@ var BOARD_SIZE_y = 20;
     function setupBoard() {
 
         $scope.board = [];
-        for (var i = 0; i < BOARD_SIZE_y; i++) {
+
+        for (var i = 0; i < BOARD_SIZE; i++) {
             $scope.board[i] = [];
-            for (var j = 0; j < BOARD_SIZE_x; j++) {
+            for (var j = 0; j < BOARD_SIZE; j++) {
                 $scope.board[i][j] = false;
             }
-
         }
     }
     setupBoard();
 
-    $window.addEventListener("keyup", function(e) {
-        if (e.keyCode == DIRECTIONS.LEFT && snake.direction !== DIRECTIONS.RIGHT) {
-            tempDirection = DIRECTIONS.LEFT;
-        } else if (e.keyCode == DIRECTIONS.UP && snake.direction !== DIRECTIONS.DOWN) {
-            tempDirection = DIRECTIONS.UP;
-        } else if (e.keyCode == DIRECTIONS.RIGHT && snake.direction !== DIRECTIONS.LEFT) {
-            tempDirection = DIRECTIONS.RIGHT;
-        } else if (e.keyCode == DIRECTIONS.DOWN && snake.direction !== DIRECTIONS.UP) {
-            tempDirection = DIRECTIONS.DOWN;
-        }
-    });
 
     $scope.onSwipeUp = function() {
         if (snake.direction !== DIRECTIONS.DOWN) {
@@ -207,6 +191,12 @@ var BOARD_SIZE_y = 20;
     $scope.onSwipeRight = function() {
         if (snake.direction !== DIRECTIONS.LEFT) {
             tempDirection = DIRECTIONS.RIGHT;
+        }
+    };
+
+    $scope.onSwipeLeft = function() {
+        if (snake.direction !== DIRECTIONS.RIGHT) {
+            tempDirection = DIRECTIONS.LEFT;
         }
     };
 
@@ -236,14 +226,6 @@ var BOARD_SIZE_y = 20;
         }, 10000);
     };
 
- $scope.onSwipeLeft = function() {
-      if (snake.direction !== DIRECTIONS.RIGHT) {
-        tempDirection = DIRECTIONS.LEFT;
-    }
-  };
-
-
-
 
 
     $scope.startGame = function() {
@@ -259,8 +241,8 @@ var BOARD_SIZE_y = 20;
         // Set up initial snake
         for (var i = 0; i < 3; i++) {
             snake.parts.push({
-                x: 6 + i,
-                y: 6
+                x: 8 + i,
+                y: 8
             });
         }
         resetFruit();
