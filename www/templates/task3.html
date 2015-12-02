@@ -10,6 +10,9 @@
       <button class="button-balanced" ng-click="snooze()" ng-hide="snoozeStatus"><i class="icon ion-social-python"></i></button>
       <div class="title" style="color:#000000;">Score: {{score}}</div>
    </div>
+   <br>
+   <br>
+   <br>
           <div class="row" ng-repeat="column in board">
               <div class="column"
                   ng-style="{'background-color': setStyling($parent.$index, $index)}"

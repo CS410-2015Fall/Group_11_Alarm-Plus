@@ -3,7 +3,7 @@ angular.module('Alarm-Plus.controllers')
 // newGameController
 .controller('task3Controller', ['$scope', '$timeout', '$ionicGesture', '$state', '$window', function($scope, $timeout, $ionicGesture, $state, $window) {
 
-var BOARD_SIZE = 20;
+var BOARD_SIZE = 18;
 
 
     var DIRECTIONS = {
@@ -111,8 +111,8 @@ var BOARD_SIZE = 20;
     }
 
     function resetFruit() {
-      var x = Math.floor(Math.random() * 16);
-      var y = Math.floor(Math.random() * 16);
+      var x = Math.floor(Math.random() * 14);
+      var y = Math.floor(Math.random() * 14);
 
 
         if ($scope.board[y][x] === true) {

@@ -182,13 +182,13 @@ swipe-card.pop-in {
 }
 
 board-layout .row {
-  height: 20px;
+  height: 26px;
 }
 
 board-layout .column {
   /*border: 1px solid white;*/
-  width: 19px;
-  height: 19px;
+  width: 24px;
+  height: 24px;
   display: inline-block;
 }
 
