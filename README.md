@@ -2,6 +2,10 @@
 
 [Check out our app video](https://youtu.be/gg9KOqy2Te0)
 
+
+####Try it out:
+[ ![Image](https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/devportal2/res/images/amazon-underground-app-us-black.png "Available on the Amazon App Store") ](http://amzn.com/B018WMKJK8 "Alarm +")
+
 ####Installation:
 - cordova plugin add cordova-plugin-dialogs
 - cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications
